@@ -8,6 +8,9 @@ public class Main : MonoBehaviour
     public static Camera cam;
     [SerializeField] private List<CursorState> cursorStates;
     public static List<Interactable> interactables = new List<Interactable>();
+    public List<ServiceTask> serviceTasks;
+    public List<string> names;
+    public static ServiceTask currentTask;
 
     public static Main obj;
 

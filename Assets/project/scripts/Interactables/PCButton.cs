@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class PCButton : Interactable
 {
@@ -9,7 +8,7 @@ public class PCButton : Interactable
         transform.DOKill();
         transform.localScale = Vector3.one * 0.9f;
         transform.DOScale(Vector3.one, 0.2f);
-        Main.obj.pcManager.Toggle();
         active = false;
+        Main.obj.pcManager.Toggle();
     }
 }
