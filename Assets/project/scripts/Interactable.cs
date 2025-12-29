@@ -38,17 +38,25 @@ public class Interactable : MonoBehaviour
     
     public void UpdateInteracable()
     {
-        if (collider.bounds.Contains(Input.mousePosition) && active)
+        if (collider.OverlapPoint(Main.cam.ScreenToWorldPoint(Input.mousePosition)) && active)
         {
             if (!touching) OnHover();
             touching = true;
-            Main.obj.SetCursorState("interactive");
+            if (Main.touchingInteractable != this)
+            {
+                Main.obj.SetCursorState("interactive");
+                Main.touchingInteractable = this;
+            }
         }
         else
         {
-            if (touching)
+            if (Main.touchingInteractable == this)
             {
                 Main.obj.SetCursorState("normal");
+                Main.touchingInteractable = null;
+            }
+            if (touching)
+            {
                 OnHoverExit();
             }
             touching = false;
@@ -56,6 +64,7 @@ public class Interactable : MonoBehaviour
 
         if (touching && Input.GetMouseButtonDown(0) && active)
         {
+            Main.touchingInteractable = this;
             Interact();
         }
         OnUpdateInteractable();

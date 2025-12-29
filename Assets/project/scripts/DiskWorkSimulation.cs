@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class DiskWorkSimulation : MonoBehaviour
 {
     public AudioSource audioSource;
-    public Image image;
+    public SpriteRenderer sprite;
 
     private float timer = 0;
 
@@ -12,7 +12,7 @@ public class DiskWorkSimulation : MonoBehaviour
     {
         timer = time;
         if (audioSource) audioSource.Play();
-        image.color = Color.white;
+        sprite.color = Color.white;
     }
 
     private void Update()
@@ -21,7 +21,7 @@ public class DiskWorkSimulation : MonoBehaviour
         if (timer <= 0)
         {
             //if (audioSource)audioSource.Stop();
-            image.color = new Color(0.5f, 0.5f, 0.5f, 1);
+            sprite.color = new Color(0.5f, 0.5f, 0.5f, 1);
         }
     }
 }

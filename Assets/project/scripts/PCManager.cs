@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using DG.Tweening;
 using Random = UnityEngine.Random;
 
 public class PCManager : MonoBehaviour
@@ -14,13 +15,13 @@ public class PCManager : MonoBehaviour
     [SerializeField] private DiskWorkSimulation diskWorkSim;
     [SerializeField] private AudioSource shutdownSound;
 
-    [SerializeField] private Image workingLed;
+    [SerializeField] private SpriteRenderer workingLed;
 
-    [SerializeField] private Image splashImage;
+    [SerializeField] private SpriteRenderer splashSprite;
 
     [SerializeField] private GameObject caret;
 
-    [SerializeField] private Image breakingNewsImage;
+    [SerializeField] private SpriteRenderer breakingNewsImage;
 
     [SerializeField] private GameObject mail;
 
@@ -53,6 +54,8 @@ public class PCManager : MonoBehaviour
         blocked = true;
         workingLed.color = Color.white;
         pcStartSound.Play();
+        Main.cam.DOKill();
+        Main.cam.DOOrthoSize(3, 2).SetEase(Ease.InOutExpo);
         yield return new WaitForSeconds(1.2f);
         caretActive = true;
         yield return new WaitForSeconds(1.2f);
@@ -65,21 +68,21 @@ public class PCManager : MonoBehaviour
         pipSound.Play();
         caretActive = false;
         caret.SetActive(false);
-        splashImage.gameObject.SetActive(true);
+        splashSprite.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
         diskWorkSim.SimWork(0.25f);
         yield return new WaitForSeconds(0.5f);
         diskWorkSim.SimWork(0.25f);
         yield return new WaitForSeconds(0.5f);
         pipSound.Play();
-        splashImage.gameObject.SetActive(false);
+        splashSprite.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         diskWorkSim.SimWork(0.25f);
         yield return new WaitForSeconds(0.5f);
         pipSound.Play();
         mail.SetActive(true);
         working = true;
-        breakingNewsImage.transform.localPosition = new Vector3(-200, 0, 0);
+        breakingNewsImage.transform.localPosition = new Vector3(3, 0, 0);
         onMainScreen = true;
         newsText.text = "";
         yield return new WaitForSeconds(0.5f);
@@ -93,6 +96,8 @@ public class PCManager : MonoBehaviour
 
     public void Shutdown()
     {
+        Main.cam.DOKill();
+        Main.cam.DOOrthoSize(4.8f, 2).SetEase(Ease.InOutExpo);
         message.SetActive(false);
         onMainScreen = false;
         pcWorkSound.Stop();
@@ -150,8 +155,8 @@ public class PCManager : MonoBehaviour
     {
         if (onMainScreen)
         {
-            breakingNewsImage.transform.localPosition += new Vector3(100 * Time.deltaTime, 0, 0);
-            if (breakingNewsImage.transform.localPosition.x > 200) breakingNewsImage.transform.localPosition = new Vector3(-200, 0, 0);
+            breakingNewsImage.transform.localPosition += new Vector3(-1.5f * Time.deltaTime, 0, 0);
+            if (breakingNewsImage.transform.localPosition.x < -3) breakingNewsImage.transform.localPosition = new Vector3(3, 0, 0);
             caretBlinkTimer -= Time.deltaTime;
             if (caretBlinkTimer <= 0)
             {

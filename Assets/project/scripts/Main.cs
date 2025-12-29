@@ -15,6 +15,8 @@ public class Main : MonoBehaviour
     public static Main obj;
 
     public PCManager pcManager;
+    
+    public static Interactable touchingInteractable = null;
 
     [System.Serializable]
     public class CursorState
@@ -56,7 +58,13 @@ public class Main : MonoBehaviour
             removed = false;
             foreach (Interactable inter in interactables)
             {
-                if (!inter.active) continue;
+                if (!inter.active && touchingInteractable == inter)
+                {
+                    touchingInteractable = null;
+                    SetCursorState("normal");
+                    inter.touching = false;
+                    continue;
+                }
                 inter.UpdateInteracable();
                 removed = inter.removed;
                 if (removed) break;
