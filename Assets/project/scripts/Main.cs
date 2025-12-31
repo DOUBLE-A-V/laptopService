@@ -11,13 +11,32 @@ public class Main : MonoBehaviour
     public List<ServiceTask> serviceTasks;
     public List<string> names;
     public static ServiceTask currentTask;
+    
+    public Blackscreen blackscreen;
 
     public static Main obj;
+
+    public static string currentPlace = "pc";
 
     public PCManager pcManager;
     
     public static Interactable touchingInteractable = null;
 
+    public static IEnumerator GoTo(string place)
+    {
+        if (place == "post")
+        {
+            obj.blackscreen.Show();
+            yield return new WaitForSeconds(1f);
+            obj.pcManager.Disable();
+            obj.blackscreen.Hide();
+        }
+        else
+        {
+            
+        }
+    }
+    
     [System.Serializable]
     public class CursorState
     {

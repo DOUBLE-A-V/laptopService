@@ -1,16 +1,27 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GoToButton : MonoBehaviour
+public class GoToButton : Interactable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Image arrowsImage;
+
+    [SerializeField] private string goToPlace;
+    
+    protected override void OnHover()
     {
-        
+        arrowsImage.transform.DOKill();
+        arrowsImage.transform.DOScale(new Vector3(1.5f, 1, 1), 0.5f).SetEase(Ease.OutElastic, 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnHoverExit()
     {
-        
+        arrowsImage.transform.DOKill();
+        arrowsImage.transform.DOScale(1, 0.5f).SetEase(Ease.OutElastic, 0.5f);
+    }
+
+    protected override void Interact()
+    {
+        StartCoroutine(Main.GoTo(goToPlace));
     }
 }

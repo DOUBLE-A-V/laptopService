@@ -47,6 +47,11 @@ public class PCManager : MonoBehaviour
     private bool caretActive = false;
     
     private bool onMainScreen = false;
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
     
     public IEnumerator StartPC()
     {
