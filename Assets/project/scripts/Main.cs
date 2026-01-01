@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.XR;
@@ -7,6 +8,9 @@ public class Main : MonoBehaviour
 {
     public static Camera cam;
     [SerializeField] private List<CursorState> cursorStates;
+    [SerializeField] private List<GoToButton> goToButtons;
+    [SerializeField] private GameObject goToButtonsStart;
+    
     public static List<Interactable> interactables = new List<Interactable>();
     public List<ServiceTask> serviceTasks;
     public List<string> names;
@@ -22,11 +26,33 @@ public class Main : MonoBehaviour
     
     public static Interactable touchingInteractable = null;
 
-    public static IEnumerator GoTo(string place)
+    public void HideGoToButtons()
+    {
+        foreach (GoToButton btn in goToButtons)
+        {
+            btn.Hide();
+        }
+    }
+
+    public void ShowGoToButtons()
+    {
+        int count = 0;
+        foreach (GoToButton btn in goToButtons)
+        {
+            if (currentPlace == btn.goToPlace) continue;
+            btn.transform.localPosition = goToButtonsStart.transform.localPosition + new Vector3(0, 150 * count, 0);
+            btn.Show();
+            count++;
+        }
+    }
+    
+    public IEnumerator GoTo(string place)
     {
         if (place == "post")
         {
+            currentPlace = "post";
             obj.blackscreen.Show();
+            HideGoToButtons();
             yield return new WaitForSeconds(1f);
             obj.pcManager.Disable();
             obj.blackscreen.Hide();

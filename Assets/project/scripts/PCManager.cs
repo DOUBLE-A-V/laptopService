@@ -55,6 +55,7 @@ public class PCManager : MonoBehaviour
     
     public IEnumerator StartPC()
     {
+        Main.obj.HideGoToButtons();
         pcWorkSound.enabled = true;
         blocked = true;
         workingLed.color = Color.white;
@@ -101,6 +102,7 @@ public class PCManager : MonoBehaviour
 
     public void Shutdown()
     {
+        Main.obj.ShowGoToButtons();
         Main.cam.DOKill();
         Main.cam.DOOrthoSize(4.8f, 2).SetEase(Ease.InOutExpo);
         message.SetActive(false);
