@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Random = UnityEngine.Random;
 
-public class PCManager : MonoBehaviour
+public class PCManager : Place
 {
     [SerializeField] private AudioSource pcStartSound;
     [SerializeField] private AudioSource pcWorkSound;

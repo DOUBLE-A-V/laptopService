@@ -11,9 +11,12 @@ public class Interactable : MonoBehaviour
     
     public bool removed = false;
 
+    protected Vector3 defaultScale;
+
     private void Awake()
     {
-        Main.interactables.Add(this);
+        defaultScale = transform.localScale;
+        if (!Main.interactables.Contains(this)) Main.interactables.Add(this);
     }
     
     protected virtual void OnUpdateInteractable()
@@ -36,7 +39,7 @@ public class Interactable : MonoBehaviour
         
     }
     
-    public void UpdateInteracable()
+    public bool UpdateInteracable()
     {
         if (collider.OverlapPoint(Main.cam.ScreenToWorldPoint(Input.mousePosition)) && active)
         {
@@ -66,7 +69,9 @@ public class Interactable : MonoBehaviour
         {
             Main.touchingInteractable = this;
             Interact();
+            return true;
         }
         OnUpdateInteractable();
+        return false;
     }
 }

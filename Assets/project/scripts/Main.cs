@@ -11,6 +11,8 @@ public class Main : MonoBehaviour
     [SerializeField] private List<GoToButton> goToButtons;
     [SerializeField] private GameObject goToButtonsStart;
     
+    public List<Place> places;
+    
     public static List<Interactable> interactables = new List<Interactable>();
     public List<ServiceTask> serviceTasks;
     public List<string> names;
@@ -20,11 +22,14 @@ public class Main : MonoBehaviour
 
     public static Main obj;
 
-    public static string currentPlace = "pc";
+    public Place currentPlace;
 
     public PCManager pcManager;
+    public PostMachine postMachine;
     
     public static Interactable touchingInteractable = null;
+
+    [SerializeField] private string startGoToPlace = "pc";
 
     public void HideGoToButtons()
     {
@@ -39,28 +44,23 @@ public class Main : MonoBehaviour
         int count = 0;
         foreach (GoToButton btn in goToButtons)
         {
-            if (currentPlace == btn.goToPlace) continue;
-            btn.transform.localPosition = goToButtonsStart.transform.localPosition + new Vector3(0, 150 * count, 0);
+            if (currentPlace.placeName == btn.goToPlace) continue;
             btn.Show();
+            btn.transform.localPosition = goToButtonsStart.transform.localPosition + new Vector3(0, 150 * count, 0);
             count++;
         }
     }
     
     public IEnumerator GoTo(string place)
     {
-        if (place == "post")
-        {
-            currentPlace = "post";
-            obj.blackscreen.Show();
-            HideGoToButtons();
-            yield return new WaitForSeconds(1f);
-            obj.pcManager.Disable();
-            obj.blackscreen.Hide();
-        }
-        else
-        {
-            
-        }
+        obj.blackscreen.Show();
+        HideGoToButtons();
+        yield return new WaitForSeconds(1f);
+        currentPlace = places.Find(x => x.placeName == place);
+        places.ForEach(x => x.gameObject.SetActive(x.placeName == place));
+        currentPlace.OnEnter();
+        obj.blackscreen.Hide();
+        ShowGoToButtons();
     }
     
     [System.Serializable]
@@ -93,6 +93,9 @@ public class Main : MonoBehaviour
     private void Start()
     {
         SetCursorState("normal");
+        HideGoToButtons();
+        ShowGoToButtons();
+        StartCoroutine(GoTo(startGoToPlace));
     }
 
     private void UpdateInteractables()
@@ -110,7 +113,11 @@ public class Main : MonoBehaviour
                     inter.touching = false;
                     continue;
                 }
-                inter.UpdateInteracable();
+
+                if (inter.UpdateInteracable())
+                {
+                    break;
+                }
                 removed = inter.removed;
                 if (removed) break;
             }
