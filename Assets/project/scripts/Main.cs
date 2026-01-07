@@ -26,10 +26,13 @@ public class Main : MonoBehaviour
 
     public PCManager pcManager;
     public PostMachine postMachine;
+    public Workplace workplace;
     
     public static Interactable touchingInteractable = null;
 
     [SerializeField] private string startGoToPlace = "pc";
+    
+    public float difficultyMultiplier = 1f;
 
     public void HideGoToButtons()
     {
@@ -46,7 +49,7 @@ public class Main : MonoBehaviour
         {
             if (currentPlace.placeName == btn.goToPlace) continue;
             btn.Show();
-            btn.transform.localPosition = goToButtonsStart.transform.localPosition + new Vector3(0, 150 * count, 0);
+            btn.transform.localPosition = goToButtonsStart.transform.localPosition + new Vector3(0, 220 * count, 0);
             count++;
         }
     }
@@ -56,14 +59,15 @@ public class Main : MonoBehaviour
         obj.blackscreen.Show();
         HideGoToButtons();
         yield return new WaitForSeconds(1f);
+        currentPlace.gameObject.SetActive(false);
         currentPlace = places.Find(x => x.placeName == place);
         places.ForEach(x => x.gameObject.SetActive(x.placeName == place));
-        currentPlace.OnEnter();
         obj.blackscreen.Hide();
         ShowGoToButtons();
+        currentPlace.OnEnter();
     }
     
-    [System.Serializable]
+    [Serializable]
     public class CursorState
     {
         public string name;
@@ -95,7 +99,29 @@ public class Main : MonoBehaviour
         SetCursorState("normal");
         HideGoToButtons();
         ShowGoToButtons();
+
+        currentTask = new ServiceTask(
+            "t",
+            "please fuck niggers",
+            "John pidrton",
+            100,
+            200,
+            150,
+            0,
+            85874538
+            );
+        
         StartCoroutine(GoTo(startGoToPlace));
+    }
+
+    public void DeactivateGoToButtons() 
+    {
+        foreach (GoToButton btn in goToButtons) btn.active = false;
+    }
+
+    public void ActivateGoToButtons()
+    {
+        foreach (GoToButton btn in goToButtons) btn.active = currentPlace.placeName != btn.goToPlace;
     }
 
     private void UpdateInteractables()

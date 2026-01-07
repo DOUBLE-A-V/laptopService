@@ -1,17 +1,23 @@
 
+using System;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
     private SpriteRenderer outline;
     private GameObject mask;
-    [SerializeField] private BoxCollider2D collider;
+    [SerializeField] protected BoxCollider2D collider;
     public bool active = true;
     public bool touching = false;
     
     public bool removed = false;
 
     protected Vector3 defaultScale;
+
+    private void OnDestroy()
+    {
+        Main.interactables.Remove(this);
+    }
 
     private void Awake()
     {

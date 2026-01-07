@@ -55,7 +55,7 @@ public class PostMachine : Place
         else if (task == "apply")
         {
             Apply();
-        } else if (task == "remove")
+        } else if (task == "remove" && mode == "receiving" && !waitingForInsertionZone)
         {
             postMachineText.text = "type post ID\n";
             postID = "";
@@ -64,6 +64,7 @@ public class PostMachine : Place
 
     public IEnumerator EatBox()
     {
+        Main.obj.DeactivateGoToButtons();
         if (eatingBoxSound)eatingBoxSound.Play();
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 2.3f, 0), 1);
         yield return new WaitForSeconds(1.5f);
@@ -71,6 +72,7 @@ public class PostMachine : Place
         yield return new WaitForSeconds(2);
         postMachineText.text = "post ID of your package: " + Random.Range(1000000, 9999999);
         postMachineText.text += "\nhave a nice day!";
+        Main.obj.ActivateGoToButtons();
     }
 
     public void TakeBox()
@@ -83,10 +85,12 @@ public class PostMachine : Place
 
     private IEnumerator InvalidPostID()
     {
+        Main.obj.DeactivateGoToButtons();
         postMachineText.text = "invalid post id!";
         yield return new WaitForSeconds(1.5f);
         postMachineText.text = "type post ID\n";
         postID = "";
+        Main.obj.ActivateGoToButtons();
     }
 
     private void Apply()
