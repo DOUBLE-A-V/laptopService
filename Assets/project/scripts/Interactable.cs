@@ -22,7 +22,10 @@ public class Interactable : MonoBehaviour
     private void Awake()
     {
         defaultScale = transform.localScale;
-        if (!Main.interactables.Contains(this)) Main.interactables.Add(this);
+        if (!Main.interactables.Contains(this))
+        {
+            Main.interactables.Add(this);
+        }
     }
     
     protected virtual void OnUpdateInteractable()

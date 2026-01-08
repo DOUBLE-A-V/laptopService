@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Threading;
+using System.Collections;
 using DG.Tweening;
 
 public class Workplace : Place
@@ -10,6 +10,9 @@ public class Workplace : Place
     [SerializeField] private List<Laptop> laptopsPrefabs;
     
     [SerializeField] private List<Tool>  toolsPrefabs;
+
+    [SerializeField] private Interactable endTurnButton;
+    [SerializeField] private Interactable finishServiceButton;
     public List<Tool> tools;
     public Laptop currentLaptop;
     
@@ -22,17 +25,85 @@ public class Workplace : Place
     public GameObject hand;
 
     public Tool draggingTool;
+
+    private void ShowButtons()
+    {
+        endTurnButton.transform.DOKill();
+        finishServiceButton.transform.DOKill();
+
+        endTurnButton.active = true;
+        finishServiceButton.active = true;
+
+        endTurnButton.transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
+        finishServiceButton.transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
+    }
+
+    private void HideButtons()
+    {
+        endTurnButton.active = false;
+        finishServiceButton.active = false;
+        
+        endTurnButton.transform.DOKill();
+        finishServiceButton.transform.DOKill();
+        
+        endTurnButton.transform.DOScale(0, 0.5f).SetEase(Ease.OutExpo);
+        finishServiceButton.transform.DOScale(0, 0.5f).SetEase(Ease.OutExpo);
+    }
+
+    public void FinishService()
+    {
+        HideButtons();
+        Main.obj.ShowGoToButtons();
+    }
+
+    public IEnumerator EndTurn()
+    {
+        foreach (Tool tool in GetHandTools())
+        {
+            tool.RemoveFromScreen();
+            tool.transform.DOLocalMove(Vector3.zero, 1f).SetEase(Ease.OutExpo);
+        }
+        yield return new WaitForSeconds(1);
+
+        currentLaptop.DoTurn();
+        
+        foreach (Tool tool in tools)
+        {
+            if (tool.toolName == "hand")
+            {
+                tool.usesLeft = tool.maxUses;
+                tool.UpdateUsesLeftText();
+                tool.GiveInHand();
+            }
+        }
+        
+        GiveToolsHand();
+    }
+    
     public override void OnEnter()
     {
         if (Main.currentTask != null)
         {
             Main.obj.HideGoToButtons();
             GenerateLaptop();
+            
+            GiveTool("hand");
+            GiveTool("hand");
+
+            foreach (Tool tool in tools)
+            {
+                if (tool.toolName == "hand")
+                {
+                    tool.usesLeft = tool.maxUses;
+                    tool.UpdateUsesLeftText();
+                    tool.GiveInHand();
+                }
+            }
+        
+            GiveToolsHand();
+            
+            ShowButtons();
         }
-        
-        GiveTool("hand");
-        
-        GiveToolsHand();
     }
 
     public void GiveTool(string toolName)

@@ -7,4 +7,14 @@ public class Laptop : MonoBehaviour
     public List<LaptopTarget> targets = new List<LaptopTarget>();
 
     public float completeness = 0;
+
+    protected virtual void OnTurn()
+    {
+        
+    }
+    
+    public void DoTurn()
+    {
+        OnTurn();
+    }
 }

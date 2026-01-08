@@ -20,24 +20,44 @@ public class Tool : Interactable
 
     private bool dragging;
 
-    private int maxUses;
+    public int maxUses;
 
     public int id;
+
+    [SerializeField] protected bool overrideBreakLogic = false;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         maxUses = usesLeft;
+        tip.maxUses = maxUses;
+        tip.usesLeft = usesLeft;
     }
-
-    private void UpdateUsesLeftText()
+    
+    public void UpdateUsesLeftText()
     {
-        usesText.text = usesLeft + " / " + maxUses;
+        if (usesLeft >= 0)
+        {
+            usesText.color = Color.white;
+            usesText.text = usesLeft + " / " + maxUses;
+        }
+        else usesText.color = new  Color(1, 1, 1, 0);
+        tip.usesLeft = usesLeft;
     }
 
     private void OnDrop()
     {
         Main.obj.workplace.draggingTool = null;
+        dragging = false;
+
+        if (Main.obj.workplace.touchingTarget)
+        {
+            Main.obj.workplace.touchingTarget.ApplyTool(this);
+        }
+        else
+        {
+            PlaceInHand();
+        }
     }
 
     protected override void OnUpdateInteractable()
@@ -53,8 +73,15 @@ public class Tool : Interactable
 
         if (dragging)
         {
-            transform.DOMove(Main.cam.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), 0.2f).SetEase(Ease.OutExpo);
-            Main.obj.workplace.tip.HideTip();
+            if (!Input.GetMouseButton(0))
+            {
+                OnDrop();
+            }
+            else
+            {
+                transform.DOMove(Main.cam.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), 0.2f).SetEase(Ease.OutExpo);
+                Main.obj.workplace.tip.HideTip();
+            }
         }
     }
 
@@ -90,44 +117,65 @@ public class Tool : Interactable
     {
         active = true;
         transform.DOKill();
-        transform.DOLocalMove(new Vector3(0 + (id - (Main.obj.workplace.tools.Count - 1) / 2.0f) * size.x, 0, 0), 0.5f).SetEase(Ease.OutExpo);
+        transform.DOLocalMove(new Vector3(0 + (id - (Main.obj.workplace.tools.Count - 1) / 2.0f) * (size.x + 0.20f), 0, 0), 0.5f).SetEase(Ease.OutExpo);
+        UpdateUsesLeftText();
     }
     
     public void BreakTool(LaptopTarget against)
     {
-        transform.DOKill();
-        transform.DOScale(0, 0.5f).SetEase(Ease.OutExpo);
-        Main.obj.workplace.tools.Remove(this);
-        Main.obj.workplace.UpdateToolsHand();
-        OnBreakTool(against);
-        Destroy(gameObject, 0.5f);
+        if (overrideBreakLogic)
+        {
+            OnBreakTool(against);
+        }
+        else
+        {
+            transform.DOKill();
+            transform.DOScale(0, 0.5f).SetEase(Ease.OutExpo);
+            Main.obj.workplace.tools.Remove(this);
+            Main.obj.workplace.UpdateToolsHand();
+            OnBreakTool(against);
+            Destroy(gameObject, 0.5f);
+        }
     }
 
     public void GiveInHand()
     {
         inHand = true;
+        active = true;
         spriteRenderer.DOKill();
         spriteRenderer.DOFade(1, 0.5f);
+        transform.DOKill();
         Main.obj.workplace.UpdateToolsHand();
+        transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
     }
 
-    public IEnumerator Use(LaptopTarget target)
+
+
+    private IEnumerator AfterAnim(LaptopTarget target)
     {
+        yield return new WaitForSeconds(0.7f);
+
+        if (usesLeft > 0)
+        {
+            usesLeft -= 1;
+            if (usesLeft <= 0)
+            {
+                BreakTool(target);
+                yield break;
+            }
+        }
+        RemoveFromScreen();
+    }    
+    public void Use(LaptopTarget target)
+    {
+        active = false;
         transform.DOKill();
         transform.localScale = Vector3.one * 0.9f;
         transform.DOScale(1, 1f).SetEase(Ease.OutElastic, 0.5f);
+        //if (globalDamage != 0) target.Damage(globalDamage, this);
+        usesLeft--;
+        UpdateUsesLeftText();
         OnUse(target);
-        
-        yield return new WaitForSeconds(1.5f);
-        
-        usesLeft -= 1;
-        if (usesLeft <= 0)
-        {
-            BreakTool(target);
-        }
-        else
-        {
-            RemoveFromScreen();
-        }
+        StartCoroutine(AfterAnim(target));
     }
 }

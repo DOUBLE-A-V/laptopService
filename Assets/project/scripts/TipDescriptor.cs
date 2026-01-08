@@ -29,7 +29,16 @@ public class TipDescriptor
 	public string rawText;
 	public List<ToolName> weaknesses = new();
 	public List<TargetName> strengths = new();
+	public List<ToolName> ignoresTools = new();
 
+	public int damage = 0;
+
+	public int maxUses = 0;
+	public int usesLeft = 0;
+
+	public int maxHealth = 0;
+	public int health = 0;
+	
 	public string CookText()
 	{
 		string result = "<size=3><blue>" + title + "<end></size>\n\n";
@@ -53,6 +62,33 @@ public class TipDescriptor
 			}
 			result += "\n";
 		}
+		
+		if (ignoresTools.Count > 0)
+		{
+			result += "<red>ignores:<end>\n";
+			foreach (ToolName toolName in ignoresTools)
+			{
+				result += "<i>-" + toolName + "</i>\n";
+			}
+
+			result += "\n";
+		}
+
+		if (damage > 0)
+		{
+			result += "<red>damage: " + damage + "\n";
+		}
+
+		if (maxUses > 0 && usesLeft >= 0)
+		{
+			result += "<orange>durability: " + usesLeft + " / " + maxUses + "<end>\n";
+		}
+		
+		if (maxHealth > 0 && health >= 0)
+		{
+			result += "<orange>health: " + health + " / " + maxHealth + "<end>\n";
+		}
+
 
 		result += rawText;
 		result = result

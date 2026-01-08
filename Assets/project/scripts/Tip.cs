@@ -26,11 +26,11 @@ public class Tip : MonoBehaviour
         {
             if (pos.y > 0)
             {
-                text.transform.position = pos + new Vector3(-realSize.x/2, -0.5f, 0);
+                text.transform.position = pos + new Vector3(-realSize.x-0.5f, -0.5f, 0);
             }
             else
             {
-                text.transform.position = pos + new Vector3(-realSize.x/2, realSize.y+0.5f, 0);
+                text.transform.position = pos + new Vector3(-realSize.x-0.5f, realSize.y+0.5f, 0);
             }
         }
         else

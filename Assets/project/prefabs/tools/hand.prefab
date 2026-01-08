@@ -191,8 +191,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4691369500449295292}
   - component: {fileID: 123133005421586896}
-  - component: {fileID: 8176467483895708771}
   - component: {fileID: 1599365907344313113}
+  - component: {fileID: 319111976728072196}
   m_Layer: 0
   m_Name: hand
   m_TagString: Untagged
@@ -275,34 +275,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &8176467483895708771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9116121202344613472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e454fd404fea14f8a34fcfeb8f3f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tool
-  collider: {fileID: 1599365907344313113}
-  active: 1
-  touching: 0
-  removed: 0
-  toolName: hand
-  usesLeft: -1
-  globalDamage: 1
-  inHand: 1
-  size: {x: 1, y: 1}
-  usesText: {fileID: 2028081351497671352}
-  tip:
-    title: hand
-    rawText: dealing <red>1 damage<end> to any target.\n<yellow>infinity uses <end>
-    weaknesses: 
-    strengths: 
-  id: 0
 --- !u!61 &1599365907344313113
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,3 +321,40 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &319111976728072196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116121202344613472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d821f8d945515354f8b27359142cdecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandTool
+  collider: {fileID: 1599365907344313113}
+  active: 1
+  touching: 0
+  removed: 0
+  toolName: hand
+  usesLeft: 3
+  globalDamage: 1
+  inHand: 1
+  size: {x: 1, y: 1}
+  usesText: {fileID: 2028081351497671352}
+  tip:
+    title: hand
+    rawText: "<yellow>When you use up all the strength, the hand doesn\u2019t break;
+      it just needs rest. It will recover on the next laptop<end>"
+    weaknesses: 
+    strengths: 
+    ignoresTools: 
+    damage: 1
+    maxUses: 0
+    usesLeft: 0
+    maxHealth: 0
+    health: 0
+  maxUses: 3
+  id: 0
+  overrideBreakLogic: 0

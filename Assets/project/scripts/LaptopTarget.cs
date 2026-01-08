@@ -22,6 +22,9 @@ public class LaptopTarget : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        tip.maxHealth = maxHealth;
+        tip.health = health;
+        UpdateHealth();
     }
 
     public void ApplyTool(Tool tool)
@@ -42,6 +45,8 @@ public class LaptopTarget : MonoBehaviour
             healthText.transform.localScale = Vector3.one * 0.9f;
             healthText.transform.DOScale(1, 0.5f).SetEase(Ease.OutElastic, 0.5f);
         }
+        tip.maxHealth = maxHealth;
+        tip.health = health;
     }
     
     protected virtual void OnDamage(int amount, Tool by)
@@ -65,7 +70,8 @@ public class LaptopTarget : MonoBehaviour
     public void Damage(int amount, Tool by)
     {
         spriteRenderer.DOKill();
-        spriteRenderer.DOColor(new Color(1, 0, 0, 1), 1);
+        spriteRenderer.color = Color.red;
+        spriteRenderer.DOColor(Color.green, 0.5f);
         health -= amount;
         if (health <= 0)
         {
