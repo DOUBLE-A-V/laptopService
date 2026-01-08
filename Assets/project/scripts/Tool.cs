@@ -109,7 +109,7 @@ public class Tool : Interactable
     {
         active = false;
         transform.DOKill();
-        transform.DOScale(0, 1f).SetEase(Ease.OutElastic, 0.5f);
+        transform.DOScale(0, 1f).SetEase(Ease.OutExpo);
         inHand = false;
     }
 
@@ -118,6 +118,7 @@ public class Tool : Interactable
         active = true;
         transform.DOKill();
         transform.DOLocalMove(new Vector3(0 + (id - (Main.obj.workplace.tools.Count - 1) / 2.0f) * (size.x + 0.20f), 0, 0), 0.5f).SetEase(Ease.OutExpo);
+        transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
         UpdateUsesLeftText();
     }
     
@@ -144,9 +145,7 @@ public class Tool : Interactable
         active = true;
         spriteRenderer.DOKill();
         spriteRenderer.DOFade(1, 0.5f);
-        transform.DOKill();
         Main.obj.workplace.UpdateToolsHand();
-        transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
     }
 
 
@@ -154,16 +153,6 @@ public class Tool : Interactable
     private IEnumerator AfterAnim(LaptopTarget target)
     {
         yield return new WaitForSeconds(0.7f);
-
-        if (usesLeft > 0)
-        {
-            usesLeft -= 1;
-            if (usesLeft <= 0)
-            {
-                BreakTool(target);
-                yield break;
-            }
-        }
         RemoveFromScreen();
     }    
     public void Use(LaptopTarget target)
@@ -176,6 +165,11 @@ public class Tool : Interactable
         usesLeft--;
         UpdateUsesLeftText();
         OnUse(target);
+        if (usesLeft <= 0)
+        {
+            BreakTool(target);
+            return;
+        }
         StartCoroutine(AfterAnim(target));
     }
 }

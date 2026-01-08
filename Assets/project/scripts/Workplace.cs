@@ -61,9 +61,9 @@ public class Workplace : Place
         foreach (Tool tool in GetHandTools())
         {
             tool.RemoveFromScreen();
-            tool.transform.DOLocalMove(Vector3.zero, 1f).SetEase(Ease.OutExpo);
+            tool.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         currentLaptop.DoTurn();
         
@@ -71,7 +71,7 @@ public class Workplace : Place
         {
             if (tool.toolName == "hand")
             {
-                tool.usesLeft = tool.maxUses;
+                //tool.usesLeft = tool.maxUses;
                 tool.UpdateUsesLeftText();
                 tool.GiveInHand();
             }
@@ -84,11 +84,11 @@ public class Workplace : Place
     {
         if (Main.currentTask != null)
         {
+            if (!currentLaptop)
+            {
+                GenerateLaptop();
+            }
             Main.obj.HideGoToButtons();
-            GenerateLaptop();
-            
-            GiveTool("hand");
-            GiveTool("hand");
 
             foreach (Tool tool in tools)
             {
@@ -126,7 +126,7 @@ public class Workplace : Place
     public void UpdateToolsHand()
     {
         int count = 0;
-        foreach (Tool t in tools)
+        foreach (Tool t in GetHandTools())
         {
             t.id = count;
             t.PlaceInHand();
