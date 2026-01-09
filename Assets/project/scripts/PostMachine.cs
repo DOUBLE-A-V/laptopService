@@ -39,11 +39,18 @@ public class PostMachine : Place
         {
             if (mode != "sending")
             {
-                mode = "sending";
-                postMachineText.text = "insert package";
-                boxInsertionZone.active = true;
-                waitingForInsertionZone = true;
-                box.transform.localPosition = new Vector3(0.12f, -6.3f, 0);
+                if (Main.obj.workplace.finished)
+                {
+                    mode = "sending";
+                    postMachineText.text = "insert package";
+                    boxInsertionZone.active = true;
+                    waitingForInsertionZone = true;
+                    box.transform.localPosition = new Vector3(0.12f, -6.3f, 0);
+                }
+                else
+                {
+                    postMachineText.text = "nothing to send";
+                }
             }
         }
         else if (task == "mode receive")
@@ -64,14 +71,16 @@ public class PostMachine : Place
 
     public IEnumerator EatBox()
     {
+        Main.obj.workplace.finished = false;
+        Main.currentTask = null;
+        
         Main.obj.DeactivateGoToButtons();
         if (eatingBoxSound)eatingBoxSound.Play();
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 2.3f, 0), 1);
         yield return new WaitForSeconds(1.5f);
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 1.7f, 0), 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
-        postMachineText.text = "post ID of your package: " + Random.Range(1000000, 9999999);
-        postMachineText.text += "\nhave a nice day!";
+        postMachineText.text = "have a nice day!";
         Main.obj.ActivateGoToButtons();
     }
 

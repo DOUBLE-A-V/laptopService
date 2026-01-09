@@ -38,6 +38,9 @@ public class TipDescriptor
 
 	public int maxHealth = 0;
 	public int health = 0;
+
+	public int qualityExists = 0;
+	public int qualityRemoved = 0;
 	
 	public string CookText()
 	{
@@ -91,6 +94,30 @@ public class TipDescriptor
 
 
 		result += rawText;
+		result += "\n";
+		if (qualityExists != 0)
+		{
+			if (qualityExists > 0)
+			{
+				result += "<orange>if on laptop:<end> <green>+" + qualityExists + "% quality<end>\n";
+			}
+			else
+			{
+				result += "<orange>if on laptop:<end> <red>" + qualityExists + "% quality<end>\n";
+			}
+		}
+		
+		if (qualityRemoved != 0)
+		{
+			if (qualityRemoved > 0)
+			{
+				result += "<orange>if removed:<end> <green>+" + qualityRemoved + "% quality<end>\n";
+			}
+			else
+			{
+				result += "<orange>if removed:<end> <red>" + qualityRemoved + "% quality<end>\n";
+			}
+		}
 		result = result
 			.Replace("<red>", ColorsTags.red)
 			.Replace("<green>", ColorsTags.green)

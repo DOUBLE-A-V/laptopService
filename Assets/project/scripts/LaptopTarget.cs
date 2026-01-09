@@ -19,12 +19,24 @@ public class LaptopTarget : MonoBehaviour
 
     public TipDescriptor tip;
 
+    public int qualityChangeExisting;
+    public int qualityChangeRemoved;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         tip.maxHealth = maxHealth;
         tip.health = health;
         UpdateHealth();
+        
+        tip.qualityRemoved = qualityChangeRemoved;
+        tip.qualityExists = qualityChangeExisting;
+    }
+
+    private void Start()
+    {
+        Main.obj.workplace.currentLaptop.quality += qualityChangeExisting;
+        Main.obj.workplace.UpdateQualityText();
     }
 
     public void ApplyTool(Tool tool)
@@ -62,6 +74,7 @@ public class LaptopTarget : MonoBehaviour
     private void Death(Tool by)
     {
         OnDeath(by);
+        Main.obj.workplace.ChangeQuality(qualityChangeRemoved - qualityChangeExisting);
         transform.DOScale(0, 1f).SetEase(Ease.InElastic, 0.5f);
         Main.obj.workplace.currentLaptop.targets.Remove(this);
         Destroy(gameObject, 1);

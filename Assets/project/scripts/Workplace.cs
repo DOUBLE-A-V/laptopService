@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 
 public class Workplace : Place
 {
@@ -26,6 +27,45 @@ public class Workplace : Place
 
     public Tool draggingTool;
 
+    [SerializeField] private TMP_Text qualityText;
+    [SerializeField] private TMP_Text qualityChangeText;
+
+    public bool finished = false;
+
+    public void UpdateQualityText(bool animate=true)
+    {
+        qualityText.text = "quality: " + currentLaptop.quality + "%";
+        if (animate)
+        {
+            qualityText.transform.DOKill();
+            qualityText.transform.localScale = Vector3.one*0.9f;
+            qualityText.transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
+        }
+    }
+
+    public void ChangeQuality(int amount)
+    {
+        if (amount == 0) return;
+        qualityChangeText.transform.DOKill();
+        qualityChangeText.DOKill();
+        qualityChangeText.text = amount + "%";
+        if (amount > 0)
+        {
+            qualityChangeText.text = "+" + amount + "%";
+            qualityChangeText.color = Color.green;
+        }
+        else
+        {
+            qualityChangeText.color = Color.red;
+        }
+
+        qualityChangeText.transform.localPosition = qualityText.transform.localPosition;
+        qualityChangeText.transform.DOLocalMove(qualityChangeText.transform.localPosition - new Vector3(0, 80, 0), 2f).SetEase(Ease.OutExpo);
+        qualityChangeText.DOFade(0, 2f).SetEase(Ease.InExpo);
+        currentLaptop.quality += amount;
+        UpdateQualityText();
+    }
+    
     private void ShowButtons()
     {
         endTurnButton.transform.DOKill();
@@ -54,6 +94,7 @@ public class Workplace : Place
     {
         HideButtons();
         Main.obj.ShowGoToButtons();
+        finished = true;
     }
 
     public IEnumerator EndTurn()
@@ -79,13 +120,20 @@ public class Workplace : Place
         
         GiveToolsHand();
     }
+
+    public override void OnExit()
+    {
+        qualityText.gameObject.SetActive(false);
+    }
     
     public override void OnEnter()
     {
+        qualityText.gameObject.SetActive(true);
         if (Main.currentTask != null)
         {
             if (!currentLaptop)
             {
+                finished = false;
                 GenerateLaptop();
             }
             Main.obj.HideGoToButtons();

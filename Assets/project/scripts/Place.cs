@@ -8,4 +8,9 @@ public class Place : MonoBehaviour
 	{
 		
 	}
+
+	public virtual void OnExit()
+	{
+		
+	}
 }

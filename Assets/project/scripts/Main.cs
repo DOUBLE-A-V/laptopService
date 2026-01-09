@@ -59,6 +59,7 @@ public class Main : MonoBehaviour
         obj.blackscreen.Show();
         HideGoToButtons();
         yield return new WaitForSeconds(1f);
+        currentPlace.OnExit();
         currentPlace.gameObject.SetActive(false);
         currentPlace = places.Find(x => x.placeName == place);
         places.ForEach(x => x.gameObject.SetActive(x.placeName == place));
