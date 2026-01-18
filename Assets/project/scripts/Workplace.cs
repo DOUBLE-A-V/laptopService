@@ -93,6 +93,10 @@ public class Workplace : Place
     public void FinishService()
     {
         HideButtons();
+        foreach (Tool tool in tools)
+        {
+            tool.RemoveFromScreen();
+        }
         Main.obj.ShowGoToButtons();
         finished = true;
     }
@@ -110,7 +114,7 @@ public class Workplace : Place
         
         foreach (Tool tool in tools)
         {
-            if (tool.toolName == "hand")
+            if (tool.toolName == "hand" && tool.usesLeft > 0)
             {
                 //tool.usesLeft = tool.maxUses;
                 tool.UpdateUsesLeftText();
@@ -128,29 +132,34 @@ public class Workplace : Place
     
     public override void OnEnter()
     {
-        qualityText.gameObject.SetActive(true);
         if (Main.currentTask != null)
         {
-            if (!currentLaptop)
+            qualityText.gameObject.SetActive(true);
+            if (!finished)
             {
-                finished = false;
-                GenerateLaptop();
-            }
-            Main.obj.HideGoToButtons();
-
-            foreach (Tool tool in tools)
-            {
-                if (tool.toolName == "hand")
+                if (!currentLaptop)
                 {
-                    tool.usesLeft = tool.maxUses;
-                    tool.UpdateUsesLeftText();
-                    tool.GiveInHand();
+                    finished = false;
+                    GenerateLaptop();
                 }
-            }
-        
-            GiveToolsHand();
+                
+                Main.obj.HideGoToButtons();
             
-            ShowButtons();
+                UpdateQualityText();
+                
+                foreach (Tool tool in tools)
+                {
+                    if (tool.toolName == "hand")
+                    {
+                        tool.usesLeft = tool.maxUses;
+                        tool.UpdateUsesLeftText();
+                        tool.GiveInHand();
+                    }
+                }
+                GiveToolsHand();
+            
+                ShowButtons();
+            }
         }
     }
 
@@ -186,7 +195,9 @@ public class Workplace : Place
     {
         for (int i = 0; i < Mathf.CeilToInt(tools.Count / 2f); i++)
         {
-            tools[Random.Range(0, tools.Count)].GiveInHand();
+            List<Tool> tmp = tools.FindAll(t => !t.inHand && t.usesLeft > 0);
+            if (tmp.Count == 0) break;
+            tmp[Random.Range(0, tmp.Count)].GiveInHand();
         }
     }
 

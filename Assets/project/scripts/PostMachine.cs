@@ -12,6 +12,8 @@ public class PostMachine : Place
 
     [SerializeField] private AudioSource eatingBoxSound;
     [SerializeField] private AudioSource takeBoxSound;
+    
+    public ServiceReport serviceReport;
 
     public string mode = "sending";
     
@@ -73,6 +75,9 @@ public class PostMachine : Place
     {
         Main.obj.workplace.finished = false;
         Main.currentTask = null;
+        serviceReport.qualities.quality = Main.obj.workplace.currentLaptop.quality;
+        
+        Destroy(Main.obj.workplace.currentLaptop.gameObject);
         
         Main.obj.DeactivateGoToButtons();
         if (eatingBoxSound)eatingBoxSound.Play();
@@ -81,6 +86,12 @@ public class PostMachine : Place
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 1.7f, 0), 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
         postMachineText.text = "have a nice day!";
+        serviceReport.Show();
+        Main.obj.workplace.finished = false;
+        while (serviceReport.showed)
+        {
+            yield return null;
+        }
         Main.obj.ActivateGoToButtons();
     }
 

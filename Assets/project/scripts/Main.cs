@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.XR;
+using TMPro;
 using System.Collections;
 
 public class Main : MonoBehaviour
@@ -10,6 +10,13 @@ public class Main : MonoBehaviour
     [SerializeField] private List<CursorState> cursorStates;
     [SerializeField] private List<GoToButton> goToButtons;
     [SerializeField] private GameObject goToButtonsStart;
+
+    [SerializeField] private TMP_Text reputationText;
+
+    [SerializeField] private int maxPoorServices;
+    
+    public int poorServices = 0;
+    public int reputation;
     
     public List<Place> places;
     
@@ -33,6 +40,13 @@ public class Main : MonoBehaviour
     [SerializeField] private string startGoToPlace = "pc";
     
     public float difficultyMultiplier = 1f;
+
+    public Qualities qualities;
+
+    public void UpdateReputationText()
+    {
+        reputationText.text = "reputation: " + reputation;
+    }
 
     public void HideGoToButtons()
     {

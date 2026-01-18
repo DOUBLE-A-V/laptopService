@@ -359,4 +359,4 @@ MonoBehaviour:
     qualityRemoved: 0
   maxUses: 3
   id: 0
-  overrideBreakLogic: 0
+  overrideBreakLogic: 1

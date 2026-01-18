@@ -127,19 +127,15 @@ public class PCManager : Place
         if (blocked) yield break;
         blocked = true;
         diskWorkSim.SimWork(0.25f);
-        yield return new WaitForSeconds(0.5f);
         mail.SetActive(false);
         onMainScreen = false;
         pipSound.Play();
         yield return new WaitForSeconds(0.5f);
         diskWorkSim.SimWork(0.25f);
-        yield return new WaitForSeconds(0.5f);
         pipSound.Play();
         message.gameObject.SetActive(true);
         messageText.text = "";
         fromText.text = "";
-        yield return new WaitForSeconds(0.5f);
-        diskWorkSim.SimWork(0.25f);
         yield return new WaitForSeconds(0.5f);
         if (Main.currentTask == null)
         {
