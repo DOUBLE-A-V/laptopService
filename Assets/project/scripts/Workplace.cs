@@ -95,6 +95,7 @@ public class Workplace : Place
 
     public void FinishService()
     {
+        Main.obj.currentStage = Main.obj.stages.gotoPost;
         HideButtons();
         foreach (Tool tool in tools)
         {
@@ -137,7 +138,7 @@ public class Workplace : Place
     {
 		bgNormal.SetActive(true);
 		bgBlur.SetActive(false);
-        if (Main.currentTask != null)
+        if (Main.currentTask != null && Main.obj.receivedBox)
         {
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);

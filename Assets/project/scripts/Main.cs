@@ -45,6 +45,28 @@ public class Main : MonoBehaviour
 
     public float money = 0;
 
+    public bool receivedBox = false;
+
+    public Stages stages;
+
+    [Serializable]
+    public class Stages
+    {
+        public PlayerStage gotoPc;
+        public PlayerStage checkNewMessage;
+        public PlayerStage disablePc;
+        public PlayerStage gotoPost;
+        public PlayerStage receiveBox;
+        public PlayerStage gotoWorkplace;
+        public PlayerStage useTools;
+        public PlayerStage takeBreak;
+        public PlayerStage sendBox;
+        public PlayerStage gotoShop;
+        public PlayerStage buyTool;
+    }
+
+    public PlayerStage currentStage;
+
 
     public void GiveMoney(float amount)
     {
@@ -78,6 +100,17 @@ public class Main : MonoBehaviour
     
     public IEnumerator GoTo(string place)
     {
+        if (place == "pc" && currentStage.id == stages.gotoPc.id)
+        {
+            currentStage = stages.checkNewMessage;
+        } else if (place == "post" && currentStage.id == stages.gotoPost.id)
+        {
+            currentStage = workplace.finished ? stages.sendBox : stages.receiveBox;
+        } else if (place == "workplace" && currentStage.id == stages.gotoWorkplace.id)
+        {
+            currentStage = stages.useTools;
+        }
+
         obj.blackscreen.Show();
         HideGoToButtons();
         yield return new WaitForSeconds(1f);

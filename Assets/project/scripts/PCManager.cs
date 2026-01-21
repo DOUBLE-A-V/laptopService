@@ -116,6 +116,10 @@ public class PCManager : Place
         shutdownSound.Play();
         pcButton.active = true;
         mail.SetActive(false);
+        if (Main.obj.currentStage.id == Main.obj.stages.disablePc.id)
+        {
+            Main.obj.currentStage = Main.obj.stages.gotoPost;
+        }
     }
 
     public void Toggle()
@@ -146,6 +150,8 @@ public class PCManager : Place
             Main.currentTask.currentCost = 
                 (float)Math.Round(Random.Range(Main.currentTask.costFrom, Main.currentTask.costTo), 1);
             Main.currentTask.from = Main.obj.names[Random.Range(0, Main.obj.names.Count)];
+            Main.obj.receivedBox = false;
+            Main.obj.currentStage = Main.obj.stages.disablePc;
         }
         
         stickerText.text = "post id:\n" + Main.currentTask.postID;

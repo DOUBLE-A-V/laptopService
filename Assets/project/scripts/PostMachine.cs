@@ -88,6 +88,7 @@ public class PostMachine : Place
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 1.7f, 0), 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
         postMachineText.text = "have a nice day!";
+        if (Main.obj.currentStage.id == Main.obj.stages.sendBox.id) Main.obj.currentStage = Main.obj.stages.gotoPc;
         Main.obj.GiveMoney(cost * serviceReport.qualities.quality/100f);
         serviceReport.Show();
         Main.obj.workplace.finished = false;
@@ -130,6 +131,11 @@ public class PostMachine : Place
                 boxInsertionZone.active = true;
                 box.transform.DOLocalMove(box.transform.localPosition - new Vector3(0, 1.7f, 0), 2f).SetEase(Ease.Linear);
                 postMachineText.text = "take your package";
+                Main.obj.receivedBox = true;
+                if (Main.obj.currentStage.id == Main.obj.stages.receiveBox.id)
+                {
+                    Main.obj.currentStage = Main.obj.stages.gotoWorkplace;
+                }
             }
             else
             {
