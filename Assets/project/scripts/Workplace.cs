@@ -30,6 +30,9 @@ public class Workplace : Place
     [SerializeField] private TMP_Text qualityText;
     [SerializeField] private TMP_Text qualityChangeText;
 
+    [SerializeField] private GameObject bgNormal;
+    [SerializeField] private GameObject bgBlur;
+
     public bool finished = false;
 
     public void UpdateQualityText(bool animate=true)
@@ -132,8 +135,12 @@ public class Workplace : Place
     
     public override void OnEnter()
     {
+		bgNormal.SetActive(true);
+		bgBlur.SetActive(false);
         if (Main.currentTask != null)
         {
+			bgNormal.SetActive(false);
+			bgBlur.SetActive(true);
             qualityText.gameObject.SetActive(true);
             if (!finished)
             {

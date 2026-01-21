@@ -73,9 +73,11 @@ public class PostMachine : Place
 
     public IEnumerator EatBox()
     {
+        float cost = Main.currentTask.currentCost;
         Main.obj.workplace.finished = false;
         Main.currentTask = null;
         serviceReport.qualities.quality = Main.obj.workplace.currentLaptop.quality;
+        serviceReport.qualities.cost = cost;
         
         Destroy(Main.obj.workplace.currentLaptop.gameObject);
         
@@ -86,6 +88,7 @@ public class PostMachine : Place
         box.transform.DOLocalMove(box.transform.localPosition + new Vector3(0, 1.7f, 0), 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
         postMachineText.text = "have a nice day!";
+        Main.obj.GiveMoney(cost * serviceReport.qualities.quality/100f);
         serviceReport.Show();
         Main.obj.workplace.finished = false;
         while (serviceReport.showed)

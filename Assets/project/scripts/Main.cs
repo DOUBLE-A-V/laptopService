@@ -43,6 +43,14 @@ public class Main : MonoBehaviour
 
     public Qualities qualities;
 
+    public float money = 0;
+
+
+    public void GiveMoney(float amount)
+    {
+        money += amount;
+    }
+    
     public void UpdateReputationText()
     {
         reputationText.text = "reputation: " + reputation;

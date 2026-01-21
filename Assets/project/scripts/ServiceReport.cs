@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -12,6 +13,8 @@ public class ServiceReport : MonoBehaviour
     public class ServiceQualities
     {
         public int quality;
+        public float cost = 0;
+        public string difficulty = "";
     }
     
     public ServiceQualities qualities = new ServiceQualities();
@@ -29,8 +32,9 @@ public class ServiceReport : MonoBehaviour
         transform.DOKill();
         transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
         showed = true;
+        float totalPay = (float)Math.Round(qualities.cost * qualities.quality/100f, 1);
         text.text = "<color=#efff00>REPORT</color>\nquality: " + qualities.quality +  "%\n";
-        text.text += "";
+        text.text += "<color=#00ff00>pay: " + totalPay + "$</color>\n<size=30><color=#aaaaff>(" + qualities.cost + "$ * " + qualities.quality + "%)</color></size>";
     }
 
     public void Hide()

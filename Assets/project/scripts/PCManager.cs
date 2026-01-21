@@ -35,6 +35,8 @@ public class PCManager : Place
     
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private TMP_Text fromText;
+
+    [SerializeField] private TMP_Text stickerText;
     
     public AudioSource pipSound;
     
@@ -142,9 +144,11 @@ public class PCManager : Place
             Main.currentTask = Main.obj.serviceTasks[Random.Range(0, Main.obj.serviceTasks.Count)];
             Main.currentTask.postID = Random.Range(1000000, 9999999);
             Main.currentTask.currentCost = 
-                (float)Math.Round(Random.Range(Main.currentTask.costFrom, Main.currentTask.costTo), 2);
+                (float)Math.Round(Random.Range(Main.currentTask.costFrom, Main.currentTask.costTo), 1);
             Main.currentTask.from = Main.obj.names[Random.Range(0, Main.obj.names.Count)];
         }
+        
+        stickerText.text = "post id:\n" + Main.currentTask.postID;
         
         messageText.text = Main.currentTask.message
                            + "\nI can pay " + Main.currentTask.currentCost + "$"
