@@ -98,6 +98,8 @@ public class Workplace : Place
     public void FinishService()
     {
         Main.obj.currentStage = Main.obj.stages.gotoPost;
+        energyBar.transform.DOKill();
+        energyBar.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
         HideButtons();
         foreach (Tool tool in tools)
         {
@@ -147,6 +149,7 @@ public class Workplace : Place
         if (Main.currentTask != null && Main.obj.receivedBox)
         {
             energyBar.gameObject.SetActive(true);
+            energyBar.transform.localScale = Vector3.one;
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);
             qualityText.gameObject.SetActive(true);
