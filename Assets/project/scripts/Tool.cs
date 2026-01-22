@@ -24,6 +24,8 @@ public class Tool : Interactable
 
     public int id;
 
+    public int energyCost;
+
     [SerializeField] protected bool overrideBreakLogic = false;
 
     private void Awake()
@@ -165,6 +167,7 @@ public class Tool : Interactable
         usesLeft--;
         UpdateUsesLeftText();
         OnUse(target);
+        Main.obj.workplace.energyBar.Change(-energyCost);
         if (usesLeft <= 0)
         {
             BreakTool(target);

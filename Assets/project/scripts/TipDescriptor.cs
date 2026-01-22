@@ -41,10 +41,13 @@ public class TipDescriptor
 
 	public int qualityExists = 0;
 	public int qualityRemoved = 0;
+
+	public int energyCost = 0;
 	
 	public string CookText()
 	{
 		string result = "<size=3><blue>" + title + "<end></size>\n\n";
+		if (maxUses != 0) result += "<color=#ff9922>energy cost: " + (energyCost == 0 ? "free" : energyCost) + "<end>\n";
 		if (weaknesses.Count > 0)
 		{
 			result += "<orange>weaknesses:<end>\n";

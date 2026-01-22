@@ -357,6 +357,8 @@ MonoBehaviour:
     health: 0
     qualityExists: 0
     qualityRemoved: 0
+    energyCost: 20
   maxUses: 3
   id: 0
+  energyCost: 20
   overrideBreakLogic: 1

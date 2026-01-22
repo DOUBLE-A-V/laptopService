@@ -33,6 +33,8 @@ public class Workplace : Place
     [SerializeField] private GameObject bgNormal;
     [SerializeField] private GameObject bgBlur;
 
+    public ProgressBar energyBar;
+
     public bool finished = false;
 
     public void UpdateQualityText(bool animate=true)
@@ -107,12 +109,15 @@ public class Workplace : Place
 
     public IEnumerator EndTurn()
     {
+        Main.obj.blackscreen.Show();
         foreach (Tool tool in GetHandTools())
         {
             tool.RemoveFromScreen();
             tool.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+        energyBar.Set(Main.obj.maxEnergy);
+        Main.obj.blackscreen.Hide();
 
         currentLaptop.DoTurn();
         
@@ -132,6 +137,7 @@ public class Workplace : Place
     public override void OnExit()
     {
         qualityText.gameObject.SetActive(false);
+        energyBar.gameObject.SetActive(false);
     }
     
     public override void OnEnter()
@@ -140,9 +146,12 @@ public class Workplace : Place
 		bgBlur.SetActive(false);
         if (Main.currentTask != null && Main.obj.receivedBox)
         {
+            energyBar.gameObject.SetActive(true);
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);
             qualityText.gameObject.SetActive(true);
+            energyBar.maxValue = Main.obj.maxEnergy;
+            energyBar.Set(Main.obj.maxEnergy);
             if (!finished)
             {
                 if (!currentLaptop)

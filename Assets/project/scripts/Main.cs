@@ -49,6 +49,8 @@ public class Main : MonoBehaviour
 
     public Stages stages;
 
+    public float maxEnergy;
+
     [Serializable]
     public class Stages
     {
