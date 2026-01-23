@@ -14,6 +14,8 @@ public class Workplace : Place
 
     [SerializeField] private Interactable endTurnButton;
     [SerializeField] private Interactable finishServiceButton;
+
+    [SerializeField] private Clock clock;
     public List<Tool> tools;
     public Laptop currentLaptop;
     
@@ -100,6 +102,13 @@ public class Workplace : Place
         Main.obj.currentStage = Main.obj.stages.gotoPost;
         energyBar.transform.DOKill();
         energyBar.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
+
+        clock.transform.DOKill();
+        clock.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
+        
+        qualityText.transform.DOKill();
+        qualityText.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
+        
         HideButtons();
         foreach (Tool tool in tools)
         {
@@ -111,6 +120,8 @@ public class Workplace : Place
 
     public IEnumerator EndTurn()
     {
+		Main.obj.noUpdateInteractablesTimer = 1.5f;
+		StartCoroutine(clock.ChangeTime(1, 0.5f));
         Main.obj.blackscreen.Show();
         foreach (Tool tool in GetHandTools())
         {
@@ -140,15 +151,19 @@ public class Workplace : Place
     {
         qualityText.gameObject.SetActive(false);
         energyBar.gameObject.SetActive(false);
+        clock.gameObject.SetActive(false);
     }
     
     public override void OnEnter()
     {
 		bgNormal.SetActive(true);
 		bgBlur.SetActive(false);
+        clock.gameObject.SetActive(false);
         if (Main.currentTask != null && Main.obj.receivedBox)
         {
             energyBar.gameObject.SetActive(true);
+            clock.gameObject.SetActive(true);
+            clock.ResetClock();
             energyBar.transform.localScale = Vector3.one;
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);

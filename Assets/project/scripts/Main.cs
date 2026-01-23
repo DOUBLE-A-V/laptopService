@@ -51,6 +51,8 @@ public class Main : MonoBehaviour
 
     public float maxEnergy;
 
+	public float noUpdateInteractablesTimer = 0;
+
     [Serializable]
     public class Stages
     {
@@ -211,6 +213,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-        UpdateInteractables();
+		noUpdateInteractablesTimer -= Time.deltaTime;
+        if (noUpdateInteractablesTimer <= 0) UpdateInteractables();
     }
 }
