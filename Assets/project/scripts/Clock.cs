@@ -13,11 +13,11 @@ public class Clock : MonoBehaviour
     public int hours = 16;
     public int minutes = 0;
 
-    public void ResetClock()
+    public void ResetClock(int resetHours, int resetMinutes)
     {
-        hours = 15;
-        minutes = 0;
-        UpdateText(15, 00);
+        hours = resetHours;
+        minutes = resetMinutes;
+        UpdateText(hours, minutes);
         arrow.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 

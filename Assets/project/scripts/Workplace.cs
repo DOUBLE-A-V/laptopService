@@ -163,7 +163,8 @@ public class Workplace : Place
         {
             energyBar.gameObject.SetActive(true);
             clock.gameObject.SetActive(true);
-            clock.ResetClock();
+            clock.transform.DOScale(Vector3.one, 0.5f);
+            clock.ResetClock(18, 00); 
             energyBar.transform.localScale = Vector3.one;
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);

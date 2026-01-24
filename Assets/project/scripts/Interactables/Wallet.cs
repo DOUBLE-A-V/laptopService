@@ -18,6 +18,10 @@ public class Wallet : Interactable
 
     private Vector3 defPos;
 
+    private float sincount = 0;
+
+    public bool opened = false;
+
     private void Awake()
     {
         defPos = transform.position;
@@ -25,6 +29,7 @@ public class Wallet : Interactable
     }
     protected override void OnHover()
     {
+        opened = true;
         transform.DOKill();
         dynamicPart.transform.DOKill();
         moneyText.DOKill();
@@ -47,6 +52,7 @@ public class Wallet : Interactable
 
     protected override void OnHoverExit()
     {
+        opened = false;
         transform.DOKill();
         dynamicPart.transform.DOKill();
         moneyText.DOKill();
@@ -55,5 +61,16 @@ public class Wallet : Interactable
         dynamicPart.transform.DORotate(Vector3.zero, 1f).SetEase(Ease.OutExpo);
         moneyText.text = Main.obj.money + "$";
         moneyText.DOFade(0, 0.5f);
+    }
+
+    protected override void OnUpdateInteractable()
+    {
+        if (!opened)
+        {
+            sincount += Time.deltaTime*2;
+            if (sincount > 360) sincount = 0;
+            transform.DOKill();
+            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.5f);
+        }
     }
 }

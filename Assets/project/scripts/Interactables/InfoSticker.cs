@@ -10,6 +10,9 @@ public class InfoSticker : Interactable
 
     private Vector3 defPos;
 
+	private float sincount = 45;
+	public bool opened = false;
+
     private void Awake()
     {
         defPos = transform.position;
@@ -26,6 +29,7 @@ public class InfoSticker : Interactable
     }
     protected override void OnHover()
     {
+		opened = true;
         transform.DOKill();
         
         transform.DOMove(defPos + new Vector3(0, -2, 0), 0.5f).SetEase(Ease.OutExpo);
@@ -34,9 +38,21 @@ public class InfoSticker : Interactable
 
     protected override void OnHoverExit()
     {
+		opened = false;
         transform.DOKill();
         
         transform.DOMove(defPos, 0.5f).SetEase(Ease.OutExpo);
         UpdateText();
+    }
+
+    protected override void OnUpdateInteractable()
+    {
+        if (!opened)
+        {
+            sincount += Time.deltaTime*2;
+            if (sincount > 360) sincount = 0;
+            transform.DOKill();
+            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.5f);
+        }
     }
 }
