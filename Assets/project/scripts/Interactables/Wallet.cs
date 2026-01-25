@@ -65,12 +65,12 @@ public class Wallet : Interactable
 
     protected override void OnUpdateInteractable()
     {
+        sincount += Time.deltaTime*2;
+        if (sincount > 360) sincount = 0;
         if (!opened)
         {
-            sincount += Time.deltaTime*2;
-            if (sincount > 360) sincount = 0;
             transform.DOKill();
-            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.5f);
+            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.2f);
         }
     }
 }

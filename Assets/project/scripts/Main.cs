@@ -11,8 +11,6 @@ public class Main : MonoBehaviour
     [SerializeField] private List<GoToButton> goToButtons;
     [SerializeField] private GameObject goToButtonsStart;
 
-    [SerializeField] private TMP_Text reputationText;
-
     [SerializeField] private int maxPoorServices;
     
     public int poorServices = 0;
@@ -71,15 +69,16 @@ public class Main : MonoBehaviour
 
     public PlayerStage currentStage;
 
+    public int badServiceStamps = 0;
+
+    [SerializeField] private BadStampReceive badStampReceive;
+    
+    public InfoSheet infoSheet;
+
 
     public void GiveMoney(float amount)
     {
         money += amount;
-    }
-    
-    public void UpdateReputationText()
-    {
-        reputationText.text = "reputation: " + reputation;
     }
 
     public void HideGoToButtons()
@@ -153,6 +152,11 @@ public class Main : MonoBehaviour
             }
         }
     }
+
+    public void OnLose()
+    {
+        
+    }
     
     private void Start()
     {
@@ -215,5 +219,9 @@ public class Main : MonoBehaviour
     {
 		noUpdateInteractablesTimer -= Time.deltaTime;
         if (noUpdateInteractablesTimer <= 0) UpdateInteractables();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(badStampReceive.Show());
+        }
     }
 }
