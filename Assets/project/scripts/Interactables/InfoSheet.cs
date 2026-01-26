@@ -56,9 +56,9 @@ public class InfoSheet : Interactable
         Main.obj.badServiceStamps++;
         SpriteRenderer sprite = badServiceStampsSprites[Main.obj.badServiceStamps-1];
         sprite.gameObject.SetActive(true);
-        sprite.transform.localScale = Vector3.one * 0.6f;
+        sprite.transform.localScale = Vector3.one * 0.14f;
         sprite.color = new Color(1, 0, 0, 0);
-        sprite.transform.DOScale(Vector3.one * 0.4f, 0.5f).SetEase(Ease.InExpo);
+        sprite.transform.DOScale(Vector3.one * 0.08f, 0.5f).SetEase(Ease.InExpo);
         sprite.DOFade(1, 0.5f).SetEase(Ease.Linear);
         yield return new WaitForSeconds(1f);
         addingStamp = false;

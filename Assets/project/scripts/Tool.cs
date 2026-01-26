@@ -13,7 +13,7 @@ public class Tool : Interactable
 
     [SerializeField] private Vector2 size;
     
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TMP_Text usesText;
 
     public TipDescriptor tip;

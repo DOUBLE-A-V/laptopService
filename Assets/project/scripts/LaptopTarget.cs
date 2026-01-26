@@ -1,11 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class LaptopTarget : MonoBehaviour
 {
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private List<Sprite> sprites;
+
+    [SerializeField] private bool randomizeDirection;
     public int health = 0;
     public int maxHealth;
     public string targetName;
@@ -13,7 +16,7 @@ public class LaptopTarget : MonoBehaviour
 
     public int difficulty = 0;
     
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     public float size = 0.5f;
 
@@ -24,13 +27,14 @@ public class LaptopTarget : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         tip.maxHealth = maxHealth;
         tip.health = health;
         UpdateHealth();
         
         tip.qualityRemoved = qualityChangeRemoved;
         tip.qualityExists = qualityChangeExisting;
+        if (randomizeDirection) spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
     }
 
     private void Start()
