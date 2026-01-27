@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 struct ColorsTags
 {
-	public static string red = "<color=#ff0000>";
+	public static string red = "<grow><color=#ff0000>";
 	public static string green =  "<color=#00ff00>";
 	public static string blue =  "<color=#8888ff>";
 	public static string yellow =  "<color=#ffff00>";
@@ -47,52 +47,52 @@ public class TipDescriptor
 	public string CookText()
 	{
 		string result = "<size=3><blue>" + title + "<end></size>\n\n";
-		if (maxUses != 0) result += "<color=#ff9922>energy cost: " + (energyCost == 0 ? "free" : energyCost) + "<end>\n";
+		if (maxUses != 0) result += "<color=#ff9922>energy cost: <wave>" + (energyCost == 0 ? "free" : energyCost) + "<end></wave>\n";
 		if (weaknesses.Count > 0)
 		{
-			result += "<orange>weaknesses:<end>\n";
+			result += "<orange>weaknesses:<end><wave>\n";
 			foreach (ToolName toolName in weaknesses)
 			{
 				result += "<i>-" + toolName + "</i>\n";
 			}
 
-			result += "\n";
+			result += "\n</wave>";
 		}
 
 		if (strengths.Count > 0)
 		{
-			result += "<red>strengths:<end>\n";
+			result += "<red></grow>strengths:<end><grow>\n";
 			foreach (TargetName targetName in strengths)
 			{
 				result += "<i>-" + targetName + "</i>\n";
 			}
-			result += "\n";
+			result += "\n</grow>";
 		}
 		
 		if (ignoresTools.Count > 0)
 		{
-			result += "<red>ignores:<end>\n";
+			result += "<red></grow>ignores:<end><grow>\n";
 			foreach (ToolName toolName in ignoresTools)
 			{
 				result += "<i>-" + toolName + "</i>\n";
 			}
 
-			result += "\n";
+			result += "\n</grow>";
 		}
 
 		if (damage > 0)
 		{
-			result += "<red>damage: " + damage + "\n";
+			result += "<red></grow>damage: <grow>" + damage + "\n</grow>";
 		}
 
 		if (maxUses > 0 && usesLeft >= 0)
 		{
-			result += "<orange>durability: " + usesLeft + " / " + maxUses + "<end>\n";
+			result += "<orange>durability: <wave>" + usesLeft + " / " + maxUses + "<end></wave>\n";
 		}
 		
 		if (maxHealth > 0 && health >= 0)
 		{
-			result += "<orange>health: " + health + " / " + maxHealth + "<end>\n";
+			result += "<orange>health: <wave>" + health + " / " + maxHealth + "<end></wave>\n";
 		}
 
 
@@ -102,11 +102,11 @@ public class TipDescriptor
 		{
 			if (qualityExists > 0)
 			{
-				result += "<orange>if on laptop:<end> <green>+" + qualityExists + "% quality<end>\n";
+				result += "<orange>if on laptop:<end> <green>+" + qualityExists + "%</jump> quality<end>\n";
 			}
 			else
 			{
-				result += "<orange>if on laptop:<end> <red>" + qualityExists + "% quality<end>\n";
+				result += "<orange>if on laptop:<end> <red>" + qualityExists + "%</grow> quality<end>\n";
 			}
 		}
 		
@@ -114,11 +114,11 @@ public class TipDescriptor
 		{
 			if (qualityRemoved > 0)
 			{
-				result += "<orange>if removed:<end> <green>+" + qualityRemoved + "% quality<end>\n";
+				result += "<orange>if removed:<end> <green><jump>+" + qualityRemoved + "%</jump> quality<end>\n";
 			}
 			else
 			{
-				result += "<orange>if removed:<end> <red>" + qualityRemoved + "% quality<end>\n";
+				result += "<orange>if removed:<end> <red>" + qualityRemoved + "%</grow> quality<end>\n";
 			}
 		}
 		result = result

@@ -85,7 +85,7 @@ public class Workplace : Place
         finishServiceButton.transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
     }
 
-    private void HideButtons()
+    public void HideButtons()
     {
         endTurnButton.active = false;
         finishServiceButton.active = false;

@@ -345,4 +345,4 @@ MonoBehaviour:
     qualityRemoved: 0
     energyCost: 0
   qualityChangeExisting: -20
-  qualityChangeRemoved: 0
+  qualityChangeRemoved: 20

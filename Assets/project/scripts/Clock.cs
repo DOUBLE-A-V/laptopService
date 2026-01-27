@@ -36,6 +36,7 @@ public class Clock : MonoBehaviour
             {
                 hours++;
                 minutes = 0;
+                if (hours == 24) hours = 0;
             }
             UpdateText(hours, minutes);
         }

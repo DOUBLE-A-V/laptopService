@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
+using DG.Tweening;
 
 public class Main : MonoBehaviour
 {
@@ -74,6 +75,9 @@ public class Main : MonoBehaviour
     [SerializeField] private BadStampReceive badStampReceive;
     
     public InfoSheet infoSheet;
+
+    [SerializeField] private TMP_Text loseText;
+    [SerializeField] private TMP_Text pressButtonText;
 
 
     public void GiveMoney(float amount)
@@ -153,9 +157,44 @@ public class Main : MonoBehaviour
         }
     }
 
-    public void OnLose()
+    public IEnumerator OnLose()
     {
-        
+        workplace.FinishService();
+        blackscreen.Show();
+        noUpdateInteractablesTimer = 9999999;
+        yield return new WaitForSeconds(1f);
+        noUpdateInteractablesTimer = 9999999;
+        loseText.DOFade(1, 1f);
+        float sincount = 0;
+        while (!Input.GetMouseButton(0) && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.Return))
+        {
+            sincount += Time.deltaTime * 2;
+            if (sincount > 360) sincount = 0;
+            pressButtonText.color = new Color(1, 1, 1, Mathf.Abs(Mathf.Sin(sincount)));
+            yield return null;
+        }
+
+        pressButtonText.DOFade(0, 0.5f);
+        loseText.DOKill();
+        loseText.DOFade(0, 0.5f);
+        noUpdateInteractablesTimer = 9999999;
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(GoTo("pc"));
+        noUpdateInteractablesTimer = 9999999;
+        foreach (Tool tool in workplace.tools)
+        {
+            Destroy(tool.gameObject);
+        }
+        workplace.tools.Clear();
+        workplace.GiveTool("hand");
+        workplace.GiveTool("hand");
+        currentStage = stages.checkNewMessage;
+        money = 0;
+        badServiceStamps = 0;
+        reputation = 0;
+        currentTask = null;
+        noUpdateInteractablesTimer = 0;
+        workplace.finished = false;
     }
     
     private void Start()

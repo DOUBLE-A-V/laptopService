@@ -64,7 +64,7 @@ public class InfoSheet : Interactable
         addingStamp = false;
         if (Main.obj.badServiceStamps == 3)
         {
-            Main.obj.OnLose();
+            StartCoroutine(Main.obj.OnLose());
         }
         else
         {
