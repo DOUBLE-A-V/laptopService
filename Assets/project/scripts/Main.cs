@@ -71,8 +71,7 @@ public class Main : MonoBehaviour
     public PlayerStage currentStage;
 
     public int badServiceStamps = 0;
-
-    [SerializeField] private BadStampReceive badStampReceive;
+    public BadStampReceive badStampReceive;
     
     public InfoSheet infoSheet;
 
@@ -195,6 +194,7 @@ public class Main : MonoBehaviour
         currentTask = null;
         noUpdateInteractablesTimer = 0;
         workplace.finished = false;
+        Destroy(workplace.currentLaptop.gameObject);
     }
     
     private void Start()

@@ -68,7 +68,16 @@ public class InfoSheet : Interactable
         }
         else
         {
+            foreach (Tool tool in Main.obj.workplace.tools)
+            {
+                tool.RemoveFromScreen();
+            }
             OnHoverExit();
+            StartCoroutine(Main.obj.GoTo("pc"));
+            Main.obj.currentStage = Main.obj.stages.checkNewMessage;
+            Main.currentTask = null;
+            Main.obj.workplace.finished = false;
+            Destroy(Main.obj.workplace.currentLaptop.gameObject);
         }
         opened = false;
         yield return new WaitForSeconds(1f);
