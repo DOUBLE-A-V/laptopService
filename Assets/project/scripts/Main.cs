@@ -14,6 +14,8 @@ public class Main : MonoBehaviour
 
     [SerializeField] private int maxPoorServices;
     
+    public HighlightsManager highlightsManager;
+    
     public int poorServices = 0;
     public int reputation;
     

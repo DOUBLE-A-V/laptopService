@@ -35,6 +35,11 @@ public class Tool : Interactable
         tip.maxUses = maxUses;
         tip.usesLeft = usesLeft;
     }
+
+    public virtual void CheckCollision()
+    {
+        
+    }
     
     public void UpdateUsesLeftText()
     {
@@ -60,6 +65,10 @@ public class Tool : Interactable
         {
             PlaceInHand();
         }
+        for (int i = 0; i < 10; i++)
+        {
+            Main.obj.highlightsManager.RemoveLine(i);
+        }
     }
 
     protected override void OnUpdateInteractable()
@@ -81,6 +90,7 @@ public class Tool : Interactable
             }
             else
             {
+                CheckCollision();
                 transform.DOMove(Main.cam.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), 0.2f).SetEase(Ease.OutExpo);
                 Main.obj.workplace.tip.HideTip();
             }

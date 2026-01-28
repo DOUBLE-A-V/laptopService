@@ -25,6 +25,8 @@ public class LaptopTarget : MonoBehaviour
     public int qualityChangeExisting;
     public int qualityChangeRemoved;
 
+    public int highlightLineIndex = -1;
+
     private void Awake()
     {
         tip.maxHealth = maxHealth;
