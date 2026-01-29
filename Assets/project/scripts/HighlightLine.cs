@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class HighlightLine : MonoBehaviour
@@ -23,6 +24,8 @@ public class HighlightLine : MonoBehaviour
     {
         line.endColor = new Color(1, 1, 1, 0);
         line.startColor = new Color(1, 1, 1, 0);
+        point2.transform.DOKill();
+        point2.transform.DOMove(Main.cam.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10)), 0.5f).SetEase(Ease.OutExpo);
     }
 
     private void Update()

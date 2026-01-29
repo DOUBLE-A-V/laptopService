@@ -88,9 +88,6 @@ public class LaptopTarget : MonoBehaviour
 
     public void Damage(int amount, Tool by)
     {
-        spriteRenderer.DOKill();
-        spriteRenderer.color = Color.red;
-        spriteRenderer.DOColor(Color.green, 0.5f);
         health -= amount;
         if (health <= 0)
         {

@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Analytics;
 
 public class Tool : Interactable
@@ -27,6 +28,8 @@ public class Tool : Interactable
     public int energyCost;
 
     [SerializeField] protected bool overrideBreakLogic = false;
+    
+    protected List<LaptopTarget> hitTargets = new List<LaptopTarget>();
 
     private void Awake()
     {
@@ -37,6 +40,16 @@ public class Tool : Interactable
     }
 
     public virtual void CheckCollision()
+    {
+        
+    }
+
+    protected virtual void OnUp()
+    {
+        
+    }
+
+    protected virtual void OnDown()
     {
         
     }
@@ -54,16 +67,35 @@ public class Tool : Interactable
 
     private void OnDrop()
     {
+        OnDown();
         Main.obj.workplace.draggingTool = null;
         dragging = false;
-
-        if (Main.obj.workplace.touchingTarget)
+        
+        foreach (LaptopTarget target in hitTargets)
         {
-            Main.obj.workplace.touchingTarget.ApplyTool(this);
+            target.ApplyTool(this);
+        }
+        if (hitTargets.Count == 0)
+        {
+            PlaceInHand();
         }
         else
         {
-            PlaceInHand();
+            active = false;
+            transform.DOKill();
+            transform.localScale = Vector3.one * 0.9f;
+            transform.DOScale(1, 1f).SetEase(Ease.OutElastic, 0.5f);
+            //if (globalDamage != 0) target.Damage(globalDamage, this);
+            usesLeft--;
+            UpdateUsesLeftText();
+            Main.obj.workplace.energyBar.Change(-energyCost);
+            if (usesLeft <= 0)
+            {
+                BreakTool(hitTargets);
+                return;
+            }
+            StartCoroutine(AfterAnim());
+            hitTargets.Clear();
         }
         for (int i = 0; i < 10; i++)
         {
@@ -79,6 +111,7 @@ public class Tool : Interactable
             {
                 Main.obj.workplace.draggingTool = this;
                 dragging = true;
+                OnUp();
             }
         }
 
@@ -112,7 +145,7 @@ public class Tool : Interactable
         
     }
 
-    protected virtual void OnBreakTool(LaptopTarget against)
+    protected virtual void OnBreakTool(List<LaptopTarget> against)
     {
         
     }
@@ -134,7 +167,7 @@ public class Tool : Interactable
         UpdateUsesLeftText();
     }
     
-    public void BreakTool(LaptopTarget against)
+    public void BreakTool(List<LaptopTarget> against)
     {
         if (overrideBreakLogic)
         {
@@ -162,27 +195,13 @@ public class Tool : Interactable
 
 
 
-    private IEnumerator AfterAnim(LaptopTarget target)
+    private IEnumerator AfterAnim()
     {
         yield return new WaitForSeconds(0.7f);
         RemoveFromScreen();
     }    
     public void Use(LaptopTarget target)
     {
-        active = false;
-        transform.DOKill();
-        transform.localScale = Vector3.one * 0.9f;
-        transform.DOScale(1, 1f).SetEase(Ease.OutElastic, 0.5f);
-        //if (globalDamage != 0) target.Damage(globalDamage, this);
-        usesLeft--;
-        UpdateUsesLeftText();
         OnUse(target);
-        Main.obj.workplace.energyBar.Change(-energyCost);
-        if (usesLeft <= 0)
-        {
-            BreakTool(target);
-            return;
-        }
-        StartCoroutine(AfterAnim(target));
     }
 }
