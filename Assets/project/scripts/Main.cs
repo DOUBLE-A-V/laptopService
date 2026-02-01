@@ -35,6 +35,8 @@ public class Main : MonoBehaviour
     public PCManager pcManager;
     public PostMachine postMachine;
     public Workplace workplace;
+
+    public Wallet wallet;
     
     public static Interactable touchingInteractable = null;
 

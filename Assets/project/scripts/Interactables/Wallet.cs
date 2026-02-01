@@ -16,6 +16,8 @@ public class Wallet : Interactable
     [SerializeField] private Sprite moneySprite;
     [SerializeField] private Sprite emptySprite;
 
+    public TMP_Text spentMoneyText;
+
     private Vector3 defPos;
 
     private float sincount = 0;
@@ -27,6 +29,14 @@ public class Wallet : Interactable
         defPos = transform.position;
         Main.interactables.Add(this);
     }
+
+    public void Spend(float amount)
+    {
+        moneyText.color = Color.red;
+        moneyText.DOFade(0f, 1.5f).SetEase(Ease.OutExpo);
+        moneyText.text = amount + "$";
+    }
+    
     protected override void OnHover()
     {
         opened = true;

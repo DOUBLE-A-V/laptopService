@@ -4,17 +4,19 @@ using DG.Tweening;
 
 public class HighlightsManager : MonoBehaviour
 {
-    [SerializeField] private List<HighlightLine> linesPull;
+    public List<HighlightLine> linesPull;
 
     public int AddLine(Vector3 point2)
     {
         point2.z = 0;
         HighlightLine line = linesPull.Find(x => !x.used);
+        line.point1.transform.position = Main.cam.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10));
         line.used = true;
         line.point2.transform.DOKill();
         line.point2.transform.position = Main.cam.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10));
         line.point2.transform.DOMove(point2, 0.5f).SetEase(Ease.OutExpo);
         line.Show();
+        line.UpdateLine();
         return linesPull.IndexOf(line);
     }
 

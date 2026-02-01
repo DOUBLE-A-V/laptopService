@@ -28,11 +28,16 @@ public class HighlightLine : MonoBehaviour
         point2.transform.DOMove(Main.cam.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10)), 0.5f).SetEase(Ease.OutExpo);
     }
 
-    private void Update()
+    public void UpdateLine()
     {
-        if (!used) return;
         line.positionCount = 2;
         line.SetPosition(0, point1.transform.position);
         line.SetPosition(1, point2.transform.position);
+    }
+
+    private void Update()
+    {
+        if (!used) return;
+        UpdateLine();
     }
 }
