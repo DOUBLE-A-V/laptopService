@@ -70,17 +70,17 @@ public class Tool : Interactable
         OnDown();
         Main.obj.workplace.draggingTool = null;
         dragging = false;
-        
-        foreach (LaptopTarget target in hitTargets)
-        {
-            target.ApplyTool(this);
-        }
-        if (hitTargets.Count == 0)
+        if (hitTargets.Count == 0 || energyCost > Main.obj.workplace.energyBar.value)
         {
             PlaceInHand();
         }
         else
         {
+            foreach (LaptopTarget target in hitTargets)
+            {
+                target.ApplyTool(this);
+            }
+            
             active = false;
             transform.DOKill();
             transform.localScale = Vector3.one * 0.9f;

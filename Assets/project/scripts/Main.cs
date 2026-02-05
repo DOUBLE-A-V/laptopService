@@ -35,6 +35,7 @@ public class Main : MonoBehaviour
     public PCManager pcManager;
     public PostMachine postMachine;
     public Workplace workplace;
+    public Shop shop;
 
     public Wallet wallet;
     
@@ -85,7 +86,14 @@ public class Main : MonoBehaviour
 
     public void GiveMoney(float amount)
     {
-        money += amount;
+        if (amount < 0)
+        {
+            wallet.Spend(-amount);
+        }
+        else
+        {
+            money += amount;
+        }
     }
 
     public void HideGoToButtons()
@@ -220,6 +228,8 @@ public class Main : MonoBehaviour
         workplace.GiveTool("hand");
         workplace.GiveTool("hand");
         StartCoroutine(GoTo(startGoToPlace));
+        
+        GiveMoney(1000);
     }
 
     public void DeactivateGoToButtons() 
@@ -264,7 +274,8 @@ public class Main : MonoBehaviour
         if (noUpdateInteractablesTimer <= 0) UpdateInteractables();
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(badStampReceive.Show());
+            shop.Upgrade();
         }
+        
     }
 }

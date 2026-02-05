@@ -156,6 +156,7 @@ public class Workplace : Place
     
     public override void OnEnter()
     {
+        GiveTool("rag");
 		bgNormal.SetActive(true);
 		bgBlur.SetActive(false);
         clock.gameObject.SetActive(false);

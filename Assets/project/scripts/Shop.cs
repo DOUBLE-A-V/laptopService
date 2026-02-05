@@ -14,33 +14,52 @@ public class Shop : Place
 
     public GameObject curtain;
     private Vector3 defCurtainPos;
+    
+    [SerializeField] private UpgradeShopButton upgradeShopButton;
 
     public int level = 0;
+    
+    private bool firstEnter = true;
 
 
     private void Awake()
     {
         defCurtainPos = curtain.transform.position;
+        Main.interactables.Add(upgradeShopButton);
     }
     
     public override void OnEnter()
     {
+        if (firstEnter)
+        {
+            firstEnter = false;
+            UpdateAllItems();
+        }
+        upgradeShopButton.active = level != 2;
         curtain.transform.position = defCurtainPos;
         ShowItems();
-        curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1f).SetEase(Ease.OutElastic, 0.4f);
+        curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1.5f).SetEase(Ease.OutExpo);
+        upgradeShopButton.transform.DOKill();
+        if (upgradeShopButton.defPos == Vector3.zero)
+        {
+            upgradeShopButton.defPos = upgradeShopButton.transform.position;
+        }
+        upgradeShopButton.transform.position = upgradeShopButton.defPos;
+        upgradeShopButton.transform.DOMove(upgradeShopButton.defPos + new Vector3(0, -1.5f * level, 0), 1.5f).SetEase(Ease.OutExpo);
+        
     }
 
     public override void OnExit()
     {
-        
+        upgradeShopButton.active = false;
     }
 
     public void Upgrade()
     {
         level++;
-        curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1f).SetEase(Ease.OutElastic, 0.4f);
-        UpdateItems(level);
-        ShowItems();
+        curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1.5f).SetEase(Ease.OutExpo);
+        //UpdateItems(level);
+        //ShowItems();
     }
 
     public void ShowItems()
@@ -53,7 +72,7 @@ public class Shop : Place
 
     public void UpdateAllItems()
     {
-        for (int i = 0; i < level; i++) UpdateItems(i);
+        for (int i = 0; i < level+1; i++) UpdateItems(i);
     }
 
     public void UpdateItems(int forLevel = 0)
@@ -84,6 +103,7 @@ public class Shop : Place
 
         foreach (Transform itemPlace in itemsPlaces)
         {
+            if (shopItems.Count == 0) break;
             ShopItem item = shopItems[Random.Range(0, shopItems.Count)];
             shopItems.Remove(item);
             item.itemPlace = itemPlace;

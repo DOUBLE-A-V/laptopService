@@ -36,7 +36,7 @@ public class LaptopTarget : MonoBehaviour
         tip.qualityRemoved = qualityChangeRemoved;
         tip.qualityExists = qualityChangeExisting;
         if (randomizeDirection) spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
+        if (sprites.Count != 0) spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
     }
 
     private void Start()

@@ -16,12 +16,15 @@ public class TipDescriptor
 	public enum ToolName
 	{
 		Hand,
+		Rag,
 		
 	}
 
 	public enum TargetName
 	{
-		Sticker,
+		Scratches,
+		Water,
+		Dust,
 		
 	}
 	

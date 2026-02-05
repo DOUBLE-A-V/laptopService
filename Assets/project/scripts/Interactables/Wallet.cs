@@ -32,9 +32,11 @@ public class Wallet : Interactable
 
     public void Spend(float amount)
     {
+        moneyText.DOKill();
         moneyText.color = Color.red;
-        moneyText.DOFade(0f, 1.5f).SetEase(Ease.OutExpo);
-        moneyText.text = amount + "$";
+        moneyText.DOColor(new Color(1, 1, 1, 0), 1.5f).SetEase(Ease.OutExpo);
+        moneyText.text = "-" + amount + "$";
+        Main.obj.money -= amount;
     }
     
     protected override void OnHover()
