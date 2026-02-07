@@ -121,7 +121,7 @@ public class Workplace : Place
     public IEnumerator EndTurn()
     {
 		Main.obj.noUpdateInteractablesTimer = 1.5f;
-		StartCoroutine(clock.ChangeTime(1, 0.5f));
+		StartCoroutine(clock.ChangeTime(Random.Range(1, 400)/100f, 0.5f));
         Main.obj.blackscreen.Show();
         foreach (Tool tool in GetHandTools())
         {
@@ -159,12 +159,12 @@ public class Workplace : Place
 		bgNormal.SetActive(true);
 		bgBlur.SetActive(false);
         clock.gameObject.SetActive(false);
+        energyBar.gameObject.SetActive(false);
         if (Main.currentTask != null && Main.obj.receivedBox)
         {
-            energyBar.gameObject.SetActive(true);
             clock.gameObject.SetActive(true);
             clock.transform.DOScale(Vector3.one, 0.5f);
-            clock.ResetClock(18, 00); 
+            clock.ResetClock(20, 00);
             energyBar.transform.localScale = Vector3.one;
 			bgNormal.SetActive(false);
 			bgBlur.SetActive(true);
@@ -173,6 +173,7 @@ public class Workplace : Place
             energyBar.Set(Main.obj.maxEnergy);
             if (!finished)
             {
+                energyBar.gameObject.SetActive(true);
                 if (!currentLaptop)
                 {
                     finished = false;

@@ -91,6 +91,19 @@ public class PostMachine : Place
         if (Main.obj.currentStage.id == Main.obj.stages.sendBox.id) Main.obj.currentStage = Main.obj.stages.gotoPc;
         Main.obj.GiveMoney(cost * serviceReport.qualities.quality/100f);
         serviceReport.Show();
+        yield return new WaitForSeconds(0.5f);
+        if (serviceReport.qualities.quality < Main.obj.qualities.qualityPoorService)
+        {
+            StartCoroutine(Main.obj.badStampReceive.Show());
+        } else if (serviceReport.qualities.quality > Main.obj.qualities.qualityRemovePoorService)
+        {
+            if (Main.obj.badServiceStamps > 0)
+            {
+                StartCoroutine(Main.obj.infoSheet.RemoveStamp());
+            }
+        }
+        Main.obj.reputation += serviceReport.qualities.quality - Main.obj.qualities.qualityPositiveService;
+        
         Main.obj.workplace.finished = false;
         while (serviceReport.showed)
         {

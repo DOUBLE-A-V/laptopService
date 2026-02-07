@@ -66,7 +66,7 @@ public class InfoSheet : Interactable
         {
             StartCoroutine(Main.obj.OnLose());
         }
-        else
+        else if (Main.obj.currentPlace == Main.obj.workplace)
         {
             foreach (Tool tool in Main.obj.workplace.tools)
             {
@@ -79,6 +79,25 @@ public class InfoSheet : Interactable
             Main.obj.workplace.finished = false;
             Destroy(Main.obj.workplace.currentLaptop.gameObject);
         }
+        opened = false;
+        yield return new WaitForSeconds(1f);
+        Main.obj.noUpdateInteractablesTimer = 0;
+    }
+    
+    public IEnumerator RemoveStamp()
+    {
+        opened = true;
+        addingStamp = true;
+        transform.DOKill();
+        transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
+        UpdateText();
+        yield return new WaitForSeconds(0.5f);
+        Main.obj.badServiceStamps--;
+        SpriteRenderer sprite = badServiceStampsSprites[Main.obj.badServiceStamps];
+        sprite.DOFade(0, 0.5f).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(1f);
+        addingStamp = false;
+        
         opened = false;
         yield return new WaitForSeconds(1f);
         Main.obj.noUpdateInteractablesTimer = 0;

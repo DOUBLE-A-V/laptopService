@@ -3897,10 +3897,10 @@ MonoBehaviour:
   startGoToPlace: workplace
   difficultyMultiplier: 1
   qualities:
-    qualityPoorService: 30
+    qualityPoorService: 50
     qualityPositiveService: 60
     qualityRemovePoorService: 100
-    failedServiceRepChange: 20
+    failedServiceRepChange: 80
   money: 0
   receivedBox: 1
   stages:

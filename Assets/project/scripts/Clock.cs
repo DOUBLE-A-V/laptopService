@@ -28,10 +28,10 @@ public class Clock : MonoBehaviour
         timeText.text = hours.ToString("00") + " " + minutes.ToString("00");
         doublePointText.text = hours.ToString("00") + ":" + minutes.ToString("00");
     }
-    public IEnumerator ChangeTime(int hoursAdd, float duration)
+    public IEnumerator ChangeTime(float hoursAdd, float duration)
     {
         arrow.transform.DOLocalRotate(new Vector3(0, 0, arrow.transform.localRotation.eulerAngles.z - 40), duration).SetEase(Ease.Linear);
-        if (hours == 23) Main.obj.noUpdateInteractablesTimer = 9999999;
+        if (hours == 23 && minutes + hoursAdd * 60f >= 60) Main.obj.noUpdateInteractablesTimer = 9999999;
         for (int i = 0; i < hoursAdd * 30; i++)
         {
             yield return null;
@@ -40,7 +40,12 @@ public class Clock : MonoBehaviour
             {
                 hours++;
                 minutes = 0;
-                if (hours == 24) hours = 0;
+                if (hours == 24)
+                {
+                    hours = 0;
+                    UpdateText(hours, minutes);
+                    break;
+                }
             }
             UpdateText(hours, minutes);
         }
