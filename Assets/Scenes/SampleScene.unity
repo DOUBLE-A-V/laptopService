@@ -3939,6 +3939,7 @@ MonoBehaviour:
       id: 10
   maxEnergy: 40
   noUpdateInteractablesTimer: 0
+  messageTextPrefab: {fileID: 8971307013717208254, guid: 973840d1554ae164cb3095e5655becd7, type: 3}
   currentStage:
     name: go to desktop
     id: 0
@@ -4131,7 +4132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &463815381
 Transform:
   m_ObjectHideFlags: 0
@@ -4141,8 +4142,8 @@ Transform:
   m_GameObject: {fileID: 463815380}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.7, z: -100}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: 0, y: 1.7, z: -100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 312301917}
@@ -4194,9 +4195,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -20
+  m_SortingOrder: -8
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1784205716024546507, guid: 68391614e183cb741a3f07354ffaef0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4902,7 +4903,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &482255575
@@ -5023,7 +5024,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1210697023}
@@ -5075,9 +5076,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1024226415114158248, guid: d05ab7172b467e74bb00e67ad322a97e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5994,8 +5995,8 @@ Transform:
   m_GameObject: {fileID: 568701625}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 15, z: 1}
+  m_LocalPosition: {x: 0, y: -2.48, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 132222744}
@@ -6047,9 +6048,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 8662384261516989540, guid: 66714ab543eb6cf479c6e701101bee12, type: 3}
   m_Color: {r: 1, g: 0.592842, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9745,11 +9746,12 @@ MonoBehaviour:
   active: 0
   touching: 0
   removed: 0
-  toolBase: {fileID: 319111976728072196, guid: 74286405082872642b3d919df391ed53, type: 3}
+  toolBase: {fileID: 6924823117748839280, guid: 74286405082872642b3d919df391ed53, type: 3}
   costText: {fileID: 477152356}
   itemName: rag
   itemPlace: {fileID: 0}
   inShop: 0
+  spriteRenderer: {fileID: 499695737}
   level: 0
   cost: 15
 --- !u!1 &1218919255

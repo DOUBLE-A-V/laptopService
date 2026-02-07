@@ -31,6 +31,8 @@ public class Tool : Interactable
     
     protected List<LaptopTarget> hitTargets = new List<LaptopTarget>();
 
+    public int stackedQuality = 0;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -72,14 +74,21 @@ public class Tool : Interactable
         dragging = false;
         if (hitTargets.Count == 0 || energyCost > Main.obj.workplace.energyBar.value)
         {
+            if (energyCost > Main.obj.workplace.energyBar.value && hitTargets.Count != 0)
+            {
+                Main.obj.ShowMessage("not enough energy!", transform.position);
+            }
             PlaceInHand();
         }
         else
         {
+            stackedQuality = 0;
             foreach (LaptopTarget target in hitTargets)
             {
                 target.ApplyTool(this);
             }
+            
+            Main.obj.workplace.ChangeQuality(stackedQuality);
             
             active = false;
             transform.DOKill();

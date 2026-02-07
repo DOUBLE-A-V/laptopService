@@ -80,7 +80,7 @@ public class LaptopTarget : MonoBehaviour
     private void Death(Tool by)
     {
         OnDeath(by);
-        Main.obj.workplace.ChangeQuality(qualityChangeRemoved - qualityChangeExisting);
+        by.stackedQuality += qualityChangeRemoved - qualityChangeExisting;
         transform.DOScale(0, 1f).SetEase(Ease.InElastic, 0.5f);
         Main.obj.workplace.currentLaptop.targets.Remove(this);
         Destroy(gameObject, 1);

@@ -57,6 +57,8 @@ public class Main : MonoBehaviour
 
 	public float noUpdateInteractablesTimer = 0;
 
+    public TMP_Text messageTextPrefab;
+
     [Serializable]
     public class Stages
     {
@@ -84,6 +86,15 @@ public class Main : MonoBehaviour
     [SerializeField] private TMP_Text pressButtonText;
 
 
+    public void ShowMessage(string message, Vector3 pos)
+    {
+        TMP_Text t = Instantiate(messageTextPrefab);
+        t.transform.position = pos;
+        t.text = message;
+        t.transform.DOMove(t.transform.position + new Vector3(0, 1, 0), 1f).SetEase(Ease.OutExpo);
+        t.DOFade(0, 2f).SetEase(Ease.OutFlash);
+    }
+    
     public void GiveMoney(float amount)
     {
         if (amount < 0)

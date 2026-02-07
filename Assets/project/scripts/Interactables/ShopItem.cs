@@ -10,6 +10,8 @@ public class ShopItem : Interactable
     public string itemName;
     public Transform itemPlace;
     public bool inShop = false;
+    
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     public int level;
 
@@ -35,8 +37,9 @@ public class ShopItem : Interactable
     {
         Main.obj.workplace.tip.HideTip();
         active = false;
-        //costText.DOFade(0, 0.5f);
-        transform.DOScale(0, 1).SetEase(Ease.OutExpo);
+        costText.DOFade(0, 0.5f);
+        spriteRenderer.transform.DOKill();
+        spriteRenderer.transform.DOScale(new Vector3(0, 0.4f, 1), 1).SetEase(Ease.OutExpo);
         Main.obj.wallet.Spend(cost);
         Main.obj.workplace.GiveTool(itemName);
     }
@@ -53,6 +56,9 @@ public class ShopItem : Interactable
 
     public void Show()
     {
+        spriteRenderer.transform.DOKill();
+        spriteRenderer.transform.DOScale(new Vector3(0.3f, 0.3f, 1), 0.3f).SetEase(Ease.OutExpo);
+        costText.DOFade(1, 0.5f);
         costText.text = cost + "$";
         active = true;
         inShop = true;
