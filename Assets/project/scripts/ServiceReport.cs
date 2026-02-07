@@ -15,6 +15,7 @@ public class ServiceReport : MonoBehaviour
         public int quality;
         public float cost = 0;
         public string difficulty = "";
+        public int repChange = 0;
     }
     
     public ServiceQualities qualities = new ServiceQualities();
@@ -34,7 +35,8 @@ public class ServiceReport : MonoBehaviour
         showed = true;
         float totalPay = (float)Math.Round(qualities.cost * qualities.quality/100f, 1);
         text.text = "<color=#efff00>REPORT</color>\nquality: " + qualities.quality +  "%\n";
-        text.text += "<color=#00ff00>pay: " + totalPay + "$</color>\n<size=30><color=#aaaaff>(" + qualities.cost + "$ * " + qualities.quality + "%)</color></size>";
+        text.text += "<color=#00ff00>pay: " + totalPay + "$</color>\n<size=30><color=#aaaaff>(" + qualities.cost + "$ * " + qualities.quality + "%)</color></size>\n";
+        text.text += "<color=#ffffff>reputation</color> " + (qualities.repChange >= 0 ? "<color=#00ff00>+" + qualities.repChange + "</color>" : "<color=#ff0000>" + qualities.repChange + "</color>");
     }
 
     public void Hide()

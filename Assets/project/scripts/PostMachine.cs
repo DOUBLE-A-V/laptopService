@@ -78,6 +78,7 @@ public class PostMachine : Place
         Main.currentTask = null;
         serviceReport.qualities.quality = Main.obj.workplace.currentLaptop.quality;
         serviceReport.qualities.cost = cost;
+        serviceReport.qualities.repChange = serviceReport.qualities.quality - Main.obj.qualities.qualityPositiveService;
         
         Destroy(Main.obj.workplace.currentLaptop.gameObject);
         

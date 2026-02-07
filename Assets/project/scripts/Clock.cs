@@ -3,7 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 
-public class Clock : MonoBehaviour
+public class Clock : Interactable
 {
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text doublePointText;
@@ -14,6 +14,19 @@ public class Clock : MonoBehaviour
     public int minutes = 0;
 
     private bool anim = false;
+
+    [SerializeField] private TipDescriptor tip;
+
+
+    protected override void OnHover()
+    {
+        Main.obj.workplace.tip.ShowTip(tip, transform.position);
+    }
+
+    protected override void OnHoverExit()
+    {
+        Main.obj.workplace.tip.HideTip();
+    }
 
     public void ResetClock(int resetHours, int resetMinutes)
     {
@@ -30,6 +43,10 @@ public class Clock : MonoBehaviour
     }
     public IEnumerator ChangeTime(float hoursAdd, float duration)
     {
+        if (hoursAdd >= 24f - (hours + minutes / 60f) && hours + minutes / 60f < 23 && Random.Range(0, 2) == 0)
+        {
+            hoursAdd = 24f - (hours + minutes / 60f) - Random.Range(50, 200) / 1000f;
+        }
         arrow.transform.DOLocalRotate(new Vector3(0, 0, arrow.transform.localRotation.eulerAngles.z - 40), duration).SetEase(Ease.Linear);
         if (hours == 23 && minutes + hoursAdd * 60f >= 60) Main.obj.noUpdateInteractablesTimer = 9999999;
         for (int i = 0; i < hoursAdd * 30; i++)

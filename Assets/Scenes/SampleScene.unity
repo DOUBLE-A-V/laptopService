@@ -496,7 +496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: take a break
+  m_text: to rest
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
   m_sharedMaterial: {fileID: -6964186084235669811, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
@@ -910,6 +910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53849443}
   - component: {fileID: 53849444}
+  - component: {fileID: 53849445}
   m_Layer: 5
   m_Name: clock
   m_TagString: Untagged
@@ -926,7 +927,7 @@ RectTransform:
   m_GameObject: {fileID: 53849442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1996315430}
@@ -952,11 +953,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7d39df772689746adb0d3e951e53b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Clock
+  collider: {fileID: 53849445}
+  active: 1
+  touching: 0
+  removed: 0
   timeText: {fileID: 317755587}
   doublePointText: {fileID: 1258989632}
   arrow: {fileID: 981459217}
   hours: 16
   minutes: 0
+  tip:
+    title: clock
+    rawText: <yellow>Time passes every time you rest, and you never know how long
+      you'll be resting. <end><color=#ff4444>Make sure to complete the service before
+      00:00.<end>
+    weaknesses: 
+    strengths: 
+    ignoresTools: 
+    damage: 0
+    maxUses: 0
+    usesLeft: 0
+    maxHealth: 0
+    health: 0
+    qualityExists: 0
+    qualityRemoved: 0
+    energyCost: 0
+--- !u!61 &53849445
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53849442}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -20}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 180, y: 200}
+  m_EdgeRadius: 0
 --- !u!1 &56229033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2873,7 +2940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &312301917
 Transform:
   m_ObjectHideFlags: 0

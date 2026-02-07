@@ -298,7 +298,7 @@ public class Workplace : Place
     {
         highlight.DOKill();
         highlight.DOFade(0, 0.5f);
-        if (!GetHandTools().Find(t => t.touching))tip.HideTip();
+        if (!GetHandTools().Find(t => t.touching) && !clock.touching)tip.HideTip();
     }
 
     private void Update()
