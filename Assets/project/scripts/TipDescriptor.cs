@@ -25,6 +25,7 @@ public class TipDescriptor
 		Scratches,
 		Water,
 		Dust,
+		Stickers,
 		
 	}
 	

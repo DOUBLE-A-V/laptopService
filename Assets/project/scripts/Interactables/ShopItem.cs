@@ -15,6 +15,9 @@ public class ShopItem : Interactable
 
     public int level;
 
+    public float costFrom = 0;
+    public float costTo = 0;
+
     public float cost = 0;
     
     protected override void Interact()
@@ -59,6 +62,7 @@ public class ShopItem : Interactable
         spriteRenderer.transform.DOKill();
         spriteRenderer.transform.DOScale(new Vector3(0.3f, 0.3f, 1), 0.3f).SetEase(Ease.OutExpo);
         costText.DOFade(1, 0.5f);
+        cost = (float)System.Math.Round(Random.Range(costFrom, costTo), 1);
         costText.text = cost + "$";
         active = true;
         inShop = true;

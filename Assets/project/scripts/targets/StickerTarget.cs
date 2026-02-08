@@ -18,7 +18,7 @@ public class StickerTarget : LaptopTarget
 
     protected override void OnDeath(Tool deadBy)
     {
-        if (deadBy.toolName != "stickerRemover")
+        if (deadBy.toolName != "sticker remover")
         {
             Main.obj.workplace.currentLaptop.targets.Add(Instantiate(stickyResiduePrefab, transform.position, Quaternion.identity));
         }
