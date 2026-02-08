@@ -16976,6 +16976,7 @@ MonoBehaviour:
   - {fileID: 4014243062974443176, guid: 54e7665a2932efb4e90053ba216eab56, type: 3}
   - {fileID: 4014243062974443176, guid: 1c1d0a41a9e1289478a6c95be4acbf58, type: 3}
   - {fileID: 4014243062974443176, guid: 522009d36d2eb5745962e933fff66f45, type: 3}
+  - {fileID: 4794841247071415205, guid: b3e42fe1d8a51624f81102380372713f, type: 3}
   laptopsPrefabs:
   - {fileID: 447490868992317336, guid: d0a198e7b770df4408d0929d8084b02d, type: 3}
   toolsPrefabs:

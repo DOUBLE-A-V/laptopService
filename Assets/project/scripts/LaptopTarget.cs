@@ -43,6 +43,7 @@ public class LaptopTarget : MonoBehaviour
     {
         Main.obj.workplace.currentLaptop.quality += qualityChangeExisting;
         Main.obj.workplace.UpdateQualityText();
+        OnAppear();
     }
 
     public void ApplyTool(Tool tool)
@@ -54,7 +55,7 @@ public class LaptopTarget : MonoBehaviour
         UpdateHealth();
     }
 
-    private void UpdateHealth(bool animate = true)
+    protected void UpdateHealth(bool animate = true)
     {
         healthText.text = health + " / " + maxHealth;
         if (animate)
@@ -96,5 +97,10 @@ public class LaptopTarget : MonoBehaviour
             return;
         }
         OnDamage(amount, by);
+    }
+
+    protected virtual void OnAppear()
+    {
+        
     }
 }
