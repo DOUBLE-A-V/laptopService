@@ -7,7 +7,7 @@ using TMPro;
 public class Workplace : Place
 {
     [SerializeField] private int toolsPerTurn;
-    [SerializeField] private List<LaptopTarget> targetsPrefabs;
+    [SerializeField] public List<LaptopTarget> targetsPrefabs;
     [SerializeField] private List<Laptop> laptopsPrefabs;
     
     [SerializeField] private List<Tool>  toolsPrefabs;
@@ -173,6 +173,7 @@ public class Workplace : Place
             energyBar.Set(Main.obj.maxEnergy);
             if (!finished)
             {
+                GiveTool("water sprayer");
                 energyBar.gameObject.SetActive(true);
                 if (!currentLaptop)
                 {

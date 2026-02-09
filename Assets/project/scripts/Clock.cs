@@ -43,7 +43,7 @@ public class Clock : Interactable
     }
     public IEnumerator ChangeTime(float hoursAdd, float duration)
     {
-        if (hoursAdd >= 24f - (hours + minutes / 60f) && hours + minutes / 60f < 23 && Random.Range(0, 2) == 0)
+        if (hoursAdd >= 24f - (hours + minutes / 60f) && hours + minutes / 60f < 22.5f && Random.Range(0, 2) == 0)
         {
             hoursAdd = 24f - (hours + minutes / 60f) - Random.Range(50, 200) / 1000f;
         }

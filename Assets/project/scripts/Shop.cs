@@ -64,7 +64,7 @@ public class Shop : Place
 
     public void ShowItems()
     {
-        foreach (ShopItem shopItem in shopItems1) shopItem.Show();
+        foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop) shopItem.Show();
 
         if (level > 0) foreach (ShopItem shopItem in shopItems2) shopItem.Show();
         if (level > 1) foreach (ShopItem shopItem in shopItems3) shopItem.Show();
@@ -107,6 +107,7 @@ public class Shop : Place
             ShopItem item = shopItems[Random.Range(0, shopItems.Count)];
             shopItems.Remove(item);
             item.itemPlace = itemPlace;
+            item.inShop = true;
         }
 
         foreach (ShopItem shopItem in prevItems) shopItems.Add(shopItem);

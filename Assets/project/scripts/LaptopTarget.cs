@@ -82,7 +82,7 @@ public class LaptopTarget : MonoBehaviour
     {
         OnDeath(by);
         by.stackedQuality += qualityChangeRemoved - qualityChangeExisting;
-        transform.DOScale(0, 1f).SetEase(Ease.InElastic, 0.5f);
+        transform.DOScale(0, 0.9f).SetEase(Ease.InElastic, 0.5f);
         Main.obj.workplace.currentLaptop.targets.Remove(this);
         Destroy(gameObject, 1);
     }

@@ -8,6 +8,7 @@ struct ColorsTags
 	public static string blue =  "<color=#8888ff>";
 	public static string yellow =  "<color=#ffff00>";
 	public static string orange =  "<color=#ffa500>";
+	public static string white =  "<color=#ffffff>";
 }
 
 [Serializable]
@@ -26,6 +27,7 @@ public class TipDescriptor
 		Water,
 		Dust,
 		Stickers,
+		StickySPCResidue,
 		
 	}
 	
@@ -68,7 +70,7 @@ public class TipDescriptor
 			result += "<red></grow>strengths:<end><grow>\n";
 			foreach (TargetName targetName in strengths)
 			{
-				result += "<i>-" + targetName + "</i>\n";
+				result += ("<i>-" + targetName).Replace("SPC", " ") + "</i>\n";
 			}
 			result += "\n</grow>";
 		}
@@ -126,6 +128,7 @@ public class TipDescriptor
 			}
 		}
 		result = result
+			.Replace("<white>", ColorsTags.white)
 			.Replace("<red>", ColorsTags.red)
 			.Replace("<green>", ColorsTags.green)
 			.Replace("<blue>", ColorsTags.blue)
