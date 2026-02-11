@@ -38,6 +38,8 @@ public class Main : MonoBehaviour
     public Shop shop;
 
     public Wallet wallet;
+
+    public Tool poppyTool;
     
     public static Interactable touchingInteractable = null;
 

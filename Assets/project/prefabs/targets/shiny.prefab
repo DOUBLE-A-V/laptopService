@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1550613974303942745}
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1595736872862477925, guid: 32177e512b61882438b8d2dca66f2efb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.6862745, g: 0.9960785, b: 0.37647063, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -282,9 +282,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1550613974303942745}
   - component: {fileID: 4014243062974443176}
-  - component: {fileID: -3442979880044406392}
+  - component: {fileID: 4616291305572735528}
   m_Layer: 0
-  m_Name: dust
+  m_Name: shiny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,33 +321,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaptopTarget
   healthText: {fileID: 1455999299275599881}
   sprites: []
-  collision: {fileID: -3442979880044406392}
+  collision: {fileID: 4616291305572735528}
   randomizeDirection: 1
-  health: 2
-  maxHealth: 2
-  targetName: dust
+  health: 1
+  maxHealth: 1
+  targetName: shiny
   stackedDamage: 0
   difficulty: 0
   spriteRenderer: {fileID: 2780322801929811509}
   size: 0.5
   tip:
-    title: dust
-    rawText: dust grown with time
+    title: shiny
+    rawText: this indicates purity
     weaknesses: 
     strengths: 
     ignoresTools: 
     damage: 0
     maxUses: 0
     usesLeft: 0
-    maxHealth: 0
-    health: 0
-    qualityExists: 0
+    maxHealth: 1
+    health: 1
+    qualityExists: 15
     qualityRemoved: 0
     energyCost: 0
-  qualityChangeExisting: -10
+  qualityChangeExisting: 15
   qualityChangeRemoved: 0
   highlightLineIndex: -1
---- !u!58 &-3442979880044406392
+--- !u!58 &4616291305572735528
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

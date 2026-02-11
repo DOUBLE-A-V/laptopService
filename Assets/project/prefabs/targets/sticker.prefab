@@ -282,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550613974303942745}
   - component: {fileID: 4794841247071415205}
+  - component: {fileID: 6834535734540736640}
   m_Layer: 0
   m_Name: sticker
   m_TagString: Untagged
@@ -320,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StickerTarget
   healthText: {fileID: 1455999299275599881}
   sprites: []
+  collision: {fileID: 6834535734540736640}
   randomizeDirection: 1
   health: 0
   maxHealth: 0
@@ -349,3 +351,39 @@ MonoBehaviour:
   healthFrom: 2
   healthTo: 6
   stickyResiduePrefab: {fileID: 4014243062974443176, guid: d2facad4bac1c30459ae4ea7d8ebaae5, type: 3}
+--- !u!58 &6834535734540736640
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7645616425415869008}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1

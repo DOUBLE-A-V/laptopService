@@ -7,6 +7,7 @@ public class LaptopTarget : MonoBehaviour
 {
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private List<Sprite> sprites;
+    public CircleCollider2D collision;
 
     [SerializeField] private bool randomizeDirection;
     public int health = 0;

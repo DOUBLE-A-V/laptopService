@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1550613974303942745}
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1595736872862477925, guid: 32177e512b61882438b8d2dca66f2efb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.6862745, g: 0.9960785, b: 0.37647063, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -281,10 +281,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550613974303942745}
-  - component: {fileID: 4014243062974443176}
-  - component: {fileID: -3442979880044406392}
+  - component: {fileID: 4616291305572735528}
+  - component: {fileID: 6771839451486063544}
   m_Layer: 0
-  m_Name: dust
+  m_Name: persistentDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,47 +307,7 @@ Transform:
   - {fileID: 2228598249749263025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4014243062974443176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7645616425415869008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dceb3f4ffb2f6459d6743e3ae193a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LaptopTarget
-  healthText: {fileID: 1455999299275599881}
-  sprites: []
-  collision: {fileID: -3442979880044406392}
-  randomizeDirection: 1
-  health: 2
-  maxHealth: 2
-  targetName: dust
-  stackedDamage: 0
-  difficulty: 0
-  spriteRenderer: {fileID: 2780322801929811509}
-  size: 0.5
-  tip:
-    title: dust
-    rawText: dust grown with time
-    weaknesses: 
-    strengths: 
-    ignoresTools: 
-    damage: 0
-    maxUses: 0
-    usesLeft: 0
-    maxHealth: 0
-    health: 0
-    qualityExists: 0
-    qualityRemoved: 0
-    energyCost: 0
-  qualityChangeExisting: -10
-  qualityChangeRemoved: 0
-  highlightLineIndex: -1
---- !u!58 &-3442979880044406392
+--- !u!58 &4616291305572735528
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,4 +342,46 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1
+  m_Radius: 1.5
+--- !u!114 &6771839451486063544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7645616425415869008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba38156163b27f4e87f5f921793d5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentDustTarget
+  healthText: {fileID: 1455999299275599881}
+  sprites: []
+  collision: {fileID: 4616291305572735528}
+  randomizeDirection: 0
+  health: 5
+  maxHealth: 5
+  targetName: persistent dust
+  stackedDamage: 0
+  difficulty: 1
+  spriteRenderer: {fileID: 2780322801929811509}
+  size: 0.5
+  tip:
+    title: persistent dust
+    rawText: This dust has been here for a very long time.<yellow>recovers 15 energy
+      when removed<end>
+    weaknesses: 
+    strengths: 
+    ignoresTools: 
+    damage: 0
+    maxUses: 0
+    usesLeft: 0
+    maxHealth: 0
+    health: 0
+    qualityExists: -35
+    qualityRemoved: 0
+    energyCost: 0
+  qualityChangeExisting: -35
+  qualityChangeRemoved: 0
+  highlightLineIndex: -1
+  addEnergy: 10

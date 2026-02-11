@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1550613974303942745}
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1595736872862477925, guid: 32177e512b61882438b8d2dca66f2efb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.6862745, g: 0.9960785, b: 0.37647063, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -281,10 +281,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550613974303942745}
-  - component: {fileID: 4014243062974443176}
-  - component: {fileID: -3442979880044406392}
+  - component: {fileID: 4794841247071415205}
+  - component: {fileID: 6834535734540736640}
   m_Layer: 0
-  m_Name: dust
+  m_Name: juiceStain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,7 +307,7 @@ Transform:
   - {fileID: 2228598249749263025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4014243062974443176
+--- !u!114 &4794841247071415205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,23 +316,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7645616425415869008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dceb3f4ffb2f6459d6743e3ae193a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 383e3ab66edb260459ffc6089f7d9bc2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LaptopTarget
+  m_EditorClassIdentifier: Assembly-CSharp::StickerTarget
   healthText: {fileID: 1455999299275599881}
   sprites: []
-  collision: {fileID: -3442979880044406392}
+  collision: {fileID: 6834535734540736640}
   randomizeDirection: 1
-  health: 2
-  maxHealth: 2
-  targetName: dust
+  health: 6
+  maxHealth: 6
+  targetName: juice stain
   stackedDamage: 0
-  difficulty: 0
+  difficulty: 1
   spriteRenderer: {fileID: 2780322801929811509}
   size: 0.5
   tip:
-    title: dust
-    rawText: dust grown with time
+    title: juice stain
+    rawText: Someone spilled juice here.\n<yellow>leaves a shiny after removal<end>
     weaknesses: 
     strengths: 
     ignoresTools: 
@@ -341,13 +341,16 @@ MonoBehaviour:
     usesLeft: 0
     maxHealth: 0
     health: 0
-    qualityExists: 0
+    qualityExists: -20
     qualityRemoved: 0
     energyCost: 0
-  qualityChangeExisting: -10
+  qualityChangeExisting: -20
   qualityChangeRemoved: 0
   highlightLineIndex: -1
---- !u!58 &-3442979880044406392
+  healthFrom: 6
+  healthTo: 6
+  stickyResiduePrefab: {fileID: 4014243062974443176, guid: d2facad4bac1c30459ae4ea7d8ebaae5, type: 3}
+--- !u!58 &6834535734540736640
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
