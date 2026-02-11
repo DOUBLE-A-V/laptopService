@@ -15,7 +15,9 @@ public class Workplace : Place
     [SerializeField] private Interactable endTurnButton;
     [SerializeField] private Interactable finishServiceButton;
 
-    [SerializeField] private Clock clock;
+    [SerializeField] private string garrantedTargetDebug;
+
+    [SerializeField] public Clock clock;
     public List<Tool> tools;
     public Laptop currentLaptop;
     
@@ -130,6 +132,7 @@ public class Workplace : Place
         }
         yield return new WaitForSeconds(1f);
         energyBar.Set(Main.obj.maxEnergy);
+        foreach (LaptopTarget target in currentLaptop.targets) target.OnEndTurn();
         Main.obj.blackscreen.Hide();
 
         currentLaptop.DoTurn();
@@ -243,13 +246,19 @@ public class Workplace : Place
     {
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         int amountOfTargets = Random.Range(Mathf.RoundToInt(3 + Main.currentTask.difficulty/2f), Mathf.RoundToInt(5 + Main.currentTask.difficulty/2f));
+        bool was = false;
         for (int j = 0; j < amountOfTargets; j++)
         {
             for (int i = 0; i < 1024; i ++)
             {
                 bool noSpace = false;
                 LaptopTarget t = targetsPrefabs[Random.Range(0, targetsPrefabs.Count)];
-                if (t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2)
+                if (!was)
+                {
+                    was = true;
+                    t = targetsPrefabs.Find(x => x.targetName == garrantedTargetDebug);
+                }
+                if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
                 {
                     LaptopTarget target = Instantiate(t, transform);
                     for (int k = 0; k < 128; k++)

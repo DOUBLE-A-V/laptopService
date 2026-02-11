@@ -47,16 +47,26 @@ public class Clock : Interactable
         {
             hoursAdd = 24f - (hours + minutes / 60f) - Random.Range(50, 200) / 1000f;
         }
-        arrow.transform.DOLocalRotate(new Vector3(0, 0, arrow.transform.localRotation.eulerAngles.z - 40), duration).SetEase(Ease.Linear);
+        arrow.transform.DOLocalRotate(new Vector3(0, 0, arrow.transform.localRotation.eulerAngles.z + (hoursAdd > 0 ? -40 : 40)), duration).SetEase(Ease.Linear);
         if (hours == 23 && minutes + hoursAdd * 60f >= 60) Main.obj.noUpdateInteractablesTimer = 9999999;
-        for (int i = 0; i < hoursAdd * 30; i++)
+        for (int i = 0; i < Mathf.Abs(hoursAdd) * 30; i++)
         {
             yield return null;
-            minutes += 2;
+            minutes += hoursAdd > 0 ? 2 : -2;
             if (minutes == 60)
             {
                 hours++;
                 minutes = 0;
+                if (hours == 24)
+                {
+                    hours = 0;
+                    UpdateText(hours, minutes);
+                    break;
+                }
+            } else if (minutes == -2)
+            {
+                hours--;
+                minutes = 58;
                 if (hours == 24)
                 {
                     hours = 0;

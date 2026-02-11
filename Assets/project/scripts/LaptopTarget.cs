@@ -28,6 +28,11 @@ public class LaptopTarget : MonoBehaviour
 
     public int highlightLineIndex = -1;
 
+    public virtual void OnEndTurn()
+    {
+        
+    }
+    
     private void Awake()
     {
         tip.maxHealth = maxHealth;
@@ -56,7 +61,7 @@ public class LaptopTarget : MonoBehaviour
         UpdateHealth();
     }
 
-    protected void UpdateHealth(bool animate = true)
+    public void UpdateHealth(bool animate = true)
     {
         healthText.text = health + " / " + maxHealth;
         if (animate)

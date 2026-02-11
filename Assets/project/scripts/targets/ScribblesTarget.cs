@@ -13,6 +13,26 @@ public class ScribblesTarget : LaptopTarget
     protected override void OnAppear()
     {
         line.transform.SetParent(null);
+        line.transform.position = Vector3.zero;
+        line.transform.localScale = Vector3.one;
+        text.transform.SetParent(null);
+        text.transform.localScale = Vector3.one;
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(line.gameObject);
+        Destroy(text.gameObject);
+    }
+
+    protected override void OnDeath(Tool by)
+    {
+        if (bonusing != null)
+        {
+            bonusing.maxHealth -= addHealth;
+            bonusing.health -= addHealth;
+            bonusing.UpdateHealth(false);
+        }
     }
 
     private void Update()
@@ -36,18 +56,24 @@ public class ScribblesTarget : LaptopTarget
             if (bonusing != null)
             {
                 bonusing.maxHealth -= addHealth;
+                bonusing.UpdateHealth(false);
                 bonusing.Damage(addHealth, Main.obj.poppyTool);
             }
             bonusing = nearestTarget;
             bonusing.maxHealth += addHealth;
-            bonusing.Damage(-addHealth, Main.obj.poppyTool);
+            bonusing.health += addHealth;
+            bonusing.UpdateHealth(false);
             
             line.positionCount = 2;
-            line.SetPosition(0, transform.position);
-            line.SetPosition(1, bonusing.transform.position);
+            Vector3 tmp = transform.position;
+            tmp.z = 0;
+            line.SetPosition(0, tmp);
+            tmp = bonusing.transform.position;
+            tmp.z = 0;
+            line.SetPosition(1, tmp);
 
             text.text = "+" + addHealth + " hp";
-            text.transform.localPosition = (bonusing.transform.position - transform.position) / 2;
+            text.transform.position = (bonusing.transform.position + transform.position) / 2;
         }
     }
 }

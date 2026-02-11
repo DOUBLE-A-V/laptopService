@@ -18582,6 +18582,10 @@ MonoBehaviour:
   - {fileID: 6771839451486063544, guid: 1d7d4831a031aff409c29e13b6cd62ee, type: 3}
   - {fileID: 4794841247071415205, guid: df609c2273795174b966a403b00b7f4c, type: 3}
   - {fileID: 724884301289799288, guid: 2dfde8dd08d0f0e49b0c253fc677a359, type: 3}
+  - {fileID: 6769092726686012498, guid: af6b1638982df59479a5ff9ac945fd50, type: 3}
+  - {fileID: 7906310687671983629, guid: 804e38fc80b826a4cbe13881acb6e3fd, type: 3}
+  - {fileID: 1642300001549734642, guid: e327202e8bd90f345bdbf1b8ce5f31e8, type: 3}
+  - {fileID: 4014243062974443176, guid: 4e1e96ea47039db49abf78c1f6f094b4, type: 3}
   laptopsPrefabs:
   - {fileID: 447490868992317336, guid: d0a198e7b770df4408d0929d8084b02d, type: 3}
   toolsPrefabs:
@@ -18593,6 +18597,7 @@ MonoBehaviour:
   - {fileID: 8411227250554261731, guid: 5a198600765474d44be8ba8c32a5632a, type: 3}
   endTurnButton: {fileID: 41235103}
   finishServiceButton: {fileID: 57411467}
+  garrantedTargetDebug: coffe stain
   clock: {fileID: 53849444}
   tools: []
   currentLaptop: {fileID: 0}
