@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 1599365907344313113}
   - component: {fileID: 8411227250554261731}
   m_Layer: 0
-  m_Name: tape
+  m_Name: CompressedAirCanister
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,7 +508,7 @@ MonoBehaviour:
   active: 1
   touching: 0
   removed: 0
-  toolName: tape
+  toolName: compressed air canister
   usesLeft: 3
   globalDamage: 1
   inHand: 0
@@ -516,10 +516,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5034855490232050356}
   usesText: {fileID: 2028081351497671352}
   tip:
-    title: tape
-    rawText: <yellow>works better on dust, have a big range<end>
+    title: compressed air canister
+    rawText: <yellow>works better on dust and water, have an unsusual range<end>
     weaknesses: 
-    strengths: 02000000
+    strengths: 0200000001000000
     ignoresTools: 
     damage: 0
     maxUses: 0

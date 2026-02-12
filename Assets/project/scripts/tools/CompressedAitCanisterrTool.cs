@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TapeTool : Tool
+public class CompressedAitCanisterTool : Tool
 {
     [SerializeField] private BoxCollider2D collision;
 
@@ -35,7 +35,7 @@ public class TapeTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName == "dust") against.stackedDamage *= 2;
+        if (against.targetName == "dust" || against.targetName == "water") against.stackedDamage *= 2;
     }
 
     public override void CheckCollision()

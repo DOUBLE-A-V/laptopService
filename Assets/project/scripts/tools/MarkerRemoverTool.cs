@@ -2,19 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TapeTool : Tool
+public class MarkerRemoverTool : Tool
 {
-    [SerializeField] private BoxCollider2D collision;
+    [SerializeField] private GameObject collisionHighlight;
+    [SerializeField] private float colSize;
 
 
     protected override void OnUp()
     {
-        collision.gameObject.SetActive(true);
+        collisionHighlight.SetActive(true);
     }
 
     protected override void OnDown()
     {
-        collision.gameObject.SetActive(false);
+        collisionHighlight.SetActive(false);
     }
     
     protected override void OnBreakTool(List<LaptopTarget> against)
@@ -35,25 +36,23 @@ public class TapeTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName == "dust") against.stackedDamage *= 2;
+        if (against.targetName != "scribbles")
+        {
+            Main.obj.workplace.currentLaptop.targets.Add(Instantiate(Main.obj.workplace.targetsPrefabs.Find(x => x.targetName == "shiny"), transform.position, Quaternion.identity));
+            Main.obj.workplace.currentLaptop.targets[Main.obj.workplace.currentLaptop.targets.Count-1].transform.localScale = Vector3.zero;
+            Main.obj.workplace.currentLaptop.targets[Main.obj.workplace.currentLaptop.targets.Count-1].transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.OutExpo);
+        }
+        else
+        {
+            against.stackedDamage *= 2;
+        }
     }
 
     public override void CheckCollision()
     {
-        List<Collider2D> cols = new List<Collider2D>();
-        collision.Overlap(cols);
         foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
         {
-            bool touches = false;
-            foreach (Collider2D col in cols)
-            {
-                if (col.gameObject == target.gameObject)
-                {
-                    touches = true;
-                    break;
-                }
-            }
-            if (touches)
+            if (Vector2.Distance(transform.position, target.transform.position) < target.size/2 + colSize/2)
             {
                 if (target.highlightLineIndex == -1)
                 {
