@@ -18597,7 +18597,8 @@ MonoBehaviour:
   - {fileID: 8411227250554261731, guid: 5a198600765474d44be8ba8c32a5632a, type: 3}
   endTurnButton: {fileID: 41235103}
   finishServiceButton: {fileID: 57411467}
-  garrantedTargetDebug: coffe stain
+  garrantedTargetDebug: 
+  garrantedToolDebug: tape
   clock: {fileID: 53849444}
   tools: []
   currentLaptop: {fileID: 0}

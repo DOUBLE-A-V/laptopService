@@ -16,6 +16,7 @@ public class Workplace : Place
     [SerializeField] private Interactable finishServiceButton;
 
     [SerializeField] private string garrantedTargetDebug;
+    [SerializeField] private string garrantedToolDebug;
 
     [SerializeField] public Clock clock;
     public List<Tool> tools;
@@ -176,7 +177,7 @@ public class Workplace : Place
             energyBar.Set(Main.obj.maxEnergy);
             if (!finished)
             {
-                GiveTool("water sprayer");
+                GiveTool(garrantedToolDebug);
                 energyBar.gameObject.SetActive(true);
                 if (!currentLaptop)
                 {
@@ -253,7 +254,7 @@ public class Workplace : Place
             {
                 bool noSpace = false;
                 LaptopTarget t = targetsPrefabs[Random.Range(0, targetsPrefabs.Count)];
-                if (!was)
+                if (!was && garrantedTargetDebug != "")
                 {
                     was = true;
                     t = targetsPrefabs.Find(x => x.targetName == garrantedTargetDebug);

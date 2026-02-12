@@ -40,9 +40,20 @@ public class TapeTool : Tool
 
     public override void CheckCollision()
     {
+        List<Collider2D> cols = new List<Collider2D>();
+        collision.Overlap(cols);
         foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
         {
-            if (collision.bounds.Intersects(target.collision.bounds))
+            bool touches = false;
+            foreach (Collider2D col in cols)
+            {
+                if (col.gameObject == target.gameObject)
+                {
+                    touches = true;
+                    break;
+                }
+            }
+            if (touches)
             {
                 if (target.highlightLineIndex == -1)
                 {
