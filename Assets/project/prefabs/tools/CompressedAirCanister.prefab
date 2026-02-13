@@ -298,13 +298,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8113079193144623602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4691369500449295292}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6331920111605028051
 SpriteRenderer:
   serializedVersion: 2
@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4691369500449295292}
   - component: {fileID: 1599365907344313113}
-  - component: {fileID: 8411227250554261731}
+  - component: {fileID: 8774231289049452713}
   m_Layer: 0
   m_Name: CompressedAirCanister
   m_TagString: Untagged
@@ -492,7 +492,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8411227250554261731
+--- !u!114 &8774231289049452713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,9 +501,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9116121202344613472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 562a31d72598b4a4c965bc07ea603948, type: 3}
+  m_Script: {fileID: 11500000, guid: d32131217213f594fadaa5e5bb77504c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TapeTool
+  m_EditorClassIdentifier: Assembly-CSharp::CompressedAirCanisterTool
   collider: {fileID: 1599365907344313113}
   active: 1
   touching: 0
@@ -517,21 +517,23 @@ MonoBehaviour:
   usesText: {fileID: 2028081351497671352}
   tip:
     title: compressed air canister
-    rawText: <yellow>works better on dust and water, have an unsusual range<end>
+    rawText: '<grow><red>damage for dust/water: 2 </grow><end><yellow>works better
+      on dust and water, big range<end>'
     weaknesses: 
     strengths: 0200000001000000
     ignoresTools: 
-    damage: 0
-    maxUses: 0
-    usesLeft: 0
+    damage: 1
+    maxUses: 3
+    usesLeft: 3
     maxHealth: 0
     health: 0
     qualityExists: 0
     qualityRemoved: 0
-    energyCost: 0
+    energyCost: 16
   maxUses: 3
   id: 0
   energyCost: 16
   overrideBreakLogic: 0
   stackedQuality: 0
   collision: {fileID: 8622730365318020274}
+  colSize: 0

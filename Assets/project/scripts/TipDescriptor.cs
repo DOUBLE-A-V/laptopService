@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 struct ColorsTags
 {
-	public static string red = "<grow><color=#ff0000>";
+	public static string red = "<color=#ff0000>";
 	public static string green =  "<color=#00ff00>";
 	public static string blue =  "<color=#8888ff>";
 	public static string yellow =  "<color=#ffff00>";
@@ -28,6 +28,7 @@ public class TipDescriptor
 		Dust,
 		Stickers,
 		StickySPCResidue,
+		Scribbles,
 		
 	}
 	
@@ -67,7 +68,7 @@ public class TipDescriptor
 
 		if (strengths.Count > 0)
 		{
-			result += "<red></grow>strengths:<end><grow>\n";
+			result += "<red>strengths:<end><grow>\n";
 			foreach (TargetName targetName in strengths)
 			{
 				result += ("<i>-" + targetName).Replace("SPC", " ") + "</i>\n";
@@ -77,7 +78,7 @@ public class TipDescriptor
 		
 		if (ignoresTools.Count > 0)
 		{
-			result += "<red></grow>ignores:<end><grow>\n";
+			result += "<red>ignores:<end><grow>\n";
 			foreach (ToolName toolName in ignoresTools)
 			{
 				result += "<i>-" + toolName + "</i>\n";
@@ -88,7 +89,7 @@ public class TipDescriptor
 
 		if (damage > 0)
 		{
-			result += "<red></grow>damage: <grow>" + damage + "\n</grow>";
+			result += "<red>damage: <grow>" + damage + "\n</grow>";
 		}
 
 		if (maxUses > 0 && usesLeft >= 0)
@@ -112,7 +113,7 @@ public class TipDescriptor
 			}
 			else
 			{
-				result += "<orange>if on laptop:<end> <red>" + qualityExists + "%</grow> quality<end>\n";
+				result += "<orange>if on laptop:<end> <red><grow>" + qualityExists + "% quality</grow><end>\n";
 			}
 		}
 		
@@ -124,7 +125,7 @@ public class TipDescriptor
 			}
 			else
 			{
-				result += "<orange>if removed:<end> <red>" + qualityRemoved + "%</grow> quality<end>\n";
+				result += "<orange>if removed:<end> <red><grow>" + qualityRemoved + "% quality</grow><end>\n";
 			}
 		}
 		result = result

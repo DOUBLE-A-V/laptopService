@@ -4,19 +4,6 @@ using DG.Tweening;
 
 public class TapeTool : Tool
 {
-    [SerializeField] private BoxCollider2D collision;
-
-
-    protected override void OnUp()
-    {
-        collision.gameObject.SetActive(true);
-    }
-
-    protected override void OnDown()
-    {
-        collision.gameObject.SetActive(false);
-    }
-    
     protected override void OnBreakTool(List<LaptopTarget> against)
     {
         active = false;
@@ -36,36 +23,5 @@ public class TapeTool : Tool
     protected override void OnUse(LaptopTarget against)
     {
         if (against.targetName == "dust") against.stackedDamage *= 2;
-    }
-
-    public override void CheckCollision()
-    {
-        List<Collider2D> cols = new List<Collider2D>();
-        collision.Overlap(cols);
-        foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
-        {
-            bool touches = false;
-            foreach (Collider2D col in cols)
-            {
-                if (col.gameObject == target.gameObject)
-                {
-                    touches = true;
-                    break;
-                }
-            }
-            if (touches)
-            {
-                if (target.highlightLineIndex == -1)
-                {
-                    hitTargets.Add(target);
-                    target.highlightLineIndex = Main.obj.highlightsManager.AddLine(target.transform.position);
-                }
-            } else if (target.highlightLineIndex != -1)
-            {
-                Main.obj.highlightsManager.RemoveLine(target.highlightLineIndex);
-                target.highlightLineIndex = -1;
-                hitTargets.Remove(target);
-            }
-        }
     }
 }

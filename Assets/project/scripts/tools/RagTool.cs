@@ -4,20 +4,6 @@ using DG.Tweening;
 
 public class RagTool : Tool
 {
-    [SerializeField] private GameObject collisionHighlight;
-    [SerializeField] private float colSize;
-
-
-    protected override void OnUp()
-    {
-        collisionHighlight.SetActive(true);
-    }
-
-    protected override void OnDown()
-    {
-        collisionHighlight.SetActive(false);
-    }
-    
     protected override void OnBreakTool(List<LaptopTarget> against)
     {
         active = false;
@@ -37,25 +23,5 @@ public class RagTool : Tool
     protected override void OnUse(LaptopTarget against)
     {
         if (against.targetName != "dust" && against.targetName != "water") against.stackedDamage = 0;
-    }
-
-    public override void CheckCollision()
-    {
-        foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
-        {
-            if (Vector2.Distance(transform.position, target.transform.position) < target.size/2 + colSize/2)
-            {
-                if (target.highlightLineIndex == -1)
-                {
-                    hitTargets.Add(target);
-                    target.highlightLineIndex = Main.obj.highlightsManager.AddLine(target.transform.position);
-                }
-            } else if (target.highlightLineIndex != -1)
-            {
-                Main.obj.highlightsManager.RemoveLine(target.highlightLineIndex);
-                target.highlightLineIndex = -1;
-                hitTargets.Remove(target);
-            }
-        }
     }
 }

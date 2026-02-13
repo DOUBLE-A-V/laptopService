@@ -243,6 +243,11 @@ public class Workplace : Place
         }
     }
 
+    public void ChangeTime(float hours, float duration)
+    {
+        StartCoroutine(clock.ChangeTime(hours, duration));
+    }
+
     private void GenerateLaptop()
     {
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class StickerRemoverTool : Tool
+public class CompressedAirCanisterTool : Tool
 {
     protected override void OnBreakTool(List<LaptopTarget> against)
     {
@@ -22,10 +22,6 @@ public class StickerRemoverTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName != "sticker" && against.targetName != "clock sticker" && against.targetName != "sticker friends") against.stackedDamage = 0;
-        else
-        {
-            against.stackedDamage = against.health;
-        }
+        if (against.targetName == "dust" || against.targetName == "water") against.stackedDamage *= 2;
     }
 }

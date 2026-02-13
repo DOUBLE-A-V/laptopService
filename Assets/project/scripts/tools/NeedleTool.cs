@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class StickerRemoverTool : Tool
+public class NeedleTool : Tool
 {
+    [SerializeField] private int damageFrom;
+    [SerializeField] private int damageTo;
+    
     protected override void OnBreakTool(List<LaptopTarget> against)
     {
         active = false;
@@ -22,10 +25,10 @@ public class StickerRemoverTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName != "sticker" && against.targetName != "clock sticker" && against.targetName != "sticker friends") against.stackedDamage = 0;
-        else
+        if (against.targetName == "sticker" || against.targetName == "clock sticker" ||
+            against.targetName == "sticker friends")
         {
-            against.stackedDamage = against.health;
+            against.stackedDamage = Random.Range(damageFrom, damageTo);
         }
     }
 }

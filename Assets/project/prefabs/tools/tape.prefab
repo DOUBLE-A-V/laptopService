@@ -517,21 +517,22 @@ MonoBehaviour:
   usesText: {fileID: 2028081351497671352}
   tip:
     title: tape
-    rawText: <yellow>works better on dust, have a big range<end>
+    rawText: <yellow>works better on dust, big range<end>
     weaknesses: 
     strengths: 02000000
     ignoresTools: 
-    damage: 0
-    maxUses: 0
-    usesLeft: 0
+    damage: 1
+    maxUses: 3
+    usesLeft: 3
     maxHealth: 0
     health: 0
     qualityExists: 0
     qualityRemoved: 0
-    energyCost: 0
+    energyCost: 16
   maxUses: 3
   id: 0
   energyCost: 16
   overrideBreakLogic: 0
   stackedQuality: 0
   collision: {fileID: 8622730365318020274}
+  colSize: 0

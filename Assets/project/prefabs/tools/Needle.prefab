@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8403215288983880825, guid: 37555c79c913f9b4a8ac2f2a9dc6a49b, type: 3}
+  m_Sprite: {fileID: 1024226415114158248, guid: d05ab7172b467e74bb00e67ad322a97e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -282,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891806188813110753}
   - component: {fileID: 6331920111605028051}
-  - component: {fileID: 7723501636502704094}
+  - component: {fileID: 6554710001876808062}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -364,7 +364,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &7723501636502704094
+--- !u!61 &6554710001876808062
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -408,7 +408,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &9116121202344613472
 GameObject:
@@ -420,9 +420,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4691369500449295292}
   - component: {fileID: 1599365907344313113}
-  - component: {fileID: 319111976728072196}
+  - component: {fileID: 8930182021869956404}
   m_Layer: 0
-  m_Name: hand
+  m_Name: Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,7 +438,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.74877, y: 0.13096, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6639792696999683588}
@@ -492,7 +492,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &319111976728072196
+--- !u!114 &8930182021869956404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,39 +501,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 9116121202344613472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d821f8d945515354f8b27359142cdecb, type: 3}
+  m_Script: {fileID: 11500000, guid: ac5285aa6cbddd54a93beb9fb88e4532, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HandTool
+  m_EditorClassIdentifier: Assembly-CSharp::NeedleTool
   collider: {fileID: 1599365907344313113}
   active: 1
   touching: 0
   removed: 0
-  toolName: hand
-  usesLeft: 3
-  globalDamage: 1
-  inHand: 1
+  toolName: needle
+  usesLeft: 4
+  globalDamage: 0
+  inHand: 0
   size: {x: 1, y: 1}
   spriteRenderer: {fileID: 5034855490232050356}
   usesText: {fileID: 2028081351497671352}
   tip:
-    title: hand
-    rawText: "<yellow>When you use up all the durability, the hand doesn\u2019t break;
-      it just needs rest. It will recover on the next laptop<end>"
+    title: needle
+    rawText: chip and good.\n<yellow>deals random damage (0-7) to stickers
     weaknesses: 
-    strengths: 
+    strengths: 03000000
     ignoresTools: 
-    damage: 1
-    maxUses: 0
-    usesLeft: 0
+    damage: 0
+    maxUses: 4
+    usesLeft: 4
     maxHealth: 0
     health: 0
     qualityExists: 0
     qualityRemoved: 0
-    energyCost: 20
-  maxUses: 3
+    energyCost: 6
+  maxUses: 4
   id: 0
-  energyCost: 20
-  overrideBreakLogic: 1
+  energyCost: 6
+  overrideBreakLogic: 0
   stackedQuality: 0
-  collision: {fileID: 7723501636502704094}
+  collision: {fileID: 6554710001876808062}
   colSize: 1
+  damageFrom: 0
+  damageTo: 7

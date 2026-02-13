@@ -32,6 +32,9 @@ public class Tool : Interactable
     protected List<LaptopTarget> hitTargets = new List<LaptopTarget>();
 
     public int stackedQuality = 0;
+    
+    [SerializeField] private BoxCollider2D collision;
+    [SerializeField] private float colSize;
 
     private void Awake()
     {
@@ -41,9 +44,57 @@ public class Tool : Interactable
         tip.usesLeft = usesLeft;
     }
 
-    public virtual void CheckCollision()
+    private void CheckCollision()
     {
-        
+        if (colSize != 0)
+        {
+            foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
+            {
+                if (Vector2.Distance(transform.position, target.transform.position) < target.size/2 + colSize/2)
+                {
+                    if (target.highlightLineIndex == -1)
+                    {
+                        hitTargets.Add(target);
+                        target.highlightLineIndex = Main.obj.highlightsManager.AddLine(target.transform.position);
+                    }
+                } else if (target.highlightLineIndex != -1)
+                {
+                    Main.obj.highlightsManager.RemoveLine(target.highlightLineIndex);
+                    target.highlightLineIndex = -1;
+                    hitTargets.Remove(target);
+                }
+            }
+        }
+        else
+        {
+            List<Collider2D> cols = new List<Collider2D>();
+            collision.Overlap(cols);
+            foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)
+            {
+                bool touches = false;
+                foreach (Collider2D col in cols)
+                {
+                    if (col.gameObject == target.gameObject)
+                    {
+                        touches = true;
+                        break;
+                    }
+                }
+                if (touches)
+                {
+                    if (target.highlightLineIndex == -1)
+                    {
+                        hitTargets.Add(target);
+                        target.highlightLineIndex = Main.obj.highlightsManager.AddLine(target.transform.position);
+                    }
+                } else if (target.highlightLineIndex != -1)
+                {
+                    Main.obj.highlightsManager.RemoveLine(target.highlightLineIndex);
+                    target.highlightLineIndex = -1;
+                    hitTargets.Remove(target);
+                }
+            }
+        }
     }
 
     protected virtual void OnUp()
@@ -69,6 +120,8 @@ public class Tool : Interactable
 
     private void OnDrop()
     {
+        collision.transform.DOKill();
+        collision.transform.DOScale(0, 0.2f);
         OnDown();
         Main.obj.workplace.draggingTool = null;
         dragging = false;
@@ -120,6 +173,11 @@ public class Tool : Interactable
             {
                 Main.obj.workplace.draggingTool = this;
                 dragging = true;
+                
+                collision.transform.DOKill();
+                if (colSize != 0)collision.transform.DOScale(colSize, 0.5f).SetEase(Ease.OutExpo);
+                else collision.transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
+                
                 OnUp();
             }
         }

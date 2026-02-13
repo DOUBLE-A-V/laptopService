@@ -6,6 +6,6 @@ public class ClockStickerTarget : LaptopTarget
 
     protected override void OnDeath(Tool deadBy)
     {
-        StartCoroutine(Main.obj.workplace.clock.ChangeTime(-1, 0.5f));
+        Main.obj.workplace.ChangeTime(-1, 0.5f);
     }
 }
