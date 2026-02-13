@@ -29,6 +29,7 @@ public class TipDescriptor
 		Stickers,
 		StickySPCResidue,
 		Scribbles,
+		JuiceSPCStain,
 		
 	}
 	
@@ -109,7 +110,7 @@ public class TipDescriptor
 		{
 			if (qualityExists > 0)
 			{
-				result += "<orange>if on laptop:<end> <green>+" + qualityExists + "%</jump> quality<end>\n";
+				result += "<orange>if on laptop:<end> <green><jump>+" + qualityExists + "%</jump> quality<end>\n";
 			}
 			else
 			{

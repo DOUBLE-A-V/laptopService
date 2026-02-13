@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class StickerTarget : LaptopTarget
@@ -20,7 +21,10 @@ public class StickerTarget : LaptopTarget
     {
         if (deadBy.toolName != "sticker remover")
         {
-            Main.obj.workplace.currentLaptop.targets.Add(Instantiate(stickyResiduePrefab, transform.position, Quaternion.identity));
+            LaptopTarget t = Instantiate(stickyResiduePrefab, Main.obj.workplace.transform);
+            Main.obj.workplace.currentLaptop.targets.Add(t);
+            t.transform.position = transform.position;
+            t.transform.localScale = Vector3.one * t.size;
         }
     }
 }

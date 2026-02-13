@@ -349,7 +349,7 @@ MonoBehaviour:
   highlightLineIndex: -1
   healthFrom: 6
   healthTo: 6
-  stickyResiduePrefab: {fileID: 4014243062974443176, guid: d2facad4bac1c30459ae4ea7d8ebaae5, type: 3}
+  stickyResiduePrefab: {fileID: 4014243062974443176, guid: 399684c1a2e2c66479c8d9db6e68511d, type: 3}
 --- !u!58 &6834535734540736640
 CircleCollider2D:
   m_ObjectHideFlags: 0

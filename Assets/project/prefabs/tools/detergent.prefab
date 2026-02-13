@@ -420,9 +420,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4691369500449295292}
   - component: {fileID: 1599365907344313113}
-  - component: {fileID: 8930182021869956404}
+  - component: {fileID: 1654000876092420202}
   m_Layer: 0
-  m_Name: Needle
+  m_Name: detergent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +492,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8930182021869956404
+--- !u!114 &1654000876092420202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,40 +501,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 9116121202344613472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac5285aa6cbddd54a93beb9fb88e4532, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e145581f17d7e84e91ac471b41a2734, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NeedleTool
+  m_EditorClassIdentifier: Assembly-CSharp::DetergentTool
   collider: {fileID: 1599365907344313113}
   active: 1
   touching: 0
   removed: 0
-  toolName: needle
-  usesLeft: 4
-  globalDamage: 0
+  toolName: detergent
+  usesLeft: 3
+  globalDamage: 2
   inHand: 0
   size: {x: 1, y: 1}
   spriteRenderer: {fileID: 5034855490232050356}
   usesText: {fileID: 2028081351497671352}
   tip:
-    title: needle
-    rawText: cheap and good.\n<yellow>deals random damage (0-7) to stickers
+    title: detergent
+    rawText: <white>good damage.<end>\n<yellow>leaves 1 hp for juice stains<end>
     weaknesses: 
-    strengths: 03000000
+    strengths: 06000000
     ignoresTools: 
-    damage: 0
-    maxUses: 4
-    usesLeft: 4
+    damage: 2
+    maxUses: 3
+    usesLeft: 3
     maxHealth: 0
     health: 0
     qualityExists: 0
     qualityRemoved: 0
-    energyCost: 6
-  maxUses: 4
+    energyCost: 12
+  maxUses: 3
   id: 0
-  energyCost: 6
+  energyCost: 12
   overrideBreakLogic: 0
   stackedQuality: 0
   collision: {fileID: 6554710001876808062}
-  colSize: 1
-  damageFrom: 0
-  damageTo: 7
+  colSize: 1.5
