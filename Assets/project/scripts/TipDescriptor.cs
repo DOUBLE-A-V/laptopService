@@ -30,6 +30,7 @@ public class TipDescriptor
 		StickySPCResidue,
 		Scribbles,
 		JuiceSPCStain,
+		HugeSPCScratches,
 		
 	}
 	
