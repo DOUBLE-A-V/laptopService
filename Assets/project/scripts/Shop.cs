@@ -58,16 +58,16 @@ public class Shop : Place
     {
         level++;
         curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1.5f).SetEase(Ease.OutExpo);
-        //UpdateItems(level);
-        //ShowItems();
+        UpdateItems(level);
+        ShowItems();
     }
 
     public void ShowItems()
     {
         foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop) shopItem.Show();
 
-        if (level > 0) foreach (ShopItem shopItem in shopItems2) shopItem.Show();
-        if (level > 1) foreach (ShopItem shopItem in shopItems3) shopItem.Show();
+        if (level > 0) foreach (ShopItem shopItem in shopItems2) if (shopItem.inShop) shopItem.Show();
+        if (level > 1) foreach (ShopItem shopItem in shopItems3) if (shopItem.inShop) shopItem.Show();
     }
 
     public void UpdateAllItems()

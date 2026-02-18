@@ -1557,7 +1557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &93241466
 Transform:
   m_ObjectHideFlags: 0
@@ -4740,7 +4740,7 @@ Transform:
   m_GameObject: {fileID: 347606676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalPosition: {x: 0, y: 3.17, z: 0}
   m_LocalScale: {x: 0.8, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10239,6 +10239,10 @@ MonoBehaviour:
   wallet: {fileID: 1330300594}
   infoSheet: {fileID: 1762465384}
   gotoTip: {fileID: 271214705}
+  restButton: {fileID: 41235103}
+  finishService: {fileID: 57411467}
+  rested: 0
+  closedServiceReport: 0
   completed: 0
 --- !u!1 &850644251
 GameObject:
@@ -10735,7 +10739,7 @@ Transform:
   m_GameObject: {fileID: 886835674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -0.4, z: 0}
+  m_LocalPosition: {x: -1.54, y: 0.52, z: 0}
   m_LocalScale: {x: 0.8, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11122,7 +11126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &919641070
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15750,7 +15754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: finish service
+  m_text: complete service
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
   m_sharedMaterial: {fileID: -6964186084235669811, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
@@ -17138,8 +17142,8 @@ Transform:
   m_GameObject: {fileID: 1537489844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.06, y: 4.4, z: 0}
-  m_LocalScale: {x: 4, y: 0.6, z: 1}
+  m_LocalPosition: {x: 6.21, y: 4.2, z: 0}
+  m_LocalScale: {x: 4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 833716184}
@@ -21827,7 +21831,7 @@ Transform:
   m_GameObject: {fileID: 1986244280}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -0.4, z: 0}
+  m_LocalPosition: {x: 1.64, y: 0.52, z: 0}
   m_LocalScale: {x: 0.8, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -132,6 +132,7 @@ public class Workplace : Place
             tool.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
         }
         yield return new WaitForSeconds(1f);
+        if (!Main.obj.tutorial.completed) Main.obj.tutorial.rested = true;
         energyBar.Set(Main.obj.maxEnergy);
         foreach (LaptopTarget target in currentLaptop.targets) target.OnEndTurn();
         Main.obj.blackscreen.Hide();
@@ -200,7 +201,7 @@ public class Workplace : Place
                 }
                 GiveToolsHand();
             
-                ShowButtons();
+                if (Main.obj.tutorial.completed) ShowButtons();
             }
         }
     }
@@ -253,51 +254,79 @@ public class Workplace : Place
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         int amountOfTargets = Random.Range(Mathf.RoundToInt(3 + Main.currentTask.difficulty/2f), Mathf.RoundToInt(5 + Main.currentTask.difficulty/2f));
         bool was = false;
-        for (int j = 0; j < amountOfTargets; j++)
+        if (Main.obj.tutorial.completed)
         {
-            for (int i = 0; i < 1024; i ++)
+            for (int j = 0; j < amountOfTargets; j++)
             {
-                bool noSpace = false;
-                LaptopTarget t = targetsPrefabs[Random.Range(0, targetsPrefabs.Count)];
-                if (!was && garrantedTargetDebug != "")
+                for (int i = 0; i < 1024; i ++)
                 {
-                    was = true;
-                    t = targetsPrefabs.Find(x => x.targetName == garrantedTargetDebug);
-                }
-                if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
-                {
-                    LaptopTarget target = Instantiate(t, transform);
-                    for (int k = 0; k < 128; k++)
+                    bool noSpace = false;
+                    LaptopTarget t = targetsPrefabs[Random.Range(0, targetsPrefabs.Count)];
+                    if (!was && garrantedTargetDebug != "")
                     {
-                        if (k == 127)
+                        was = true;
+                        t = targetsPrefabs.Find(x => x.targetName == garrantedTargetDebug);
+                    }
+                    if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
+                    {
+                        LaptopTarget target = Instantiate(t, transform);
+                        for (int k = 0; k < 128; k++)
                         {
-                            noSpace = true;
-                            break;
-                        }
-                        target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
-                        bool touches = false;
-                        foreach (LaptopTarget t2 in currentLaptop.targets)
-                        {
-                            if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
+                            if (k == 127)
                             {
-                                touches = true;
+                                noSpace = true;
                                 break;
                             }
+                            target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
+                            bool touches = false;
+                            foreach (LaptopTarget t2 in currentLaptop.targets)
+                            {
+                                if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
+                                {
+                                    touches = true;
+                                    break;
+                                }
+                            }
+
+                            if (touches) continue;
+                            break;
                         }
 
-                        if (touches) continue;
+                        if (noSpace)
+                        {
+                            Destroy(target.gameObject);
+                            break;
+                        }
+                        currentLaptop.targets.Add(target);
                         break;
                     }
-
-                    if (noSpace)
-                    {
-                        Destroy(target.gameObject);
-                        break;
-                    }
-                    currentLaptop.targets.Add(target);
-                    break;
                 }
             }
+        }
+        else
+        {
+            LaptopTarget target = Instantiate(targetsPrefabs.Find(x => x.targetName == "scratches"), transform);
+            for (int k = 0; k < 128; k++)
+            {
+                if (k == 127)
+                {
+                    break;
+                }
+                target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
+                bool touches = false;
+                foreach (LaptopTarget t2 in currentLaptop.targets)
+                {
+                    if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
+                    {
+                        touches = true;
+                        break;
+                    }
+                }
+
+                if (touches) continue;
+                break;
+            }
+            currentLaptop.targets.Add(target);
         }
     }
 

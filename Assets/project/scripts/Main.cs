@@ -244,7 +244,7 @@ public class Main : MonoBehaviour
         workplace.GiveTool("hand");
         StartCoroutine(GoTo(startGoToPlace, tutorial.completed));
         
-        GiveMoney(1000);
+        //GiveMoney(1000);
         if (!tutorial.completed) StartCoroutine(tutorial.StartTutorial());
     }
 

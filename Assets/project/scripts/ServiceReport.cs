@@ -41,6 +41,7 @@ public class ServiceReport : MonoBehaviour
 
     public void Hide()
     {
+        Main.obj.tutorial.closedServiceReport = true;
         foreach (Interactable i in disabledInteractables) i.active = true;
         disabledInteractables.Clear();
         closeButton.active = false;

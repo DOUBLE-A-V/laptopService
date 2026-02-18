@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
@@ -6,11 +7,18 @@ using TMPro;
 public class Tutorial : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer highlight;
-    [SerializeField] private Message message;
+    [SerializeField] public Message message;
 
     [SerializeField] private Wallet wallet;
     [SerializeField] private InfoSheet infoSheet;
     [SerializeField] private InfoSticker gotoTip;
+
+    [SerializeField] private WorkplaceButton restButton;
+    [SerializeField] private WorkplaceButton finishService;
+    
+    public bool rested = false;
+
+    public bool closedServiceReport = false;
     
     private float sincounter = 0;
     private bool animateHighlight = false;
@@ -81,9 +89,50 @@ public class Tutorial : MonoBehaviour
         message.Hide();
         HideHighlight();
         message.canSkip = true;
-        ShowText("There always will be tip about what to do at the moment.", Vector3.zero);
+        ShowText("There will always be a hint here about what to do.", Vector3.zero);
         while (message.active) yield return null;
         Main.obj.ShowGoToButtons();
+        while (Main.obj.currentPlace != Main.obj.workplace || !Main.obj.receivedBox) yield return null;
+        message.canSkip = false;
+        ShowText("drag tools onto targets to use them.", new Vector3(0, 1, 0));
+        while (Main.obj.workplace.tools.FindAll(x => x.inHand).Count != 0) yield return null;
+        message.Hide();
+        ShowText("good work, now recover your energy by resting.",  new Vector3(0, 1, 0));
+        restButton.transform.DOScale(Vector3.one, 0.5f);
+        restButton.active = true;
+        while (!rested)  yield return null;
+        restButton.active = false;
+        message.Hide();
+        message.canSkip = true;
+        ShowText("every time you use a tool, it's durability decreases.",  new Vector3(0, 1, 0));
+        while (message.active) yield return null;
+        ShowText("when durability reaches zero tool will be permanently removed from your inventory.",  new Vector3(0, 1, 0));
+        while (message.active) yield return null;
+        ShowText("except your hands of course. Their durability is restored with every new laptop you service.", new Vector3(0, 1, 0));
+        while (message.active) yield return null;
+        ShowText("you also have a clock, hover mouse over it to see more info.", new Vector3(0, 1, 0));
+        while (message.active) yield return null;
+        message.canSkip = false;
+        ShowText("now use the tools again and complete the service.", new Vector3(0, 1, 0));
+        while (Main.obj.workplace.tools.FindAll(x => x.inHand).Count != 0) yield return null;
+        message.Hide();
+        finishService.active = true;
+        finishService.transform.DOScale(Vector3.one, 0.5f);
+        while (!closedServiceReport) yield return null;
+        message.canSkip = true;
+        ShowText("congratulations with your first serviced laptop!", Vector3.zero);
+        wallet.display = true;
+        infoSheet.display = true;
+        while (message.active) yield return null;
+        ShowText("hover your mouse over your wallet to see how much money you have.",  Vector3.zero);
+        Highlight(new Vector3(-6.5f, -3.9f, 0), new Vector2(3, 1.5f));
+        while (message.active) yield return null;
+        ShowText("hover your mouse over this sheet to see info about your service.", Vector3.zero);
+        Highlight(new Vector3(6.2f, 4.2f, 0), new Vector2(4, 1f));
+        while (message.active) yield return null;
+        HideHighlight();
+        ShowText("Tutorial complete! Enjoy, don't forget to visit a shop.",  Vector3.zero);
+        completed = true;
     }
 
     private void Update()

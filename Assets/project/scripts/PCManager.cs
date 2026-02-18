@@ -162,6 +162,8 @@ public class PCManager : Place
         fromText.text = Main.currentTask.from;
         
         blocked = false;
+        
+        Main.obj.currentStage = Main.obj.stages.disablePc;
     }
 
     private void Update()
