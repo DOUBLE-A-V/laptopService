@@ -1,0 +1,40 @@
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+
+public class SkeinOfThreadTool : Tool
+{
+    [SerializeField] private int randomTargetDamage;
+    protected override void OnBreakTool(List<LaptopTarget> against)
+    {
+        active = false;
+        transform.DOKill();
+        transform.DOScale(0, 0.5f).SetEase(Ease.OutExpo);
+        inHand = false;
+        Main.obj.workplace.UpdateToolsHand();
+
+        foreach (LaptopTarget target in against)
+        {
+            Main.obj.highlightsManager.RemoveLine(target.highlightLineIndex);
+            target.highlightLineIndex = -1;
+        }
+        hitTargets.Clear();
+    }
+
+    protected override void OnUse(LaptopTarget against)
+    {
+        if (against.health <= against.stackedDamage && Main.obj.workplace.currentLaptop.targets.Count > 1)
+        {
+            while (true)
+            {
+                LaptopTarget r = Main.obj.workplace.currentLaptop.targets[Random.Range(0, Main.obj.workplace.currentLaptop.targets.Count)];
+                if (r != against)
+                {
+                    r.Damage(randomTargetDamage, this);
+                    r.UpdateHealth();
+                    break;
+                }
+            }
+        }
+    }
+}

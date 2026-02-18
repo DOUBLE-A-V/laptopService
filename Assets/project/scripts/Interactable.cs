@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     private SpriteRenderer outline;
     private GameObject mask;
     [SerializeField] protected BoxCollider2D collider;
+    public bool clickable = true;
     public bool active = true;
     public bool touching = false;
     
@@ -54,7 +55,7 @@ public class Interactable : MonoBehaviour
         {
             if (!touching) OnHover();
             touching = true;
-            if (Main.touchingInteractable != this)
+            if (Main.touchingInteractable != this && clickable)
             {
                 Main.obj.SetCursorState("interactive");
                 Main.touchingInteractable = this;

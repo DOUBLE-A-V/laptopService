@@ -10,6 +10,8 @@ public class InfoSticker : Interactable
 
     private Vector3 defPos;
 
+    public bool display = true;
+
 	private float sincount = 45;
 	public bool opened = false;
 
@@ -47,12 +49,20 @@ public class InfoSticker : Interactable
 
     protected override void OnUpdateInteractable()
     {
-        sincount += Time.deltaTime*2;
-        if (sincount > 360) sincount = 0;
-        if (!opened)
+        if (!display)
         {
             transform.DOKill();
-            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.2f);
+            transform.DOMove(transform.position + new Vector3(0, 2, 0), 0.5f).SetEase(Ease.OutExpo);
+        }
+        else
+        {
+            sincount += Time.deltaTime*2;
+            if (sincount > 360) sincount = 0;
+            if (!opened)
+            {
+                transform.DOKill();
+                transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.2f);
+            }   
         }
     }
 }

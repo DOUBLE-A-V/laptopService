@@ -11,7 +11,7 @@ public class PCManager : Place
 {
     [SerializeField] private AudioSource pcStartSound;
     [SerializeField] private AudioSource pcWorkSound;
-    [SerializeField] private PCButton pcButton;
+    [SerializeField] public PCButton pcButton;
     [SerializeField] private DiskWorkSimulation diskWorkSim;
     [SerializeField] private AudioSource shutdownSound;
 

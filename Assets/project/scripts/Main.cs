@@ -37,6 +37,8 @@ public class Main : MonoBehaviour
     public Workplace workplace;
     public Shop shop;
 
+    public Tutorial tutorial;
+
     public Wallet wallet;
 
     public Tool poppyTool;
@@ -129,7 +131,7 @@ public class Main : MonoBehaviour
         }
     }
     
-    public IEnumerator GoTo(string place)
+    public IEnumerator GoTo(string place, bool showGoToButtons = true)
     {
         if (place == "pc" && currentStage.id == stages.gotoPc.id)
         {
@@ -150,7 +152,7 @@ public class Main : MonoBehaviour
         currentPlace = places.Find(x => x.placeName == place);
         places.ForEach(x => x.gameObject.SetActive(x.placeName == place));
         obj.blackscreen.Hide();
-        ShowGoToButtons();
+        if (showGoToButtons) ShowGoToButtons();
         currentPlace.OnEnter();
     }
     
@@ -203,7 +205,7 @@ public class Main : MonoBehaviour
         loseText.DOFade(0, 0.5f);
         noUpdateInteractablesTimer = 9999999;
         yield return new WaitForSeconds(1f);
-        StartCoroutine(GoTo("pc"));
+        StartCoroutine(GoTo("pc", false));
         noUpdateInteractablesTimer = 9999999;
         foreach (Tool tool in workplace.tools)
         {
@@ -240,9 +242,10 @@ public class Main : MonoBehaviour
             );
         workplace.GiveTool("hand");
         workplace.GiveTool("hand");
-        StartCoroutine(GoTo(startGoToPlace));
+        StartCoroutine(GoTo(startGoToPlace, tutorial.completed));
         
         GiveMoney(1000);
+        if (!tutorial.completed) StartCoroutine(tutorial.StartTutorial());
     }
 
     public void DeactivateGoToButtons() 

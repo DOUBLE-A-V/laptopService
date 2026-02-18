@@ -177,7 +177,7 @@ public class Workplace : Place
             energyBar.Set(Main.obj.maxEnergy);
             if (!finished)
             {
-                GiveTool(garrantedToolDebug);
+                if (garrantedToolDebug != "") GiveTool(garrantedToolDebug);
                 energyBar.gameObject.SetActive(true);
                 if (!currentLaptop)
                 {

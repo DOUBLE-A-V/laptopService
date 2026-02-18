@@ -11,6 +11,7 @@ public class InfoSheet : Interactable
     
     [SerializeField] private List<SpriteRenderer> badServiceStampsSprites;
 
+    public bool display = true;
 
     private bool addingStamp = false;
     private Vector3 defPos;
@@ -115,12 +116,20 @@ public class InfoSheet : Interactable
 
     protected override void OnUpdateInteractable()
     {
-        sincount += Time.deltaTime*2;
-        if (sincount > 360) sincount = 0;
-        if (!opened)
+        if (!display)
         {
             transform.DOKill();
-            transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.2f);
+            transform.DOMove(transform.position + new Vector3(0, 2, 0), 0.5f).SetEase(Ease.OutExpo);
+        }
+        else
+        {
+            sincount += Time.deltaTime*2;
+            if (sincount > 360) sincount = 0;
+            if (!opened)
+            {
+                transform.DOKill();
+                transform.DOLocalMove(defPos + new Vector3(0, Mathf.Sin(sincount)/10, 0), 0.2f);
+            }
         }
     }
 }

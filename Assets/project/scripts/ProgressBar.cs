@@ -19,6 +19,7 @@ public class ProgressBar : MonoBehaviour
     public void Change(float amount)
     {
         value += amount;
+        if (value > maxValue) value = maxValue;
         if (value < 0) value = 0;
         realBar.DOKill();
         visualBar.DOKill();
