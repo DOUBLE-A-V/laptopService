@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1024226415114158248, guid: d05ab7172b467e74bb00e67ad322a97e, type: 3}
+  m_Sprite: {fileID: -6795427934640739779, guid: 13da5f7aebc808b4082370887cd11337, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicScrewdriverTool
   collider: {fileID: 1599365907344313113}
+  clickable: 1
   active: 1
   touching: 0
   removed: 0

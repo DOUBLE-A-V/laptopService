@@ -229,7 +229,7 @@ public class Main : MonoBehaviour
         SetCursorState("normal");
         HideGoToButtons();
         ShowGoToButtons();
-
+        /*
         currentTask = new ServiceTask(
             "t",
             "please fuck niggers",
@@ -240,6 +240,7 @@ public class Main : MonoBehaviour
             0,
             85874538
             );
+        */
         workplace.GiveTool("hand");
         workplace.GiveTool("hand");
         StartCoroutine(GoTo(startGoToPlace, tutorial.completed));

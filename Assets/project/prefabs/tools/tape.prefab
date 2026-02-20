@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1024226415114158248, guid: d05ab7172b467e74bb00e67ad322a97e, type: 3}
+  m_Sprite: {fileID: -4687008889057308190, guid: 6fb2d3ae469cc5b488ed2bc5842fe7cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TapeTool
   collider: {fileID: 1599365907344313113}
+  clickable: 1
   active: 1
   touching: 0
   removed: 0
