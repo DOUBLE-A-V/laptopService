@@ -25,7 +25,7 @@ public class ShopItem : Interactable
         transform.DOKill();
         transform.localScale = Vector3.one * 0.9f;
         transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
-        Buy();
+        if (Main.obj.money >= cost) Buy();
     }
 
     public void RemoveFromShop()
@@ -59,10 +59,10 @@ public class ShopItem : Interactable
 
     public void Show()
     {
+        spriteRenderer.sprite = toolBase.spriteRenderer.sprite;
         spriteRenderer.transform.DOKill();
-        spriteRenderer.transform.DOScale(new Vector3(0.3f, 0.3f, 1), 0.3f).SetEase(Ease.OutExpo);
+        spriteRenderer.transform.DOScale(toolBase.spriteRenderer.transform.localScale, 0.3f).SetEase(Ease.OutExpo);
         costText.DOFade(1, 0.5f);
-        cost = (float)System.Math.Round(Random.Range(costFrom, costTo), 1);
         costText.text = cost + "$";
         active = true;
         inShop = true;

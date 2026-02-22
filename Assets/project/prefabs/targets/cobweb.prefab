@@ -364,7 +364,7 @@ MonoBehaviour:
   targetName: cobweb
   stackedDamage: 0
   difficulty: 2
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 2780322801929811509}
   size: 0.5
   tip:
     title: cobweb

@@ -359,11 +359,11 @@ MonoBehaviour:
   sprites: []
   collision: {fileID: 4616291305572735528}
   randomizeDirection: 1
-  health: 3
-  maxHealth: 3
+  health: 2
+  maxHealth: 2
   targetName: clock sticker
   stackedDamage: 0
-  difficulty: 0
+  difficulty: 2
   spriteRenderer: {fileID: 2780322801929811509}
   size: 0.5
   tip:
@@ -375,8 +375,8 @@ MonoBehaviour:
     damage: 0
     maxUses: 0
     usesLeft: 0
-    maxHealth: 3
-    health: 3
+    maxHealth: 2
+    health: 2
     qualityExists: -5
     qualityRemoved: -10
     energyCost: 0

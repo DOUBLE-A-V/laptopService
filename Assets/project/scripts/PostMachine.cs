@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using NUnit.Framework.Internal.Commands;
 using UnityEngine;
@@ -73,7 +74,7 @@ public class PostMachine : Place
 
     public IEnumerator EatBox()
     {
-        float cost = Main.currentTask.currentCost;
+        float cost = (float)Math.Round(Main.currentTask.currentCost, 1);
         Main.obj.workplace.finished = false;
         Main.currentTask = null;
         serviceReport.qualities.quality = Main.obj.workplace.currentLaptop.quality;
@@ -90,7 +91,7 @@ public class PostMachine : Place
         yield return new WaitForSeconds(2);
         postMachineText.text = "have a nice day!";
         if (Main.obj.currentStage.id == Main.obj.stages.sendBox.id) Main.obj.currentStage = Main.obj.stages.gotoPc;
-        Main.obj.GiveMoney(cost * serviceReport.qualities.quality/100f);
+        Main.obj.GiveMoney((float)Math.Round(cost * serviceReport.qualities.quality / 100f, 1));
         serviceReport.Show();
         yield return new WaitForSeconds(0.5f);
         if (serviceReport.qualities.quality < Main.obj.qualities.qualityPoorService)

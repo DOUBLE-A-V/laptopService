@@ -116,12 +116,12 @@ TextureImporter:
       name: stickerRemover_0
       rect:
         serializedVersion: 2
-        x: 252
-        y: 115
-        width: 627
-        height: 1108
+        x: 0
+        y: 0
+        width: 860
+        height: 860
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c4918517db540f8468f4c9d4fe700144
     internalID: 0
     vertices: []
     indices: 

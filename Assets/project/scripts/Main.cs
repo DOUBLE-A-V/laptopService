@@ -97,6 +97,7 @@ public class Main : MonoBehaviour
         t.text = message;
         t.transform.DOMove(t.transform.position + new Vector3(0, 1, 0), 1f).SetEase(Ease.OutExpo);
         t.DOFade(0, 2f).SetEase(Ease.OutFlash);
+        Destroy(t.gameObject, 2);
     }
     
     public void GiveMoney(float amount)

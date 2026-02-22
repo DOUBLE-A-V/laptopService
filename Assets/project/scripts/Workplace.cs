@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using DG.Tweening;
 using TMPro;
+using Random = UnityEngine.Random;
+using Mathf = UnityEngine.Mathf;
 
 public class Workplace : Place
 {
@@ -118,6 +121,9 @@ public class Workplace : Place
             tool.RemoveFromScreen();
         }
         Main.obj.ShowGoToButtons();
+        
+        Main.obj.shop.UpdateAllItems();
+        
         finished = true;
     }
 
@@ -251,55 +257,83 @@ public class Workplace : Place
 
     private void GenerateLaptop()
     {
+        int tmpRep = Main.obj.reputation;
+        if (Main.obj.reputation == 0) tmpRep = 1;
+        int tier1Chance = Mathf.RoundToInt(100 / (tmpRep / 10f));
+        int tier2Chance = Mathf.RoundToInt((tmpRep - 100) * (450 - tmpRep)/200f);
+        int tier3Chance = Mathf.RoundToInt((tmpRep - 400) * (700 - tmpRep) / 300f);
+
+        if (tier2Chance < 10 && Main.obj.reputation > 200)
+        {
+            tier2Chance = 10;
+        }
+        
+        tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
+        tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
+        
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
-        int amountOfTargets = Random.Range(Mathf.RoundToInt(3 + Main.currentTask.difficulty/2f), Mathf.RoundToInt(5 + Main.currentTask.difficulty/2f));
+        int amountOfTargets = Random.Range(Mathf.RoundToInt((3 + Main.obj.reputation / 50f) / ((tier2Chance == 0
+            ? 1
+            : tier2Chance / 30f) + (tier3Chance == 0 ? 1 : tier3Chance/20f))), Mathf.RoundToInt(
+            (5 + Main.obj.reputation / 50f) / ((tier2Chance == 0 ? 1 : tier2Chance / 30f) +
+                                               (tier3Chance == 0 ? 1 : tier3Chance / 20f))));
         bool was = false;
         if (Main.obj.tutorial.completed)
         {
             for (int j = 0; j < amountOfTargets; j++)
             {
+                int tmpTier = 0;
+                if (Random.Range(0, 100) <= tier3Chance)
+                {
+                    tmpTier = 2;
+                } else if (Random.Range(0, 100) <= tier2Chance)
+                {
+                    tmpTier = 1;
+                } else if (Random.Range(0, 100) <= tier1Chance)
+                {
+                    tmpTier = 0;
+                }
+                List<LaptopTarget> candidates = targetsPrefabs.FindAll(x => x.difficulty == tmpTier || x.targetName == garrantedTargetDebug);
                 for (int i = 0; i < 1024; i ++)
                 {
                     bool noSpace = false;
-                    LaptopTarget t = targetsPrefabs[Random.Range(0, targetsPrefabs.Count)];
+                    LaptopTarget t = candidates[Random.Range(0, candidates.Count)];
                     if (!was && garrantedTargetDebug != "")
                     {
                         was = true;
-                        t = targetsPrefabs.Find(x => x.targetName == garrantedTargetDebug);
+                        t = candidates.Find(x => x.targetName == garrantedTargetDebug);
                     }
-                    if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
+                    //if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
+                    LaptopTarget target = Instantiate(t, transform);
+                    for (int k = 0; k < 128; k++)
                     {
-                        LaptopTarget target = Instantiate(t, transform);
-                        for (int k = 0; k < 128; k++)
+                        if (k == 127)
                         {
-                            if (k == 127)
+                            noSpace = true;
+                            break;
+                        }
+                        target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
+                        bool touches = false;
+                        foreach (LaptopTarget t2 in currentLaptop.targets)
+                        {
+                            if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
                             {
-                                noSpace = true;
+                                touches = true;
                                 break;
                             }
-                            target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
-                            bool touches = false;
-                            foreach (LaptopTarget t2 in currentLaptop.targets)
-                            {
-                                if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
-                                {
-                                    touches = true;
-                                    break;
-                                }
-                            }
-
-                            if (touches) continue;
-                            break;
                         }
 
-                        if (noSpace)
-                        {
-                            Destroy(target.gameObject);
-                            break;
-                        }
-                        currentLaptop.targets.Add(target);
+                        if (touches) continue;
                         break;
                     }
+
+                    if (noSpace)
+                    {
+                        Destroy(target.gameObject);
+                        break;
+                    }
+                    currentLaptop.targets.Add(target);
+                    break;
                 }
             }
         }

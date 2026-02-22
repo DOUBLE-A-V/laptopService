@@ -116,12 +116,12 @@ TextureImporter:
       name: magicScrewdriver_0
       rect:
         serializedVersion: 2
-        x: 568
-        y: 60
-        width: 148
-        height: 1147
+        x: 5
+        y: 0
+        width: 1275
+        height: 1280
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 972154bcb52c0a742af13acdffefefb8
     internalID: 0
     vertices: []
     indices: 

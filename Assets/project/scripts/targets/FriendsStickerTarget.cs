@@ -9,8 +9,8 @@ public class FriendsStickerTarget : LaptopTarget
         int stack = 0;
         foreach (LaptopTarget t in Main.obj.workplace.currentLaptop.targets)
         {
-            t.qualityChangeRemoved -= changeQuality;
-            t.tip.qualityRemoved = t.qualityChangeRemoved;
+            t.qualityChangeExisting += changeQuality;
+            t.tip.qualityExists = t.qualityChangeExisting;
             stack += changeQuality;
         }
 
@@ -22,8 +22,8 @@ public class FriendsStickerTarget : LaptopTarget
         int stack = 0;
         foreach (LaptopTarget t in Main.obj.workplace.currentLaptop.targets)
         {
-            t.qualityChangeRemoved += changeQuality;
-            t.tip.qualityRemoved = t.qualityChangeRemoved;
+            t.qualityChangeExisting -= changeQuality;
+            t.tip.qualityExists -= t.qualityChangeRemoved;
             stack -= changeQuality;
         }
 

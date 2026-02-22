@@ -95,17 +95,19 @@ public class Shop : Place
             shopItems = shopItems3;
             itemsPlaces = itemsPlaces3;
         }
-        foreach (ShopItem shopItem in shopItems)
+        foreach (ShopItem shopItem in shopItems.FindAll(x => x.inShop))
         {
+            shopItem.itemPlace = null;
             prevItems.Add(shopItem);
             shopItem.RemoveFromShop();
+            shopItems.Remove(shopItem);
         }
 
         foreach (Transform itemPlace in itemsPlaces)
         {
-            if (shopItems.Count == 0) break;
-            ShopItem item = shopItems[Random.Range(0, shopItems.Count)];
-            shopItems.Remove(item);
+            List<ShopItem> tmp = shopItems.FindAll(x => !x.inShop);
+            ShopItem item = tmp[Random.Range(0, tmp.Count)];
+            item.cost = (float)System.Math.Round(Random.Range(item.costFrom, item.costTo), 1);
             item.itemPlace = itemPlace;
             item.inShop = true;
         }

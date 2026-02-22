@@ -5363,7 +5363,7 @@ MonoBehaviour:
     qualityPoorService: 50
     qualityPositiveService: 60
     qualityRemovePoorService: 100
-    failedServiceRepChange: 80
+    failedServiceRepChange: 40
   money: 0
   receivedBox: 1
   stages:
@@ -8846,7 +8846,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
 --- !u!114 &652542734
 MonoBehaviour:
@@ -10243,7 +10243,7 @@ MonoBehaviour:
   finishService: {fileID: 57411467}
   rested: 0
   closedServiceReport: 0
-  completed: 0
+  completed: 1
 --- !u!1 &850644251
 GameObject:
   m_ObjectHideFlags: 0
@@ -22907,7 +22907,7 @@ MonoBehaviour:
   - {fileID: 4236825635439448764, guid: beacd8208156f314688482663030449a, type: 3}
   endTurnButton: {fileID: 41235103}
   finishServiceButton: {fileID: 57411467}
-  garrantedTargetDebug: sticker
+  garrantedTargetDebug: 
   garrantedToolDebug: 
   clock: {fileID: 53849444}
   tools: []

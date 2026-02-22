@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicLampTool
   collider: {fileID: 1599365907344313113}
+  clickable: 1
   active: 1
   touching: 0
   removed: 0
@@ -521,8 +522,8 @@ MonoBehaviour:
     weaknesses: 
     strengths: 
     ignoresTools: 
-    damage: 0
-    maxUses: 0
+    damage: 3
+    maxUses: 3
     usesLeft: 0
     maxHealth: 0
     health: 0

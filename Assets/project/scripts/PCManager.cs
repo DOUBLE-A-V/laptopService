@@ -148,7 +148,7 @@ public class PCManager : Place
             Main.currentTask = Main.obj.serviceTasks[Random.Range(0, Main.obj.serviceTasks.Count)];
             Main.currentTask.postID = Random.Range(1000000, 9999999);
             Main.currentTask.currentCost = 
-                (float)Math.Round(Random.Range(Main.currentTask.costFrom, Main.currentTask.costTo), 1);
+                (float)Math.Round(Random.Range(Main.currentTask.costFrom * (1 + Main.obj.reputation / 200f), Main.currentTask.costTo * (1 + Main.obj.reputation / 200f)), 1);
             Main.currentTask.from = Main.obj.names[Random.Range(0, Main.obj.names.Count)];
             Main.obj.receivedBox = false;
             Main.obj.currentStage = Main.obj.stages.disablePc;
