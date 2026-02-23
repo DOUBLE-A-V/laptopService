@@ -95,6 +95,7 @@ public class LaptopTarget : MonoBehaviour
 
     public void Damage(int amount, Tool by)
     {
+        if (health <= 0) return;
         health -= amount;
         if (health <= 0)
         {

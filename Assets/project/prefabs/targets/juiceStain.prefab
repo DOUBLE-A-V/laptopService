@@ -350,6 +350,7 @@ MonoBehaviour:
   healthFrom: 6
   healthTo: 6
   stickyResiduePrefab: {fileID: 4014243062974443176, guid: 399684c1a2e2c66479c8d9db6e68511d, type: 3}
+  dontLeaveIfDeadBy: 44
 --- !u!58 &6834535734540736640
 CircleCollider2D:
   m_ObjectHideFlags: 0

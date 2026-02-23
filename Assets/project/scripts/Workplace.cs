@@ -271,11 +271,15 @@ public class Workplace : Place
         tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
         tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
         
+        Debug.Log(tier1Chance);
+        Debug.Log(tier2Chance);
+        Debug.Log(tier3Chance);
+        
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
-        int amountOfTargets = Random.Range(Mathf.RoundToInt((3 + Main.obj.reputation / 50f) / ((tier2Chance == 0
+        int amountOfTargets = Random.Range(Mathf.RoundToInt((5 + Main.obj.reputation / 50f) / ((tier2Chance == 0
             ? 1
             : tier2Chance / 30f) + (tier3Chance == 0 ? 1 : tier3Chance/20f))), Mathf.RoundToInt(
-            (5 + Main.obj.reputation / 50f) / ((tier2Chance == 0 ? 1 : tier2Chance / 30f) +
+            (7 + Main.obj.reputation / 50f) / ((tier2Chance == 0 ? 1 : tier2Chance / 30f) +
                                                (tier3Chance == 0 ? 1 : tier3Chance / 20f))));
         bool was = false;
         if (Main.obj.tutorial.completed)

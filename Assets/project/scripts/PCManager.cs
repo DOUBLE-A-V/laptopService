@@ -126,6 +126,10 @@ public class PCManager : Place
     {
         if (working && !blocked) Shutdown();
         else if (!blocked) StartCoroutine(StartPC());
+        else
+        {
+            pcButton.active = true;
+        }
     }
 
     public IEnumerator GoToMessage()

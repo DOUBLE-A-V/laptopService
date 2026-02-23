@@ -22907,7 +22907,7 @@ MonoBehaviour:
   - {fileID: 4236825635439448764, guid: beacd8208156f314688482663030449a, type: 3}
   endTurnButton: {fileID: 41235103}
   finishServiceButton: {fileID: 57411467}
-  garrantedTargetDebug: 
+  garrantedTargetDebug: scribbles
   garrantedToolDebug: 
   clock: {fileID: 53849444}
   tools: []

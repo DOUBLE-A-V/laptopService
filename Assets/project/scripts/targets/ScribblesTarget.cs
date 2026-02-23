@@ -30,7 +30,10 @@ public class ScribblesTarget : LaptopTarget
         if (bonusing != null)
         {
             bonusing.maxHealth -= addHealth;
-            bonusing.health -= addHealth;
+            Main.obj.poppyTool.globalDamage = addHealth;
+            Main.obj.poppyTool.stackedQuality = 0;
+            bonusing.ApplyTool(Main.obj.poppyTool);
+            Main.obj.workplace.ChangeQuality(Main.obj.poppyTool.stackedQuality);
             bonusing.UpdateHealth(false);
         }
     }
@@ -57,7 +60,10 @@ public class ScribblesTarget : LaptopTarget
             {
                 bonusing.maxHealth -= addHealth;
                 bonusing.UpdateHealth(false);
-                bonusing.Damage(addHealth, Main.obj.poppyTool);
+                Main.obj.poppyTool.globalDamage = addHealth;
+                Main.obj.poppyTool.stackedQuality = 0;
+                bonusing.ApplyTool(Main.obj.poppyTool);
+                Main.obj.workplace.ChangeQuality(Main.obj.poppyTool.stackedQuality);
             }
             bonusing = nearestTarget;
             bonusing.maxHealth += addHealth;

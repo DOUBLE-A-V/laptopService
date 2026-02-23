@@ -7,7 +7,10 @@ public class StickerTarget : LaptopTarget
     [SerializeField] private int healthTo;
 
     [SerializeField] private LaptopTarget stickyResiduePrefab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] private string dontLeaveIfDeadBy;
+    
+    
     protected override void OnAppear()
     {
         maxHealth = Random.Range(healthFrom, healthTo);
@@ -19,7 +22,7 @@ public class StickerTarget : LaptopTarget
 
     protected override void OnDeath(Tool deadBy)
     {
-        if (deadBy.toolName != "sticker remover")
+        if (deadBy.toolName != dontLeaveIfDeadBy)
         {
             LaptopTarget t = Instantiate(stickyResiduePrefab, Main.obj.workplace.transform);
             Main.obj.workplace.currentLaptop.targets.Add(t);
