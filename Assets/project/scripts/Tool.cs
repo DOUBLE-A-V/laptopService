@@ -38,7 +38,7 @@ public class Tool : Interactable
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         maxUses = usesLeft;
         tip.maxUses = maxUses;
         tip.usesLeft = usesLeft;

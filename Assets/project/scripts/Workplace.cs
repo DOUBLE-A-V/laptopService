@@ -255,6 +255,12 @@ public class Workplace : Place
         StartCoroutine(clock.ChangeTime(hours, duration));
     }
 
+    private void RegenerateLaptop()
+    {
+        Destroy(currentLaptop.gameObject);
+        GenerateLaptop();
+    }
+
     private void GenerateLaptop()
     {
         int tmpRep = Main.obj.reputation;
@@ -270,10 +276,6 @@ public class Workplace : Place
         
         tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
         tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
-        
-        Debug.Log(tier1Chance);
-        Debug.Log(tier2Chance);
-        Debug.Log(tier3Chance);
         
         currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         int amountOfTargets = Random.Range(Mathf.RoundToInt((5 + Main.obj.reputation / 50f) / ((tier2Chance == 0
@@ -386,6 +388,10 @@ public class Workplace : Place
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RegenerateLaptop();
+        }
         if (!currentLaptop) return;
         Vector2 mouse = Main.cam.ScreenToWorldPoint(Input.mousePosition);
         LaptopTarget nearestTarget = null;
