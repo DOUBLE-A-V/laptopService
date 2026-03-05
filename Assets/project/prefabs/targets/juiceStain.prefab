@@ -323,8 +323,8 @@ MonoBehaviour:
   sprites: []
   collision: {fileID: 6834535734540736640}
   randomizeDirection: 1
-  health: 6
-  maxHealth: 6
+  health: 4
+  maxHealth: 4
   targetName: juice stain
   stackedDamage: 0
   difficulty: 1
@@ -339,16 +339,16 @@ MonoBehaviour:
     damage: 0
     maxUses: 0
     usesLeft: 0
-    maxHealth: 0
-    health: 0
+    maxHealth: 4
+    health: 4
     qualityExists: -20
     qualityRemoved: 0
     energyCost: 0
   qualityChangeExisting: -20
   qualityChangeRemoved: 0
   highlightLineIndex: -1
-  healthFrom: 6
-  healthTo: 6
+  healthFrom: 4
+  healthTo: 5
   stickyResiduePrefab: {fileID: 4014243062974443176, guid: 399684c1a2e2c66479c8d9db6e68511d, type: 3}
   dontLeaveIfDeadBy: 44
 --- !u!58 &6834535734540736640

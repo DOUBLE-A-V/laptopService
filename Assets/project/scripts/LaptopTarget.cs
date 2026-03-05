@@ -63,15 +63,18 @@ public class LaptopTarget : MonoBehaviour
 
     public void UpdateHealth(bool animate = true)
     {
-        healthText.text = health + " / " + maxHealth;
-        if (animate)
+        if (healthText != null)
         {
-            healthText.transform.DOKill();
-            healthText.transform.localScale = Vector3.one * 0.9f;
-            healthText.transform.DOScale(1, 0.5f).SetEase(Ease.OutElastic, 0.5f);
+            healthText.text = health + " / " + maxHealth;
+            if (animate)
+            {
+                healthText.transform.DOKill();
+                healthText.transform.localScale = Vector3.one * 0.9f;
+                healthText.transform.DOScale(1, 0.5f).SetEase(Ease.OutElastic, 0.5f);
+            }
+            tip.maxHealth = maxHealth;
+            tip.health = health;
         }
-        tip.maxHealth = maxHealth;
-        tip.health = health;
     }
     
     protected virtual void OnDamage(int amount, Tool by)
@@ -86,6 +89,7 @@ public class LaptopTarget : MonoBehaviour
 
     private void Death(Tool by)
     {
+        Main.obj.SpawnEffect("removed", transform.position);
         OnDeath(by);
         by.stackedQuality += qualityChangeRemoved - qualityChangeExisting;
         transform.DOScale(0, 0.9f).SetEase(Ease.InElastic, 0.5f);
@@ -96,6 +100,10 @@ public class LaptopTarget : MonoBehaviour
     public void Damage(int amount, Tool by)
     {
         if (health <= 0) return;
+        if (amount > 0)
+        {
+            Main.obj.SpawnEffect("damage", transform.position);
+        }
         health -= amount;
         if (health <= 0)
         {

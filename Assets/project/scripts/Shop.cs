@@ -62,12 +62,33 @@ public class Shop : Place
         ShowItems();
     }
 
-    public void ShowItems()
+    public void ShowItems(int slevel = -1)
     {
-        foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop) shopItem.Show();
+        if (slevel == -1)
+        {
+            foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop) shopItem.Show();
 
-        if (level > 0) foreach (ShopItem shopItem in shopItems2) if (shopItem.inShop) shopItem.Show();
-        if (level > 1) foreach (ShopItem shopItem in shopItems3) if (shopItem.inShop) shopItem.Show();
+            if (level > 0) foreach (ShopItem shopItem in shopItems2) if (shopItem.inShop) shopItem.Show();
+            if (level > 1) foreach (ShopItem shopItem in shopItems3) if (shopItem.inShop) shopItem.Show();
+        } 
+            else if (slevel == 0)
+            {
+                foreach (ShopItem shopItem in shopItems1)
+                    if (shopItem.inShop)
+                        shopItem.Show();
+            }
+            else if (slevel == 1)
+            {
+                foreach (ShopItem shopItem in shopItems2)
+                    if (shopItem.inShop)
+                        shopItem.Show();
+            }
+            else if (slevel == 2)
+            {
+                foreach (ShopItem shopItem in shopItems3)
+                    if (shopItem.inShop)
+                        shopItem.Show();
+            }
     }
 
     public void UpdateAllItems()

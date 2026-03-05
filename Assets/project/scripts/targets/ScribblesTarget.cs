@@ -21,12 +21,14 @@ public class ScribblesTarget : LaptopTarget
 
     private void OnDestroy()
     {
+        /*
         if (bonusing != null)
         {
             bonusing.maxHealth -= addHealth;
             bonusing.health -= addHealth;
             bonusing.UpdateHealth();
         }
+        */
         Destroy(line.gameObject);
         Destroy(text.gameObject);
     }

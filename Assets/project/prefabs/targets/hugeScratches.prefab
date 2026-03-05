@@ -320,9 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaptopTarget
   healthText: {fileID: 1455999299275599881}
-  sprites:
-  - {fileID: 1774624084633497024, guid: 2cd451859da43da45831c7fb626251a5, type: 3}
-  - {fileID: -1124104645735315550, guid: 7b6b1a0fd2e41f24bb059698fb8fc4e8, type: 3}
+  sprites: []
   collision: {fileID: 4616291305572735528}
   randomizeDirection: 1
   health: 6

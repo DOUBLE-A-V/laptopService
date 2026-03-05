@@ -25,9 +25,15 @@ public class MarkerRemoverTool : Tool
     {
         if (against.targetName != "scribbles")
         {
-            Main.obj.workplace.currentLaptop.targets.Add(Instantiate(Main.obj.workplace.targetsPrefabs.Find(x => x.targetName == "shiny"), transform.position, Quaternion.identity));
-            Main.obj.workplace.currentLaptop.targets[Main.obj.workplace.currentLaptop.targets.Count-1].transform.localScale = Vector3.zero;
-            Main.obj.workplace.currentLaptop.targets[Main.obj.workplace.currentLaptop.targets.Count-1].transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.OutExpo);
+            if (against.stackedDamage >= against.health)
+            {
+                LaptopTarget shiny = Instantiate(Main.obj.workplace.targetsPrefabs.Find(x => x.targetName == "shiny"),
+                    transform.position, Quaternion.identity);
+                Main.obj.workplace.currentLaptop.targets.Add(shiny);
+                shiny.transform.localScale = Vector3.zero;
+                shiny.transform.parent = Main.obj.workplace.transform;
+                shiny.transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.OutExpo);
+            }
         }
         else
         {

@@ -524,12 +524,12 @@ MonoBehaviour:
     ignoresTools: 
     damage: 3
     maxUses: 3
-    usesLeft: 0
+    usesLeft: 3
     maxHealth: 0
     health: 0
     qualityExists: 0
     qualityRemoved: 0
-    energyCost: 0
+    energyCost: 12
   maxUses: 3
   id: 0
   energyCost: 12

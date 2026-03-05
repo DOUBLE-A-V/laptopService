@@ -496,7 +496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: to rest
+  m_text: rest
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
   m_sharedMaterial: {fileID: -6964186084235669811, guid: f469152f4e674764bab8f8c0531584c4, type: 2}
@@ -5317,7 +5317,7 @@ MonoBehaviour:
   maxPoorServices: 0
   highlightsManager: {fileID: 664312630}
   poorServices: 0
-  reputation: 0
+  reputation: 190
   places:
   - {fileID: 93241468}
   - {fileID: 2101451458}
@@ -5364,7 +5364,7 @@ MonoBehaviour:
     qualityPositiveService: 60
     qualityRemovePoorService: 100
     failedServiceRepChange: 40
-  money: 0
+  money: 150
   receivedBox: 1
   stages:
     gotoPc:
@@ -5411,6 +5411,10 @@ MonoBehaviour:
   infoSheet: {fileID: 1762465384}
   loseText: {fileID: 1468154358}
   pressButtonText: {fileID: 1360724943}
+  effectPrefabs:
+  - {fileID: 1209301357425698285, guid: 7856c3ebff7ea894194e089fd485a9d0, type: 3}
+  - {fileID: 1209301357425698285, guid: 86fd5a00d5dcfae46ae0a549066ac2fa, type: 3}
+  - {fileID: 1209301357425698285, guid: 198144910446d124395804951a840dfc, type: 3}
 --- !u!1 &415440850
 GameObject:
   m_ObjectHideFlags: 0
@@ -22886,6 +22890,7 @@ MonoBehaviour:
   - {fileID: 7906310687671983629, guid: 804e38fc80b826a4cbe13881acb6e3fd, type: 3}
   - {fileID: 1642300001549734642, guid: e327202e8bd90f345bdbf1b8ce5f31e8, type: 3}
   - {fileID: 4014243062974443176, guid: 4e1e96ea47039db49abf78c1f6f094b4, type: 3}
+  - {fileID: 4014243062974443176, guid: 399684c1a2e2c66479c8d9db6e68511d, type: 3}
   laptopsPrefabs:
   - {fileID: 447490868992317336, guid: d0a198e7b770df4408d0929d8084b02d, type: 3}
   toolsPrefabs:
@@ -22907,7 +22912,7 @@ MonoBehaviour:
   - {fileID: 4236825635439448764, guid: beacd8208156f314688482663030449a, type: 3}
   endTurnButton: {fileID: 41235103}
   finishServiceButton: {fileID: 57411467}
-  garrantedTargetDebug: scribbles
+  garrantedTargetDebug: 
   garrantedToolDebug: 
   clock: {fileID: 53849444}
   tools: []
@@ -22923,6 +22928,7 @@ MonoBehaviour:
   bgBlur: {fileID: 698695534}
   energyBar: {fileID: 1531379729}
   finished: 0
+  finalLaptopPrefab: {fileID: 0}
 --- !u!1 &2101451455
 GameObject:
   m_ObjectHideFlags: 0

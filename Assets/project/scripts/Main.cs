@@ -88,7 +88,13 @@ public class Main : MonoBehaviour
 
     [SerializeField] private TMP_Text loseText;
     [SerializeField] private TMP_Text pressButtonText;
+    
+    [SerializeField] private List<EffectPrefab> effectPrefabs;
 
+    public void SpawnEffect(string effectName, Vector2 pos)
+    {
+        EffectPrefab prefab = Instantiate(effectPrefabs.Find(x => x.effectName == effectName), pos, Quaternion.identity);
+    }
 
     public void ShowMessage(string message, Vector3 pos)
     {
@@ -230,7 +236,7 @@ public class Main : MonoBehaviour
         SetCursorState("normal");
         HideGoToButtons();
         ShowGoToButtons();
-        
+        /*
         currentTask = new ServiceTask(
             "t",
             "please fuck niggers",
@@ -241,7 +247,7 @@ public class Main : MonoBehaviour
             0,
             85874538
             );
-        
+        */
         workplace.GiveTool("hand");
         workplace.GiveTool("hand");
         StartCoroutine(GoTo(startGoToPlace, tutorial.completed));
@@ -294,6 +300,10 @@ public class Main : MonoBehaviour
         {
             shop.Upgrade();
         }
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SpawnEffect("click", cam.ScreenToWorldPoint(Input.mousePosition));
+        }
     }
 }

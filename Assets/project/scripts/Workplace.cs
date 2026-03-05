@@ -45,6 +45,8 @@ public class Workplace : Place
 
     public bool finished = false;
 
+    [SerializeField] private Laptop finalLaptopPrefab;
+
     public void UpdateQualityText(bool animate=true)
     {
         qualityText.text = "quality: " + currentLaptop.quality + "%";
@@ -130,7 +132,7 @@ public class Workplace : Place
     public IEnumerator EndTurn()
     {
 		Main.obj.noUpdateInteractablesTimer = 1.5f;
-		StartCoroutine(clock.ChangeTime(Random.Range(1, 400)/100f, 0.5f));
+		StartCoroutine(clock.ChangeTime(Random.Range(1, 350)/100f, 0.5f));
         Main.obj.blackscreen.Show();
         foreach (Tool tool in GetHandTools())
         {
@@ -149,7 +151,6 @@ public class Workplace : Place
         {
             if (tool.toolName == "hand" && tool.usesLeft > 0)
             {
-                //tool.usesLeft = tool.maxUses;
                 tool.UpdateUsesLeftText();
                 tool.GiveInHand();
             }
@@ -276,8 +277,10 @@ public class Workplace : Place
         
         tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
         tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
+
+        bool final = Main.obj.reputation >= 550;
         
-        currentLaptop = Instantiate(laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
+        currentLaptop = Instantiate(final ? finalLaptopPrefab : laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         int amountOfTargets = Random.Range(Mathf.RoundToInt((5 + Main.obj.reputation / 50f) / ((tier2Chance == 0
             ? 1
             : tier2Chance / 30f) + (tier3Chance == 0 ? 1 : tier3Chance/20f))), Mathf.RoundToInt(
@@ -286,7 +289,7 @@ public class Workplace : Place
         bool was = false;
         if (Main.obj.tutorial.completed)
         {
-            for (int j = 0; j < amountOfTargets; j++)
+            for (int j = 0; j < amountOfTargets + (final ? 3 : 0); j++)
             {
                 int tmpTier = 0;
                 if (Random.Range(0, 100) <= tier3Chance)
@@ -300,47 +303,41 @@ public class Workplace : Place
                     tmpTier = 0;
                 }
                 List<LaptopTarget> candidates = targetsPrefabs.FindAll(x => x.difficulty == tmpTier || x.targetName == garrantedTargetDebug);
-                for (int i = 0; i < 1024; i ++)
+                bool noSpace = false;
+                LaptopTarget t = candidates[Random.Range(0, candidates.Count)];
+                if (!was && garrantedTargetDebug != "")
                 {
-                    bool noSpace = false;
-                    LaptopTarget t = candidates[Random.Range(0, candidates.Count)];
-                    if (!was && garrantedTargetDebug != "")
+                    was = true;
+                    t = candidates.Find(x => x.targetName == garrantedTargetDebug);
+                }
+                LaptopTarget target = Instantiate(t, transform);
+                for (int k = 0; k < 128; k++)
+                {
+                    if (k == 127)
                     {
-                        was = true;
-                        t = candidates.Find(x => x.targetName == garrantedTargetDebug);
+                        noSpace = true;
+                        break;
                     }
-                    //if ((t.difficulty <= Main.currentTask.difficulty && t.difficulty > Main.currentTask.difficulty - 2) || t.targetName == garrantedTargetDebug)
-                    LaptopTarget target = Instantiate(t, transform);
-                    for (int k = 0; k < 128; k++)
+                    target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
+                    bool touches = false;
+                    foreach (LaptopTarget t2 in currentLaptop.targets)
                     {
-                        if (k == 127)
+                        if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
                         {
-                            noSpace = true;
+                            touches = true;
                             break;
                         }
-                        target.transform.localPosition = new Vector3(Random.Range(-150, 150)/100f, Random.Range(-150, 150)/100f, 0);
-                        bool touches = false;
-                        foreach (LaptopTarget t2 in currentLaptop.targets)
-                        {
-                            if (Vector2.Distance(t2.transform.position, target.transform.position) < target.size)
-                            {
-                                touches = true;
-                                break;
-                            }
-                        }
-
-                        if (touches) continue;
-                        break;
                     }
 
-                    if (noSpace)
-                    {
-                        Destroy(target.gameObject);
-                        break;
-                    }
-                    currentLaptop.targets.Add(target);
+                    if (touches) continue;
                     break;
                 }
+
+                if (noSpace)
+                {
+                    Destroy(target.gameObject);
+                }
+                currentLaptop.targets.Add(target);
             }
         }
         else
