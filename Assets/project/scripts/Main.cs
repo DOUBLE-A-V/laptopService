@@ -63,6 +63,15 @@ public class Main : MonoBehaviour
 
     public TMP_Text messageTextPrefab;
 
+    public List<SoundPrefab> soundPrefabs;
+
+    [Serializable]
+    public class SoundPrefab
+    {
+        public string name;
+        public AudioSource audio;
+    }
+
     [Serializable]
     public class Stages
     {
@@ -91,6 +100,11 @@ public class Main : MonoBehaviour
     
     [SerializeField] private List<EffectPrefab> effectPrefabs;
 
+    public void PlaySound(string soundName)
+    {
+        soundPrefabs.Find(x => x.name == soundName).audio.Play();
+    }
+    
     public void SpawnEffect(string effectName, Vector2 pos)
     {
         EffectPrefab prefab = Instantiate(effectPrefabs.Find(x => x.effectName == effectName), pos, Quaternion.identity);

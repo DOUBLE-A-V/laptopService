@@ -16,6 +16,9 @@ public class Wallet : Interactable
     [SerializeField] private Sprite moneySprite;
     [SerializeField] private Sprite emptySprite;
 
+    public AudioSource soundIn;
+    public AudioSource soundOut;
+
     public TMP_Text spentMoneyText;
 
     public bool display = true;
@@ -43,6 +46,8 @@ public class Wallet : Interactable
     
     protected override void OnHover()
     {
+        soundOut.Stop();
+        soundIn.Play();
         opened = true;
         transform.DOKill();
         dynamicPart.transform.DOKill();
@@ -66,6 +71,8 @@ public class Wallet : Interactable
 
     protected override void OnHoverExit()
     {
+        soundIn.Stop();
+        soundOut.Play();
         opened = false;
         transform.DOKill();
         dynamicPart.transform.DOKill();

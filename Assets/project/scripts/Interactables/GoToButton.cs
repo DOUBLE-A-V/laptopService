@@ -14,6 +14,7 @@ public class GoToButton : Interactable
     
     protected override void OnHover()
     {
+        Main.obj.PlaySound("hover");
         arrowsImage.transform.DOKill();
         arrowsImage.transform.DOScale(new Vector3(1.5f, 1, 1), 0.5f).SetEase(Ease.OutElastic, 0.5f);
     }
@@ -25,6 +26,7 @@ public class GoToButton : Interactable
 
     protected override void Interact()
     {
+        Main.obj.PlaySound("click");
         StartCoroutine(Main.obj.GoTo(goToPlace));
     }
 

@@ -10,6 +10,9 @@ public class InfoSticker : Interactable
 
     private Vector3 defPos;
 
+    public AudioSource soundIn;
+    public AudioSource soundOut;
+
     public bool display = true;
 
 	private float sincount = 45;
@@ -31,6 +34,8 @@ public class InfoSticker : Interactable
     }
     protected override void OnHover()
     {
+        soundIn.Play();
+        soundOut.Stop();
 		opened = true;
         transform.DOKill();
         
@@ -40,6 +45,8 @@ public class InfoSticker : Interactable
 
     protected override void OnHoverExit()
     {
+        soundIn.Stop();
+        soundOut.Play();
 		opened = false;
         transform.DOKill();
         

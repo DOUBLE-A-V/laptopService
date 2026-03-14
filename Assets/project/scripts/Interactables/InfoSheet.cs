@@ -11,6 +11,9 @@ public class InfoSheet : Interactable
     
     [SerializeField] private List<SpriteRenderer> badServiceStampsSprites;
 
+    public AudioSource soundIn;
+    public AudioSource soundOut;
+
     public bool display = true;
 
     private bool addingStamp = false;
@@ -39,6 +42,8 @@ public class InfoSheet : Interactable
     protected override void OnHover()
     {
         if (addingStamp) return;
+        soundIn.Play();
+        soundOut.Stop();
 		opened = true;
         transform.DOKill();
         
@@ -107,6 +112,8 @@ public class InfoSheet : Interactable
     protected override void OnHoverExit()
     {
         if (addingStamp) return;
+        soundOut.Play();
+        soundIn.Stop();
 		opened = false;
         transform.DOKill();
         
