@@ -66,27 +66,27 @@ public class Shop : Place
     {
         if (slevel == -1)
         {
-            foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop) shopItem.Show();
+            foreach (ShopItem shopItem in shopItems1) if (shopItem.inShop && !shopItem.bought) shopItem.Show();
 
-            if (level > 0) foreach (ShopItem shopItem in shopItems2) if (shopItem.inShop) shopItem.Show();
-            if (level > 1) foreach (ShopItem shopItem in shopItems3) if (shopItem.inShop) shopItem.Show();
+            if (level > 0) foreach (ShopItem shopItem in shopItems2) if (shopItem.inShop && !shopItem.bought) shopItem.Show();
+            if (level > 1) foreach (ShopItem shopItem in shopItems3) if (shopItem.inShop && !shopItem.bought) shopItem.Show();
         } 
             else if (slevel == 0)
             {
                 foreach (ShopItem shopItem in shopItems1)
-                    if (shopItem.inShop)
+                    if (shopItem.inShop && !shopItem.bought)
                         shopItem.Show();
             }
             else if (slevel == 1)
             {
                 foreach (ShopItem shopItem in shopItems2)
-                    if (shopItem.inShop)
+                    if (shopItem.inShop && !shopItem.bought)
                         shopItem.Show();
             }
             else if (slevel == 2)
             {
                 foreach (ShopItem shopItem in shopItems3)
-                    if (shopItem.inShop)
+                    if (shopItem.inShop && !shopItem.bought)
                         shopItem.Show();
             }
     }
@@ -128,6 +128,7 @@ public class Shop : Place
         {
             List<ShopItem> tmp = shopItems.FindAll(x => !x.inShop);
             ShopItem item = tmp[Random.Range(0, tmp.Count)];
+            item.bought = false;
             item.cost = (float)System.Math.Round(Random.Range(item.costFrom, item.costTo), 1);
             item.itemPlace = itemPlace;
             item.inShop = true;

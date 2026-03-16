@@ -10,5 +10,6 @@ public class PCButton : Interactable
         transform.DOScale(defaultScale, 0.2f);
         active = false;
         Main.obj.pcManager.Toggle();
+        Main.obj.PlaySound("button");
     }
 }

@@ -9,6 +9,7 @@ public class PostMachineButton : Interactable
         transform.DOKill();
         transform.localScale = defaultScale * 0.9f;
         transform.DOScale(defaultScale, 0.2f);
+        Main.obj.PlaySound("button");
         Main.obj.postMachine.ClickNumButton(task);
     }
 }

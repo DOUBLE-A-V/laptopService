@@ -47,6 +47,8 @@ public class Workplace : Place
 
     [SerializeField] private Laptop finalLaptopPrefab;
 
+    public bool isFinalLaptop = false;
+
     public void UpdateQualityText(bool animate=true)
     {
         qualityText.text = "quality: " + currentLaptop.quality + "%";
@@ -216,6 +218,8 @@ public class Workplace : Place
     public void GiveTool(string toolName)
     {
         Tool tool = Instantiate(toolsPrefabs.Find(t => t.toolName == toolName), hand.transform);
+
+        tool.transform.localScale = Vector3.zero;
         tools.Add(tool);
         Main.interactables.Add(tool);
     }
@@ -278,9 +282,9 @@ public class Workplace : Place
         tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
         tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
 
-        bool final = Main.obj.reputation >= 550;
+        isFinalLaptop = Main.obj.reputation >= 550;
         
-        currentLaptop = Instantiate(final ? finalLaptopPrefab : laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
+        currentLaptop = Instantiate(isFinalLaptop ? finalLaptopPrefab : laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         int amountOfTargets = Random.Range(Mathf.RoundToInt((5 + Main.obj.reputation / 50f) / ((tier2Chance == 0
             ? 1
             : tier2Chance / 30f) + (tier3Chance == 0 ? 1 : tier3Chance/20f))), Mathf.RoundToInt(
@@ -289,7 +293,7 @@ public class Workplace : Place
         bool was = false;
         if (Main.obj.tutorial.completed)
         {
-            for (int j = 0; j < amountOfTargets + (final ? 3 : 0); j++)
+            for (int j = 0; j < amountOfTargets + (isFinalLaptop ? 3 : 0); j++)
             {
                 int tmpTier = 0;
                 if (Random.Range(0, 100) <= tier3Chance)

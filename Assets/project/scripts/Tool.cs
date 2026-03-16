@@ -135,6 +135,7 @@ public class Tool : Interactable
         }
         else
         {
+            Main.obj.PlaySound("some crack");
             stackedQuality = 0;
             foreach (LaptopTarget target in hitTargets)
             {

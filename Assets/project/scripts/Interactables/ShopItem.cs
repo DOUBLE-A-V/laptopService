@@ -20,6 +20,8 @@ public class ShopItem : Interactable
 
     public float cost = 0;
     
+    public bool bought = false;
+    
     protected override void Interact()
     {
         transform.DOKill();
@@ -38,8 +40,10 @@ public class ShopItem : Interactable
 
     public void Buy()
     {
+        Main.obj.PlaySound("buy");
         Main.obj.workplace.tip.HideTip();
         active = false;
+        bought = true;
         costText.DOFade(0, 0.5f);
         spriteRenderer.transform.DOKill();
         spriteRenderer.transform.DOScale(new Vector3(0, 0.4f, 1), 1).SetEase(Ease.OutExpo);

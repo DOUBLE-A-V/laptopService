@@ -40,6 +40,14 @@ public class Clock : Interactable
     {
         timeText.text = hours.ToString("00") + " " + minutes.ToString("00");
         doublePointText.text = hours.ToString("00") + ":" + minutes.ToString("00");
+        if (Main.obj.workplace.isFinalLaptop)
+        {
+            timeText.text = timeText.text.Remove(0, 2);
+            timeText.text = timeText.text.Insert(0, "??");
+            
+            doublePointText.text = doublePointText.text.Remove(0, 2);
+            doublePointText.text = doublePointText.text.Insert(0, "??");
+        }
     }
     public IEnumerator ChangeTime(float hoursAdd, float duration)
     {

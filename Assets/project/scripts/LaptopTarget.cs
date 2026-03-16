@@ -107,6 +107,7 @@ public class LaptopTarget : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
+            Main.obj.PlaySound("magic sound");
             health = 0;
             Death(by);
             return;
