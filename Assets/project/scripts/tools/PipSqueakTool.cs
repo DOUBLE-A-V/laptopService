@@ -23,6 +23,6 @@ public class PipSqueakTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName == "persistent dust" || against.targetName == "dust") against.stackedDamage = 4;
+        if (against.targetName == "persistent dust" || against.targetName == "dust" || against.targetName == "cobweb") against.stackedDamage = 4;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class UpgradeShopButton : Interactable
 {
-    [SerializeField] private TMP_Text costText;
+    //[SerializeField] private TMP_Text costText;
     [SerializeField] public List<float> costs;
 
     public Vector3 defPos;
@@ -18,17 +18,19 @@ public class UpgradeShopButton : Interactable
     
     public void UpdateCostText()
     {
-        if (Main.obj.shop.level != 2) costText.text = "upgrade shop\n" + costs[Main.obj.shop.level] + "$";
-        else costText.DOFade(0, 0.5f).SetEase(Ease.OutExpo);
+        //if (Main.obj.shop.level != 2) costText.text = "upgrade shop\n" + costs[Main.obj.shop.level] + "$";
+        //else costText.DOFade(0, 0.5f).SetEase(Ease.OutExpo);
     }
 
     protected override void Interact()
     {
-        transform.DOKill();
-
-        transform.DOMove(transform.position - new Vector3(0, 1.5f, 0), 1.5f).SetEase(Ease.OutExpo);
+        return;
         if (Main.obj.money >= costs[Main.obj.shop.level])
         {
+            transform.DOKill();
+
+            transform.DOMove(transform.position - new Vector3(0, 1.5f, 0), 1.5f).SetEase(Ease.OutExpo);
+            
             Main.obj.GiveMoney(-costs[Main.obj.shop.level]);
             Main.obj.shop.Upgrade();
             if (Main.obj.shop.level == 2) active = false;

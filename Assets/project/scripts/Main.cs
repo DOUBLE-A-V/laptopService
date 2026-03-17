@@ -100,6 +100,8 @@ public class Main : MonoBehaviour
     
     [SerializeField] private List<EffectPrefab> effectPrefabs;
 
+    public GlobalProgressBar globalProgressBar;
+
     public void PlaySound(string soundName)
     {
         soundPrefabs.Find(x => x.name == soundName).audio.Play();
@@ -247,6 +249,7 @@ public class Main : MonoBehaviour
     
     private void Start()
     {
+        globalProgressBar.UpdateProgress();
         SetCursorState("normal");
         HideGoToButtons();
         ShowGoToButtons();

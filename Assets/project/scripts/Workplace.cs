@@ -143,7 +143,7 @@ public class Workplace : Place
         }
         yield return new WaitForSeconds(1f);
         if (!Main.obj.tutorial.completed) Main.obj.tutorial.rested = true;
-        energyBar.Set(Main.obj.maxEnergy);
+        energyBar.Set(energyBar.maxValue);
         foreach (LaptopTarget target in currentLaptop.targets) target.OnEndTurn();
         Main.obj.blackscreen.Hide();
 
@@ -166,10 +166,12 @@ public class Workplace : Place
         qualityText.gameObject.SetActive(false);
         energyBar.gameObject.SetActive(false);
         clock.gameObject.SetActive(false);
+        Main.obj.globalProgressBar.Show();
     }
     
     public override void OnEnter()
     {
+        Main.obj.globalProgressBar.Hide();
 		bgNormal.SetActive(true);
 		bgBlur.SetActive(false);
         clock.gameObject.SetActive(false);
@@ -247,7 +249,7 @@ public class Workplace : Place
     
     private void GiveToolsHand()
     {
-        for (int i = 0; i < Mathf.CeilToInt(tools.Count / 2f); i++)
+        for (int i = 0; i < tools.Count; i++)
         {
             List<Tool> tmp = tools.FindAll(t => !t.inHand && t.usesLeft > 0);
             if (tmp.Count == 0) break;
@@ -285,6 +287,8 @@ public class Workplace : Place
         isFinalLaptop = Main.obj.reputation >= 550;
         
         currentLaptop = Instantiate(isFinalLaptop ? finalLaptopPrefab : laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
+        if (isFinalLaptop) energyBar.maxValue = Main.obj.maxEnergy + 10;
+        energyBar.Set(energyBar.maxValue);
         int amountOfTargets = Random.Range(Mathf.RoundToInt((5 + Main.obj.reputation / 50f) / ((tier2Chance == 0
             ? 1
             : tier2Chance / 30f) + (tier3Chance == 0 ? 1 : tier3Chance/20f))), Mathf.RoundToInt(

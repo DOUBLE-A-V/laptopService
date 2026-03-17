@@ -48,6 +48,7 @@ public class ScribblesTarget : LaptopTarget
 
     private void Update()
     {
+        if (health <= 0) return;
         LaptopTarget nearestTarget = null;
         float nearestDistance = float.MaxValue;
         foreach (LaptopTarget target in Main.obj.workplace.currentLaptop.targets)

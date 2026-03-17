@@ -37,6 +37,9 @@ public class ServiceReport : MonoBehaviour
         text.text = "<color=#efff00>REPORT</color>\nquality: " + qualities.quality +  "%\n";
         text.text += "<color=#00ff00>pay: " + totalPay + "$</color>\n<size=30><color=#aaaaff>(" + qualities.cost + "$ * " + qualities.quality + "%)</color></size>\n";
         text.text += "<color=#ffffff>reputation</color> " + (qualities.repChange >= 0 ? "<color=#00ff00>+" + qualities.repChange + "</color>" : "<color=#ff0000>" + qualities.repChange + "</color>");
+        text.text += "\n\n";
+        if (Main.obj.reputation == 200) text.text += "<color=#00ff00><size=50>SHOP UPGRADED!</size></color>";
+        if (Main.obj.reputation == 400) text.text += "<color=#00ff00><size=50>SHOP UPGRADED!</size></color>";
     }
 
     public void Hide()

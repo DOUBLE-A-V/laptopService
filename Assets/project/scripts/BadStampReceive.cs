@@ -26,13 +26,15 @@ public class BadStampReceive : MonoBehaviour
         
         yield return new WaitForSeconds(0.5f);
         
-        Main.obj.reputation -= Main.obj.qualities.failedServiceRepChange;
+        //Main.obj.reputation -= Main.obj.qualities.failedServiceRepChange;
         
+        /*
         repText.text = "-" + Main.obj.qualities.failedServiceRepChange + " reputation";
         repText.transform.localScale = Vector3.one * 1.5f;
         repText.transform.DOKill();
         repText.DOFade(1, 0.5f).SetEase(Ease.Linear);
         repText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutExpo);
+        */
         
         yield return new WaitForSeconds(1.2f);
         

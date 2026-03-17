@@ -22,6 +22,8 @@ public class PostMachine : Place
 
     private string postID = "";
 
+    public SpriteRenderer endScreen;
+
     public override void OnEnter()
     {
 		boxInsertionZone.active = false;
@@ -79,7 +81,7 @@ public class PostMachine : Place
         Main.currentTask = null;
         serviceReport.qualities.quality = Main.obj.workplace.currentLaptop.quality;
         serviceReport.qualities.cost = cost;
-        serviceReport.qualities.repChange = serviceReport.qualities.quality - Main.obj.qualities.qualityPositiveService;
+        if (serviceReport.qualities.quality >= Main.obj.qualities.qualityPoorService)serviceReport.qualities.repChange = 100;
         
         Destroy(Main.obj.workplace.currentLaptop.gameObject);
         
@@ -92,8 +94,15 @@ public class PostMachine : Place
         postMachineText.text = "have a nice day!";
         if (Main.obj.currentStage.id == Main.obj.stages.sendBox.id) Main.obj.currentStage = Main.obj.stages.gotoPc;
         Main.obj.GiveMoney((float)Math.Round(cost * serviceReport.qualities.quality / 100f, 1));
+        if (serviceReport.qualities.quality >= Main.obj.qualities.qualityPoorService) Main.obj.reputation += 100;
         serviceReport.Show();
         yield return new WaitForSeconds(0.5f);
+        if (serviceReport.qualities.quality >= Main.obj.qualities.qualityPoorService && Main.obj.workplace.isFinalLaptop)
+        {
+            Main.obj.noUpdateInteractablesTimer = 99999999;
+            endScreen.DOFade(1, 1.5f).SetEase(Ease.Linear);
+            yield break;
+        }
         if (serviceReport.qualities.quality < Main.obj.qualities.qualityPoorService)
         {
             StartCoroutine(Main.obj.badStampReceive.Show());
@@ -104,9 +113,16 @@ public class PostMachine : Place
                 StartCoroutine(Main.obj.infoSheet.RemoveStamp());
             }
         }
-        Main.obj.reputation += serviceReport.qualities.quality - Main.obj.qualities.qualityPositiveService;
         
         Main.obj.workplace.finished = false;
+        Main.obj.globalProgressBar.UpdateProgress();
+        if (Main.obj.reputation == 200 && Main.obj.shop.level == 0)
+        {
+            Main.obj.shop.Upgrade();
+        } else if (Main.obj.reputation == 400 && Main.obj.shop.level == 1)
+        {
+            Main.obj.shop.Upgrade();
+        }
         while (serviceReport.showed)
         {
             yield return null;
