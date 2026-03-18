@@ -6232,7 +6232,7 @@ MonoBehaviour:
   - name: removeStickers
     message: I just bought a used laptop and i want it to be clean.
     from: 
-    costFrom: 10
+    costFrom: 15
     costTo: 20
     currentCost: 0
     difficulty: 0
@@ -6241,7 +6241,7 @@ MonoBehaviour:
     message: This laptop was given to me by my grandmother, and I need it for work,
       so I want it to look appropriate.
     from: 
-    costFrom: 10
+    costFrom: 15
     costTo: 20
     currentCost: 0
     difficulty: 0
@@ -6250,7 +6250,7 @@ MonoBehaviour:
     message: I found this laptop in the basement of my new house, I think I could
       use it if you clean it.
     from: 
-    costFrom: 10
+    costFrom: 15
     costTo: 20
     currentCost: 0
     difficulty: 0
@@ -6258,7 +6258,7 @@ MonoBehaviour:
   - name: iloverust
     message: i traded a bag of crisps for this laptop, i want it to be clean.
     from: 
-    costFrom: 10
+    costFrom: 15
     costTo: 20
     currentCost: 0
     difficulty: 0
@@ -6266,7 +6266,7 @@ MonoBehaviour:
   - name: itchpleaseindexthisgame
     message: I won this laptop in the 1944 turtle contest, please service it.
     from: 
-    costFrom: 10
+    costFrom: 15
     costTo: 20
     currentCost: 0
     difficulty: 0
@@ -6303,7 +6303,7 @@ MonoBehaviour:
     qualityPositiveService: 60
     qualityRemovePoorService: 100
     failedServiceRepChange: 40
-  money: 100000
+  money: 0
   receivedBox: 1
   stages:
     gotoPc:
@@ -11343,6 +11343,7 @@ MonoBehaviour:
   - {fileID: 19179129}
   - {fileID: 23470229}
   - {fileID: 1108184176}
+  - {fileID: 1177957615}
 --- !u!1 &833716183
 GameObject:
   m_ObjectHideFlags: 0

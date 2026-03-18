@@ -131,6 +131,7 @@ public class Main : MonoBehaviour
         else
         {
             money += amount;
+            money = (float)Math.Round(money, 1);
         }
     }
 
@@ -313,10 +314,12 @@ public class Main : MonoBehaviour
     {
 		noUpdateInteractablesTimer -= Time.deltaTime;
         if (noUpdateInteractablesTimer <= 0) UpdateInteractables();
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             shop.Upgrade();
         }
+        
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -63,6 +63,12 @@ public class ScribblesTarget : LaptopTarget
             }
         }
 
+        if (nearestTarget == null)
+        {
+            line.positionCount = 0;
+            text.text = "";
+        }
+
         if (nearestTarget != null && bonusing != nearestTarget)
         {
             if (bonusing != null)

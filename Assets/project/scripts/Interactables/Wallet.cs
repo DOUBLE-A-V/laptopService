@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using UnityEngine;
 using DG.Tweening;
@@ -42,6 +43,7 @@ public class Wallet : Interactable
         moneyText.DOColor(new Color(1, 1, 1, 0), 1.5f).SetEase(Ease.OutExpo);
         moneyText.text = "-" + amount + "$";
         Main.obj.money -= amount;
+        Main.obj.money = (float)Math.Round(Main.obj.money, 1);
     }
     
     protected override void OnHover()

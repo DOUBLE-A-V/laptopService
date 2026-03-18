@@ -118,10 +118,12 @@ public class PostMachine : Place
         Main.obj.globalProgressBar.UpdateProgress();
         if (Main.obj.reputation == 200 && Main.obj.shop.level == 0)
         {
-            Main.obj.shop.Upgrade();
+            Main.obj.shop.level = 1;
+            Main.obj.shop.UpdateAllItems();
         } else if (Main.obj.reputation == 400 && Main.obj.shop.level == 1)
         {
-            Main.obj.shop.Upgrade();
+            Main.obj.shop.level = 2;
+            Main.obj.shop.UpdateAllItems();
         }
         while (serviceReport.showed)
         {

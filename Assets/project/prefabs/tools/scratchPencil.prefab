@@ -511,19 +511,19 @@ MonoBehaviour:
   removed: 0
   toolName: scratch pencil
   usesLeft: 4
-  globalDamage: 2
+  globalDamage: 1
   inHand: 0
   size: {x: 1, y: 1}
   spriteRenderer: {fileID: 5034855490232050356}
   usesText: {fileID: 2028081351497671352}
   tip:
     title: scratch pencil
-    rawText: <color=#ffffff>can be used for painting over scratches<end>\n<yellow>works
-      only on scratches<end>
+    rawText: '<color=#ffffff>can be used for painting over scratches<end>\n<red>damage
+      for scratches: <wave>x4</wave><end>'
     weaknesses: 
     strengths: 00000000
     ignoresTools: 
-    damage: 2
+    damage: 1
     maxUses: 4
     usesLeft: 4
     maxHealth: 0

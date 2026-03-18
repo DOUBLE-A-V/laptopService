@@ -51,7 +51,8 @@ public class Workplace : Place
 
     public void UpdateQualityText(bool animate=true)
     {
-        qualityText.text = "quality: " + currentLaptop.quality + "%";
+        qualityText.text = "quality: " + (currentLaptop.quality < 50 ? "<color=#ff0000>" : "<color=#00ff00>") + currentLaptop.quality + "%" +
+                           (currentLaptop.quality < 50 ? "</color><color=#ffffff><size=20>\n - if quality is less than 50%\nyou will get 'poor service' stamp</size>" : "") + "</color>";
         if (animate)
         {
             qualityText.transform.DOKill();

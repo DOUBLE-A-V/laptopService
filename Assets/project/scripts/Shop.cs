@@ -35,7 +35,7 @@ public class Shop : Place
             firstEnter = false;
             UpdateAllItems();
         }
-        upgradeShopButton.active = level != 2;
+        //upgradeShopButton.active = level != 2;
         curtain.transform.position = defCurtainPos;
         ShowItems();
         curtain.transform.DOMove(defCurtainPos + new Vector3(0, 2.5f * (level + 1), 0), 1.5f).SetEase(Ease.OutExpo);

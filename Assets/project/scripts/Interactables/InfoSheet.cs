@@ -68,7 +68,7 @@ public class InfoSheet : Interactable
         sprite.DOFade(1, 0.5f).SetEase(Ease.Linear);
         yield return new WaitForSeconds(1f);
         addingStamp = false;
-        if (Main.obj.badServiceStamps == 3)
+        if (Main.obj.badServiceStamps == 2)
         {
             StartCoroutine(Main.obj.OnLose());
         }
