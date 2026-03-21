@@ -101,6 +101,7 @@ public class PostMachine : Place
         {
             Main.obj.noUpdateInteractablesTimer = 99999999;
             endScreen.DOFade(1, 1.5f).SetEase(Ease.Linear);
+            Main.obj.globalProgressBar.Hide();
             yield break;
         }
         if (serviceReport.qualities.quality < Main.obj.qualities.qualityPoorService)

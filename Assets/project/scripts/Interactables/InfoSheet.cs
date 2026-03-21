@@ -86,6 +86,7 @@ public class InfoSheet : Interactable
             Destroy(Main.obj.workplace.currentLaptop.gameObject);
         }
         opened = false;
+        UpdateInteracable();
         yield return new WaitForSeconds(1f);
         Main.obj.noUpdateInteractablesTimer = 0;
     }

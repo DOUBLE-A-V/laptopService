@@ -22,6 +22,6 @@ public class ScratchPencilTool : Tool
 
     protected override void OnUse(LaptopTarget against)
     {
-        if (against.targetName == "scratches") against.stackedDamage = globalDamage * 4;
+        if (against.targetName == "scratches" || against.targetName == "huge scratches") against.stackedDamage = globalDamage * 4;
     }
 }

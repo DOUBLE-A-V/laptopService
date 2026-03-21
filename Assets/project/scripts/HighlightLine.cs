@@ -6,7 +6,7 @@ public class HighlightLine : MonoBehaviour
     public GameObject point1;
     public GameObject point2;
     public LineRenderer line;
-    public bool used = false;
+    public bool used;
 
     private void Awake()
     {

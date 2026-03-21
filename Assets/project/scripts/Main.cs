@@ -246,6 +246,7 @@ public class Main : MonoBehaviour
         noUpdateInteractablesTimer = 0;
         workplace.finished = false;
         Destroy(workplace.currentLaptop.gameObject);
+        globalProgressBar.UpdateProgress();
     }
     
     private void Start()
@@ -300,7 +301,7 @@ public class Main : MonoBehaviour
                     continue;
                 }
 
-                if (inter.UpdateInteracable())
+                if (inter.active) if (inter.UpdateInteracable())
                 {
                     break;
                 }

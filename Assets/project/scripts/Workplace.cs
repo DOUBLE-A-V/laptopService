@@ -110,6 +110,8 @@ public class Workplace : Place
 
     public void FinishService()
     {
+        OnHoverExitTarget();
+        tip.HideTip();
         Main.obj.currentStage = Main.obj.stages.gotoPost;
         energyBar.transform.DOKill();
         energyBar.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutExpo);
@@ -130,10 +132,14 @@ public class Workplace : Place
         Main.obj.shop.UpdateAllItems();
         
         finished = true;
+        OnHoverExitTarget();
+        tip.HideTip();
     }
 
     public IEnumerator EndTurn()
     {
+        OnHoverExitTarget();
+        tip.HideTip();
 		Main.obj.noUpdateInteractablesTimer = 1.5f;
 		StartCoroutine(clock.ChangeTime(Random.Range(1, 350)/100f, 0.5f));
         Main.obj.blackscreen.Show();
@@ -285,7 +291,7 @@ public class Workplace : Place
         tier2Chance = Mathf.Clamp(tier2Chance, 0, 100);
         tier3Chance = Mathf.Clamp(tier3Chance, 0, 100);
 
-        isFinalLaptop = Main.obj.reputation >= 550;
+        isFinalLaptop = Main.obj.reputation == 600;
         
         currentLaptop = Instantiate(isFinalLaptop ? finalLaptopPrefab : laptopsPrefabs[Random.Range(0, laptopsPrefabs.Count)], transform);
         if (isFinalLaptop) energyBar.maxValue = Main.obj.maxEnergy + 10;

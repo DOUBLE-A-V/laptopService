@@ -519,7 +519,7 @@ MonoBehaviour:
   tip:
     title: scratch pencil
     rawText: '<color=#ffffff>can be used for painting over scratches<end>\n<red>damage
-      for scratches: <wave>x4</wave><end>'
+      for scratches & huge scratches: <wave>x4</wave><end>'
     weaknesses: 
     strengths: 00000000
     ignoresTools: 

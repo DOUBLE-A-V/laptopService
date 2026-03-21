@@ -63,10 +63,19 @@ public class Tutorial : MonoBehaviour
         Main.obj.pcManager.pcButton.active = false;
         message.Hide();
         HideHighlight();
-        yield return new WaitForSeconds(9f);
+        for (int i = 0; i < 90; i++)
+        {
+            Main.obj.pcManager.pcButton.active = false;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Main.obj.pcManager.pcButton.active = false;
         ShowText("Read new message.", new Vector3(0, -1, 0));
         Highlight(new Vector3(0.47f, 2.1f, 0), new Vector3(0.7f, 0.5f, 0));
-        while (Main.obj.pcManager.blocked == false) yield return null;
+        while (Main.obj.pcManager.blocked == false)
+        {
+            Main.obj.pcManager.pcButton.active = false;
+            yield return null;
+        }
         message.Hide();
         HideHighlight();
         yield return new WaitForSeconds(1f);
@@ -104,6 +113,7 @@ public class Tutorial : MonoBehaviour
         restButton.active = false;
         message.Hide();
         message.canSkip = true;
+        Main.obj.noUpdateInteractablesTimer = 9999999;
         ShowText("every time you use a tool, it's durability decreases.",  new Vector3(0, 1, 0));
         while (message.active) yield return null;
         ShowText("when durability reaches zero tool will be permanently removed from your inventory.",  new Vector3(0, 1, 0));
@@ -111,6 +121,7 @@ public class Tutorial : MonoBehaviour
         ShowText("except your hands of course. Their durability is restored with every new laptop you service.", new Vector3(0, 1, 0));
         while (message.active) yield return null;
         ShowText("you also have a clock, hover mouse over it to see more info.", new Vector3(0, 1, 0));
+        Main.obj.noUpdateInteractablesTimer = 0;
         while (message.active) yield return null;
         message.canSkip = false;
         ShowText("now use the tools again and complete the service.", new Vector3(0, 1, 0));
@@ -120,6 +131,7 @@ public class Tutorial : MonoBehaviour
         finishService.transform.DOScale(Vector3.one, 0.5f);
         while (!closedServiceReport) yield return null;
         message.canSkip = true;
+        Main.obj.HideGoToButtons();
         ShowText("congratulations with your first serviced laptop!", Vector3.zero);
         wallet.display = true;
         infoSheet.display = true;
@@ -132,6 +144,7 @@ public class Tutorial : MonoBehaviour
         while (message.active) yield return null;
         HideHighlight();
         ShowText("Tutorial complete! Enjoy, don't forget to visit a shop.",  Vector3.zero);
+        Main.obj.ShowGoToButtons();
         completed = true;
     }
 
