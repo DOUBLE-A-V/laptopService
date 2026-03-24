@@ -22,7 +22,7 @@ public class PostMachine : Place
 
     private string postID = "";
 
-    public SpriteRenderer endScreen;
+    public TMP_Text endText;
 
     public override void OnEnter()
     {
@@ -100,7 +100,9 @@ public class PostMachine : Place
         if (serviceReport.qualities.quality >= Main.obj.qualities.qualityPoorService && Main.obj.workplace.isFinalLaptop)
         {
             Main.obj.noUpdateInteractablesTimer = 99999999;
-            endScreen.DOFade(1, 1.5f).SetEase(Ease.Linear);
+            Main.obj.blackscreen.Show();
+            Main.obj.globalProgressBar.Hide();
+            endText.DOFade(1, 1.5f).SetEase(Ease.Linear);
             Main.obj.globalProgressBar.Hide();
             yield break;
         }

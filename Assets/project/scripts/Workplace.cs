@@ -400,10 +400,6 @@ public class Workplace : Place
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RegenerateLaptop();
-        }
         if (!currentLaptop) return;
         Vector2 mouse = Main.cam.ScreenToWorldPoint(Input.mousePosition);
         LaptopTarget nearestTarget = null;

@@ -16,6 +16,7 @@ public class PCManager : Place
     [SerializeField] private AudioSource shutdownSound;
 
     [SerializeField] private SpriteRenderer workingLed;
+    [SerializeField] private GameObject workingLedLight;
 
     [SerializeField] private SpriteRenderer splashSprite;
 
@@ -61,6 +62,7 @@ public class PCManager : Place
         pcWorkSound.enabled = true;
         blocked = true;
         workingLed.color = Color.white;
+        workingLedLight.SetActive(true);
         pcStartSound.Play();
         Main.cam.DOKill();
         Main.cam.DOOrthoSize(3, 2).SetEase(Ease.InOutExpo);
@@ -113,6 +115,7 @@ public class PCManager : Place
         pcWorkSound.enabled = false;
         working = false;
         workingLed.color = new Color(0.5f, 0.5f, 0.5f, 1);
+        workingLedLight.SetActive(false);
         shutdownSound.Play();
         pcButton.active = true;
         mail.SetActive(false);

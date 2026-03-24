@@ -316,11 +316,6 @@ public class Main : MonoBehaviour
 		noUpdateInteractablesTimer -= Time.deltaTime;
         if (noUpdateInteractablesTimer <= 0) UpdateInteractables();
         
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            shop.Upgrade();
-        }
-        
 
         if (Input.GetMouseButtonDown(0))
         {
