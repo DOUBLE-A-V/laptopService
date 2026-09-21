@@ -17,7 +17,7 @@ Built with Unity and C#.
 
 ## How to Run
 1. Clone the repository.
-2. Open the project in Unity version.
+2. Open the project in Unity version 2022.3 LTS.
 3. Open the scene in Assets/Scenes.
 4. Press Play.
 
